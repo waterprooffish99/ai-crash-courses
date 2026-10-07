@@ -1,0 +1,20 @@
+{
+  "title": "AI Crash Courses",
+  "description": "Complicated AI concepts explained simply.",
+  "pages": [
+    "index",
+    "---Foundations---",
+    "just-delegate-it",
+    "what-ai-actually-is",
+    "ai-fluency",
+    "ai-prompting-2026",
+    "---Building with AI---",
+    "markdown-in-html-out",
+    "code-you-never-write",
+    "skills-and-connectors",
+    "---Thinking & Responsibility---",
+    "how-to-think-in-the-ai-era",
+    "workflow-design-and-diagnosis",
+    "governance-risk-responsible-use"
+  ]
+}

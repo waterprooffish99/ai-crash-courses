@@ -1,0 +1,525 @@
+---
+title: "Skills & Connectors"
+description: "Understand how reusable Skills teach a method and how Connectors give AI controlled access to real apps and information."
+course: 7
+---
+
+## 01. The one idea under everything
+
+A normal prompt handles one moment. A Skill preserves your method. A Connector gives AI controlled access to an outside app.
+
+### 💬 Chat prompt
+
+**“Do this now.”**  
+Useful for a one-off task.
+
+→
+
+### 🧠 Skill
+
+**“Do this my way every time.”**  
+Reusable instructions.
+
++
+
+### 🔌 Connector
+
+**“Reach the app where the data lives.”**  
+Controlled app access.
+
+**Kitchen analogy:** Connectors are the kitchen and tools. Skills are recipe cards. A recipe without a kitchen cannot cook. A kitchen without a recipe leads to improvisation. Together, AI can use real information and follow your preferred method.
+
+Operating layer means AI is no longer only a chat box. It can apply your standards to real work and, when permitted, interact with your apps.
+
+## 02. Important technical terms
+
+### Skill
+
+A reusable set of instructions teaching AI how to perform one task your way.
+
+**Example:** Always turn raw class notes into headings, key terms and review questions.
+
+### Connector
+
+A controlled link between AI and an app such as Drive, Gmail, Slack, Notion or a tracker.
+
+**Example:** AI searches a document in Drive instead of you uploading it.
+
+### SKILL.md
+
+The required text file inside a skill folder. It contains the skill's identity, trigger description and instructions.
+
+### Frontmatter
+
+The metadata block at the top of `SKILL.md`, normally containing `name` and `description`.
+
+### Description
+
+The short explanation of what the skill does and when to use it. It strongly controls whether the skill activates.
+
+### Fire
+
+Course shorthand for a skill activating because your request matches its description.
+
+### Progressive disclosure
+
+AI keeps lightweight skill information available, then loads detailed instructions only when the skill becomes relevant. This avoids loading every full skill all the time.
+
+### MCP
+
+**Model Context Protocol.** An open standard used to connect AI systems with tools and data sources.
+
+### Scope
+
+How much of an app a connector may access. Smaller scope reduces risk.
+
+### Read-only vs write
+
+**Read-only:** inspect/search without changing. **Write:** may create, edit, send or delete, depending on connector capabilities.
+
+### Negative trigger
+
+A rule explaining when a skill should **not** activate. Useful when a skill fires too broadly.
+
+### Prompt injection
+
+Instructions, possibly hidden or untrusted, that try to make AI perform actions you did not intend.
+
+### Data exfiltration
+
+Secret or unintended transfer of your information outside the place you expected it to stay.
+
+### Custom connector
+
+A connector you add yourself for a service that supports the relevant connection standard, such as MCP.
+
+### Interactive connector
+
+A connector able to show a live interactive interface in the chat rather than only text results.
+
+### Market-of-one test
+
+A task deserves a custom skill when it captures **your repeated way** of doing something, not merely a generic task everyone already has a tool for.
+
+## 03. Skill vs Connector vs Project vs Custom Instructions
+
+| Feature | What it solves | Simple test |
+| --- | --- | --- |
+| **Skill** | Reusable procedure or method | “I keep explaining **how** to do this.” |
+| **Connector** | Access to data/actions in another app | “I keep copying data from another app.” |
+| **Project** | Standing files and instructions for one body of work | “These same files/rules belong to everything in this workspace.” |
+| **Custom instructions** | Preferences that should apply broadly | “I want this preference in all chats.” |
+
+**Exam shortcut:** **Skill = expertise/how.** **Connector = access/where.** **Project = persistent workspace context.** **Custom instructions = global preference.**
+
+## 04. How Skills and Connectors work
+
+### Automatic activation
+
+In Claude.ai, you normally describe the task in ordinary language. The system compares your request with enabled skill descriptions. A matching skill can activate automatically. If matching misses, you can explicitly name the skill. More hands-on environments may also let you browse or call skills directly.
+
+### Built-in document abilities
+
+The course highlights document creation for Word, PowerPoint, Excel and PDF, backed by Claude's code/file-creation capability. The important concept is that you request the outcome, while the system handles the implementation.
+
+### Connecting an app
+
+**1\. Connect**  
+Choose the app and authorize your account.
+
+→
+
+**2\. Enable**  
+Make the connector available to the current conversation.
+
+→
+
+**3\. Scope**  
+Limit what it can reach where possible.
+
+→
+
+**4\. Ask**  
+Request a task that needs the app.
+
+AI inherits your existing permissions. If your account cannot access something, the connector should not magically gain access to it.
+
+**Important:** Permission and capability are different. Even if a connector has permission to an app, it can perform only the actions its connector tools were built to perform.
+
+### Skills + Connectors together
+
+**Connector fetches the real data → Skill applies your method → You review the result.**
+
+Example: Drive contains your class notes. A Drive connector retrieves them. Your study-notes skill turns them into your preferred structure. You review the final notes.
+
+### Which one do I need?
+
+| Your friction | Use |
+| --- | --- |
+| Repeating the same formatting, tone, checklist or method | Skill |
+| Repeatedly fetching information from another app | Connector |
+| AI needs to perform an allowed action in another app | Connector with appropriate write capability |
+| Real data must be transformed using your repeatable method | Both |
+| One-off question that will not repeat | Neither, just prompt well |
+
+## 05. Building your own Skill
+
+You do not need to manually program the skill. The course recommends describing the desired behavior clearly and letting a skill-building assistant create the files.
+
+### Anatomy of `SKILL.md`
+
+```text
+---
+name: weekly-study-notes
+description: Turns raw weekly class notes into structured study notes.
+  Use when the user asks for "study notes" or "weekly notes".
+---
+# Weekly Study Notes
+
+## Instructions
+1. Organize notes by topic.
+2. Highlight important technical terms.
+3. End with exactly three review questions.
+```
+
+**Level 1:** frontmatter information helps decide relevance. **Level 2:** detailed instructions load when the skill matches. More complex skills can also keep detailed references, templates/assets, or exact programs/scripts for use only when needed.
+
+### File and naming rules emphasized by the course
+
+-   The required file is exactly `SKILL.md`.
+-   Skill folders should use `kebab-case`, for example `weekly-study-notes`.
+-   Keep the description short, specific and trigger-friendly.
+-   Avoid XML-style angle-bracket tags in the name/description.
+-   Reserved vendor names should not be used as your custom skill name.
+
+### The description is crucial
+
+A useful description answers three questions: **What does this skill do? When should it be used? What natural phrases might the user say?**
+
+### ❌ Weak
+
+“Helps with reports.”
+
+Too broad. The system cannot reliably know which reports or when.
+
+### ✅ Better
+
+“Creates monthly client financial summaries. Use for requests such as ‘client summary’, ‘monthly close’, or ‘month-end report’.”
+
+If a skill activates too often, add a **negative trigger**, for example: do not use for quick one-off calculations.
+
+### Test, then iterate
+
+1.  Describe the skill and create the first version.
+2.  Check whether each instruction is precise enough that two people would interpret it similarly.
+3.  Test phrases that **should** activate it.
+4.  Test unrelated phrases that **should not** activate it.
+5.  Check the output against measurable requirements.
+6.  Test awkward edge cases.
+7.  Feed failures back into the skill and improve it.
+
+**Debug by timing:** If it never activates, fix the description. If it activates on the wrong requests, narrow the description or add a negative trigger. If activation is right but output is wrong, tighten the instructions. If an exact calculation repeatedly varies, move that deterministic step into code. If data is being guessed, it may belong behind a connector.
+
+## 06. Portability and the wider ecosystem
+
+The course presents **Agent Skills** as an open format based on `SKILL.md`. The core idea is portability: the same basic skill definition can be understood by multiple compatible tools, although installation paths, permissions and product-specific features differ.
+
+It contrasts this with consumer-app saved assistants such as Custom GPTs and Gemini Gems, which are product-specific experiences. The exam concept is not “one is always better.” It is: **open skill format aims for portability, while vendor-specific assistants stay inside their own ecosystems.**
+
+Connectors also have equivalents across major AI products. The transferable principle is controlled access: authorize an app, inherit your account permissions, keep access as narrow as practical, and begin read-only.
+
+## 07. Safety and governance
+
+### ⚠️ Risk 1: Malicious skill
+
+An untrusted skill can contain instructions or programs you should not blindly allow. Risks include prompt injection and data exfiltration.
+
+### ⚠️ Risk 2: Too much connector access
+
+Broad write access can cause unwanted edits, sends or deletions. Least privilege is safer.
+
+**Memory hook:** Treat an unknown Skill like a contract you must read. Treat a Connector like a key you are handing over.
+
+### Safe-use checklist
+
+-   Prefer trusted or official skill sources.
+-   Inspect `SKILL.md` and bundled files before enabling an unfamiliar skill.
+-   Ask AI to explain any external-server contact, credential handling or possible data sharing.
+-   Start connectors **read-only**.
+-   Use the smallest practical **scope**.
+-   Before allowing changes, understand version history, undo and recovery.
+-   Use reviewed organizational sharing channels for team skills.
+-   Remember: connector scope can often be restricted, while a Skill itself has no equivalent scope dial. A skill can act through whatever capabilities are available in that chat.
+
+## 08. 🎯 What you must remember
+
+EXAM CORE
+
+### Skill = HOW
+
+Reusable instructions for your repeated method.
+
+EXAM CORE
+
+### Connector = ACCESS
+
+A controlled bridge to real apps/data.
+
+EXAM CORE
+
+### Description = TRIGGER
+
+It tells the system when a skill is relevant.
+
+EXAM CORE
+
+### Scope = SAFETY
+
+Open only what the workflow actually needs.
+
+EXAM CORE
+
+### MCP
+
+Model Context Protocol, an open standard for connecting AI to tools and data.
+
+EXAM CORE
+
+### Human review
+
+More capability means more need for checking and governance.
+
+## 09. 🛠️ Practical Work from the course
+
+The source includes a “Try this now” sequence plus five projects. These are summarized below so you can actually practice them.
+
+### 30-minute “Try this now” sequence
+
+1.  **Trigger a built-in document skill:** turn three facts into a one-slide presentation and observe that you did not have to explicitly name the skill.
+2.  **Connect one app read-only:** use Drive or Gmail, then retrieve and summarize a specific item without manual copy-paste.
+3.  **Build your first custom skill:** choose a weekly task where you keep repeating the same instructions. Give the skill creator your rules, format, must-dos and must-nots.
+4.  **Pressure-test its description:** ask when the skill should and should not be used. Tighten the description if it is too broad or narrow.
+5.  **Audit a skill:** ask AI to inspect an unfamiliar skill for external network contact, credentials or possible data leakage.
+6.  **Diagnose three recurring tasks:** label each as Skill, Connector, Both, or Neither.
+
+### Project 1 • Build your first real skill (30–45 min)
+
+Create a weekly study-notes skill. It should recognize natural requests for study/weekly notes, organize raw notes by topic, highlight key terms, and end with exactly three review questions. Save it, inspect its description, then test it in a fresh chat **without naming the skill**.
+
+**Done when:** it activates naturally, produces your format without reminders, and stays out of unrelated tasks.
+
+### Project 2 • Connect one app read-only (20–30 min)
+
+Connect Drive or Gmail read-only. Ask for a real answer based on something inside that app, with no upload or copy-paste. Then explain in one sentence what the connector can and cannot do.
+
+**Done when:** real data came through the connector and you understand the access granted.
+
+### Project 3 • Combine a Skill + Connector (45–60 min)
+
+Use your study-notes skill with Drive. Ask AI to find this week's notes and format them using your skill. Verify at least one part of the output manually.
+
+**Done when:** one plain-English request produces the correctly formatted result from live connected data.
+
+### Project 4 • Make it portable / hand it off (30 min)
+
+Either share the skill through an approved team mechanism and have another person run it cold, or load the same skill in another compatible environment and test it there.
+
+**Done when:** another person or another compatible tool gets the correct behavior from the same skill.
+
+### Project 5 • Audit before trusting (15–20 min)
+
+Choose an official-directory skill you did not write. Have AI inspect and explain it, especially any network calls, credential handling or possible data transfer.
+
+**Done when:** you can explain what the skill does and whether it reaches outside your account.
+
+## 10. 🧠 Test Yourself: MCQs
+
+**Source note:** The public course page shows a “Test Your Understanding” section, but its question content was behind a “Checking access…” state when retrieved. Therefore I cannot truthfully reproduce “all official MCQs.” The questions below are **exam-style practice questions created from the course concepts**, not claimed as the hidden official quiz. Answers are intentionally not shown so you can answer first.
+
+**1.** You repeat the same report format every month, but all source data is already pasted into the chat. What is the best fit?  
+A. Connector  
+B. Skill  
+C. Project only  
+D. Write access
+
+**2.** You repeatedly copy information from Google Drive into AI. What problem does this most directly point to?  
+A. Skill  
+B. Connector  
+C. Negative trigger  
+D. Custom instruction
+
+**3.** Which statement best describes a Skill?  
+A. Permission to access an app  
+B. Reusable instructions for doing a task your way  
+C. A permanent copy of all your app data  
+D. A password manager
+
+**4.** What is the required file in a basic Agent Skill folder?  
+A. README.txt  
+B. agent.json  
+C. SKILL.md  
+D. prompt.xml
+
+**5.** What is the most important job of a skill's description?  
+A. Store passwords  
+B. Decide when the skill is relevant and should activate  
+C. Give the connector write permission  
+D. Replace the instructions
+
+**6.** A skill keeps activating for quick questions even though it should only run for full reports. What is a strong fix?  
+A. Give every connector write access  
+B. Add a negative trigger and narrow the description  
+C. Delete the instructions  
+D. Increase connector scope
+
+**7.** What does MCP stand for?  
+A. Managed Computing Permission  
+B. Model Context Protocol  
+C. Machine Connector Package  
+D. Model Control Program
+
+**8.** Why should a new connector normally begin read-only?  
+A. Read-only makes AI smarter  
+B. It reduces the risk of unwanted changes while you learn its behavior  
+C. MCP forbids write access  
+D. Skills cannot work with write access
+
+**9.** If your own account cannot access a particular file, what should happen through the connector?  
+A. AI gets admin access automatically  
+B. AI should inherit your limitation and not access it  
+C. The Skill overrides the permission  
+D. MCP copies the file elsewhere
+
+**10.** What does “scope” mean in this course?  
+A. The length of a prompt  
+B. How much of an app/data source is exposed to the connector  
+C. The number of skills installed  
+D. The model's context window
+
+**11.** Which pairing is correct?  
+A. Skill = access, Connector = expertise  
+B. Skill = how, Connector = access  
+C. Skill = app, Connector = prompt  
+D. Skill = workspace, Connector = global preference
+
+**12.** You need AI to fetch a live ledger from Drive and format it using your firm's repeated reporting rules. What do you need?  
+A. Skill only  
+B. Connector only  
+C. Both Skill and Connector  
+D. Neither
+
+**13.** Which feature best fits files and instructions that should stay available throughout every chat in one client workspace?  
+A. Project  
+B. Negative trigger  
+C. Connector scope  
+D. Script folder
+
+**14.** “Always use metric units in all my chats” best belongs where?  
+A. A task-specific Skill  
+B. Custom instructions  
+C. A Drive connector  
+D. A script
+
+**15.** What is progressive disclosure?  
+A. Giving all apps full access gradually  
+B. Loading detailed skill content only when it becomes relevant  
+C. Publishing a skill publicly  
+D. Asking progressively longer prompts
+
+**16.** Which optional folder is most suitable for an exact deterministic calculation that language instructions keep performing inconsistently?  
+A. scripts/  
+B. assets/  
+C. references/  
+D. inbox/
+
+**17.** A skill never activates when you say the phrases you naturally use. What should you inspect first?  
+A. The description and its trigger wording  
+B. Connector write permission  
+C. Version history  
+D. The app's recycle bin
+
+**18.** What is a prompt-injection risk in this context?  
+A. A hidden/untrusted instruction pushes AI toward unintended actions  
+B. A connector loads slowly  
+C. A skill has a short name  
+D. A user writes a long prompt
+
+**19.** What is data exfiltration?  
+A. Compressing a file  
+B. Secretly or unintentionally sending information somewhere it should not go  
+C. Converting Markdown to HTML  
+D. Loading a skill on demand
+
+**20.** Which is the safest approach to a skill downloaded from an unfamiliar source?  
+A. Enable it immediately  
+B. Give it write access first  
+C. Inspect its instructions and bundled files before trusting it  
+D. Increase connector scope
+
+**21.** A connector has access to Drive but cannot edit an existing document in place. What is the best interpretation?  
+A. The model is broken  
+B. Permission always guarantees every possible action  
+C. The connector's built-in action set may not support that operation  
+D. A Skill can bypass it
+
+**22.** What is the “market-of-one” idea used for?  
+A. Deciding whether your repeated personal method is worth turning into a skill  
+B. Choosing the cheapest model  
+C. Selling one connector  
+D. Limiting a team to one user
+
+**23.** Which folder name follows the course's naming guidance?  
+A. Weekly Study Notes  
+B. weekly\_study\_notes  
+C. weekly-study-notes  
+D. WeeklyStudyNotes
+
+**24.** Why are exact arithmetic/threshold operations sometimes better placed in code inside a skill?  
+A. Code is deterministic and better for exact steps  
+B. Code increases app permissions  
+C. Code makes descriptions unnecessary  
+D. MCP requires it
+
+**25.** A skill worked at first, but the conversation became very long and its behavior degraded. What should you try before rewriting the skill?  
+A. Start a fresh chat and restate the task  
+B. Give all connectors write access  
+C. Delete the description  
+D. Rename SKILL.md
+
+**26.** What is the main portability advantage of an open Agent Skill format?  
+A. The same core skill can be understood by multiple compatible tools  
+B. It automatically grants permissions everywhere  
+C. It makes every AI model identical  
+D. It removes the need for testing
+
+**27.** Which statement about Skills and connector scope is most accurate?  
+A. Every Skill has its own folder-level scope slider  
+B. Connector access can be scoped, while a Skill acts through capabilities available in its chat  
+C. Skills always have less access than connectors  
+D. Scope applies only to prompts
+
+**28.** What should you verify before allowing AI to edit, move or delete important files?  
+A. Only the skill name  
+B. Recovery, undo/version history and backups  
+C. The font in SKILL.md  
+D. The number of installed skills
+
+**29.** A one-off request you do not expect to repeat usually needs what?  
+A. A new Skill  
+B. A new Connector  
+C. A good prompt, not necessarily either  
+D. A custom MCP server
+
+**30.** Which sentence best captures the complete workflow?  
+A. Connector defines your method; Skill grants app permissions  
+B. Connector retrieves/acts on real app data; Skill applies your repeatable method; human reviews  
+C. Project replaces all Skills and Connectors  
+D. Skills remove the need for human checking
+
+**Your turn:** Answer like `1B, 2B, 3B...`. Then I can score you and explain every mistake in simple language.
+
+<SourceLink course={7} />
+
+<CourseVideo course={7} />
+
+<CourseNavigation course={7} />

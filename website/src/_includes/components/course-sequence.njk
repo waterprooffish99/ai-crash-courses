@@ -1,0 +1,21 @@
+<nav class="course-sequence shell" aria-label="Course sequence">
+  {% if course.previousCourse %}
+    <a class="sequence-link sequence-link--previous" href="{{ course.previousCourse.path | url }}">
+      <span>Previous Course</span>
+      <strong>{{ course.previousCourse.number }}. {{ course.previousCourse.title }}</strong>
+    </a>
+  {% else %}
+    <span class="sequence-link sequence-link--empty" aria-hidden="true"></span>
+  {% endif %}
+
+  <a class="all-courses-link" href="{{ '/courses/' | url }}">All Courses</a>
+
+  {% if course.nextCourse %}
+    <a class="sequence-link sequence-link--next" href="{{ course.nextCourse.path | url }}">
+      <span>Next Course</span>
+      <strong>{{ course.nextCourse.number }}. {{ course.nextCourse.title }}</strong>
+    </a>
+  {% else %}
+    <span class="sequence-link sequence-link--empty" aria-hidden="true"></span>
+  {% endif %}
+</nav>

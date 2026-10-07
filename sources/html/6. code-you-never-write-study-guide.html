@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code You Never Write — Exam Study Guide</title>
+<style>
+:root{
+  --bg:#070914; --panel:#101526; --panel2:#151b31; --text:#eef2ff; --muted:#aab4d0;
+  --cyan:#36e6ff; --pink:#ff5fcf; --yellow:#ffd95a; --green:#65f5a5; --purple:#a989ff; --orange:#ff9b54;
+  --border:#263154;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+radial-gradient(circle at 15% 0%,#17285c55,transparent 30%),
+radial-gradient(circle at 90% 15%,#6d1d6d44,transparent 28%),
+var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.7}
+a{color:var(--cyan)}
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:26px 18px;background:#090d19e8;border-right:1px solid var(--border);overflow:auto;backdrop-filter:blur(14px)}
+.logo{font-size:12px;letter-spacing:2px;color:var(--cyan);font-weight:800}
+aside h2{font-size:19px;margin:8px 0 18px}
+nav a{display:block;text-decoration:none;color:#bac5e5;padding:8px 10px;border-radius:9px;margin:3px 0;font-size:14px}
+nav a:hover{background:#18213a;color:white}
+main{max-width:1100px;width:100%;margin:auto;padding:42px 48px 100px}
+.hero{padding:42px;border:1px solid #33426d;border-radius:26px;background:linear-gradient(135deg,#111a32dd,#19122ddd);box-shadow:0 25px 70px #0008}
+.eyebrow{color:var(--yellow);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+h1{font-size:clamp(38px,6vw,72px);line-height:1.02;margin:10px 0;background:linear-gradient(90deg,var(--cyan),#fff,var(--pink));-webkit-background-clip:text;color:transparent}
+.hero p{font-size:19px;color:#c7d0ea;max-width:850px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.chip{padding:7px 12px;border-radius:999px;border:1px solid #3a4772;background:#0b1020;color:#dfe7ff;font-size:13px}
+section{margin-top:54px;scroll-margin-top:20px}
+h2{font-size:30px;margin-bottom:8px}h3{font-size:22px;margin-top:30px}
+.lead{color:var(--muted);font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:linear-gradient(180deg,#12182a,#0d1221);border:1px solid var(--border);border-radius:18px;padding:22px}
+.card strong,.term{color:var(--cyan)}
+.accent-pink{border-top:3px solid var(--pink)}.accent-green{border-top:3px solid var(--green)}.accent-yellow{border-top:3px solid var(--yellow)}.accent-purple{border-top:3px solid var(--purple)}
+.callout{padding:20px 22px;border-left:4px solid var(--cyan);background:#0e1a2b;border-radius:0 14px 14px 0;margin:20px 0}
+.warning{border-left-color:var(--orange);background:#251711}.success{border-left-color:var(--green);background:#0d211a}
+pre{white-space:pre-wrap;background:#070b15;border:1px solid #283454;padding:18px;border-radius:14px;color:#dce7ff;overflow:auto}
+table{width:100%;border-collapse:collapse;background:#0d1221;border-radius:14px;overflow:hidden}
+th,td{padding:13px;border-bottom:1px solid #27304c;text-align:left;vertical-align:top}th{color:var(--yellow);background:#131a2d}
+.num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2ce5ff,#8d70ff);color:#06101b;font-weight:900;margin-right:8px}
+.mini{font-size:14px;color:var(--muted)}
+.exam{background:linear-gradient(135deg,#19132c,#0d1c2c);border:1px solid #423e78;border-radius:20px;padding:24px}
+details{background:#0d1323;border:1px solid #273252;border-radius:12px;margin:10px 0;padding:12px 15px}summary{cursor:pointer;font-weight:700;color:#e9edff}
+.progress{height:8px;background:#171d31;border-radius:99px;overflow:hidden;margin-top:18px}.progress span{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink))}
+.footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color:var(--muted)}
+@media(max-width:850px){.layout{display:block}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}nav{display:none}main{padding:25px 18px 70px}.hero{padding:28px 22px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+<div class="logo">AGENT FACTORY • STUDY MODE</div>
+<h2>Code You Never Write</h2>
+<nav>
+<a href="#bigidea">01 · Big Idea</a><a href="#terms">02 · Key Terms</a><a href="#part1">03 · Part 1: The Deal</a>
+<a href="#part2">04 · Part 2: Commissioning</a><a href="#part3">05 · Part 3: Surfaces</a>
+<a href="#part4">06 · Part 4: Safety</a><a href="#recap">07 · 13-Concept Recap</a>
+<a href="#practical">08 · Practical Work</a><a href="#projects">09 · Projects</a><a href="#test">10 · Test Yourself</a>
+</nav>
+</aside>
+<main>
+<header class="hero">
+<div class="eyebrow">Exam-focused • Super simple English • Complete concept map</div>
+<h1>Code You Never Write</h1>
+<p>You do not need to become the person who writes every line of code. You learn to <b>describe the job clearly</b>, let AI write and run the code, and then <b>verify the result</b>. Your new role is closer to a careful client or supervisor than a traditional programmer.</p>
+<div class="chips"><span class="chip">13 core concepts</span><span class="chip">VPRF</span><span class="chip">5-part brief</span><span class="chip">Verification ladder</span><span class="chip">Blast radius</span><span class="chip">4 projects</span></div>
+<div class="progress"><span></span></div>
+</header>
+
+<section id="bigidea">
+<h2>🌈 The Big Idea</h2>
+<p class="lead">The old question was: <b>“Can I code this?”</b> The new question is: <b>“Can I describe exactly what I want done?”</b></p>
+<div class="grid">
+<div class="card accent-green"><h3>What AI does</h3><p>AI can choose a suitable programming language, write the program, run it, see errors, repair it, and return the result.</p></div>
+<div class="card accent-pink"><h3>What YOU do</h3><p>You explain the goal, provide the real data and business rules, define what success looks like, and check whether the result is trustworthy.</p></div>
+</div>
+<div class="callout"><b>Easy picture:</b> You hire a mechanic. You do not need to know how every engine part works, but you must explain the problem and check that the car now behaves correctly. AI-written code is similar.</div>
+</section>
+
+<section id="terms">
+<h2>🧩 Important Technical Terms</h2>
+<div class="grid">
+<div class="card"><b class="term">Script</b><p>A small program saved as a file so it can be run again. <b>Why it matters:</b> one solved task can become reusable.</p></div>
+<div class="card"><b class="term">Sandbox</b><p>A temporary computer environment used by an AI service. Your local computer is not directly changed. Think of it as a safe practice room.</p></div>
+<div class="card"><b class="term">Brief</b><p>Your plain-English job description for the AI. It tells the AI what “done correctly” means.</p></div>
+<div class="card"><b class="term">CSV</b><p>A simple spreadsheet-like file containing rows of values, usually separated by commas.</p></div>
+<div class="card"><b class="term">Known-answer test</b><p>Test the code on a small case where you already know the correct answer. This is the most important everyday verification technique.</p></div>
+<div class="card"><b class="term">Dry run</b><p>The AI shows what it <i>would</i> change before changing anything. Essential for renaming, moving, deleting, or overwriting files.</p></div>
+<div class="card"><b class="term">Blast radius</b><p>The maximum damage a mistake could cause. Smaller access means smaller possible damage.</p></div>
+<div class="card"><b class="term">Intent Layer</b><p>Your written intention stored in files, such as the brief. It preserves the “what and why” even when the code changes.</p></div>
+<div class="card"><b class="term">Wrong-but-running</b><p>The program finishes without an error, but its result is wrong. This is more dangerous than obvious red error text.</p></div>
+<div class="card"><b class="term">Digital FTE</b><p>An AI worker designed to carry an ongoing role. This is beyond a simple one-prompt script because it can operate repeatedly and autonomously.</p></div>
+</div>
+</section>
+
+<section id="part1">
+<h2>Part 1 · 🤝 The Deal</h2>
+<h3><span class="num">1</span>Code is no longer gated by coding</h3>
+<p>Previously, you either learned programming or asked a developer. Now, for many small and well-defined jobs, AI can act as the developer. It can write, execute, inspect errors, repair, and rerun the program.</p>
+<div class="callout success"><b>Exam idea:</b> Your skill is not syntax. Your skill is describing the desired outcome and verifying it.</div>
+
+<h3><span class="num">2</span>What code actually is</h3>
+<p><b>Code</b> is a set of exact instructions a computer follows. Exactness is both its strength and its danger. Correct instructions can process thousands of rows perfectly. Wrong instructions can make the wrong change thousands of times just as perfectly.</p>
+<table><tr><th>Typical output</th><th>Language AI may choose</th><th>Simple example</th></tr>
+<tr><td>Numbers, files, data, charts, reports</td><td>Python</td><td>Total sales, merge CSVs, rename files</td></tr>
+<tr><td>Interactive browser experience</td><td>JavaScript / TypeScript</td><td>Calculator, quiz, clickable dashboard</td></tr></table>
+<p class="mini">You normally describe the outcome and let the AI make the technical language choice.</p>
+
+<h3><span class="num">3</span>The dividing line: Answer problem vs Code problem</h3>
+<p>An <b>answer problem</b> mainly needs reasoning, explanation, drafting, or judgment. A <b>code problem</b> needs exact processing of data/files.</p>
+<div class="grid">
+<div class="card accent-yellow"><h3>ANSWER problem</h3><p>“Explain mutual funds.” “Draft an email.” “Is this idea persuasive?”</p></div>
+<div class="card accent-purple"><h3>CODE problem</h3><p>“Total 5,000 sales rows.” “Rename 300 photos.” “Reconcile two spreadsheets.”</p></div>
+</div>
+<h3>VPRF: the four signals</h3>
+<table><tr><th>Signal</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><b>V · Volume</b></td><td>Too many items to do comfortably by hand</td><td>2,000 sales rows</td></tr>
+<tr><td><b>P · Precision</b></td><td>A wrong digit matters</td><td>Payroll, grades, invoices</td></tr>
+<tr><td><b>R · Repetition</b></td><td>You will do the same task again</td><td>Weekly/monthly report</td></tr>
+<tr><td><b>F · Files</b></td><td>The problem lives inside files</td><td>CSV, Excel, logs, image folders</td></tr></table>
+<div class="callout"><b>Rule:</b> If even one VPRF signal fires, strongly consider treating the task as a code problem.</div>
+</section>
+
+<section id="part2">
+<h2>Part 2 · 🛠️ Commissioning Code</h2>
+<h3><span class="num">4</span>Force computation when precision matters</h3>
+<p>An AI may sometimes glance at data and produce a plausible answer instead of actually calculating it. For precision-critical work, explicitly ask it to <b>write and run code</b>.</p>
+<pre>Write and run code to answer this.
+Show me the code you ran.
+Before analyzing, report the exact row count, column names, and date range.</pre>
+<p>Why row count and columns? They are a quick reality check that the AI actually read the file you supplied.</p>
+
+<h3><span class="num">5</span>Brief the problem, not the program</h3>
+<p>A strong brief has five parts. You describe <b>what</b> must happen, not loops, libraries, or programming syntax.</p>
+<div class="grid">
+<div class="card"><b>1. Goal</b><p>What problem should be solved?</p></div>
+<div class="card"><b>2. Input</b><p>What files/data are supplied and roughly how much?</p></div>
+<div class="card"><b>3. Output</b><p>What should come back: number, table, chart, cleaned file, HTML report?</p></div>
+<div class="card"><b>4. Rules</b><p>Your special domain knowledge that a stranger would not know.</p></div>
+<div class="card"><b>5. Edge cases</b><p>What to do with blanks, duplicates, odd dates, unreadable rows, strange formats?</p></div>
+</div>
+<div class="callout warning"><b>Common beginner mistake:</b> skipping Rules and Edge cases. The AI may know Python, but it does not know the private rules of your school, shop, company, or workflow unless you state them.</div>
+<pre># Brief: [task name]
+## Goal
+What problem should be solved?
+## Input
+What am I giving you?
+## Output
+What exactly should I receive?
+## Rules
+What special rules must be followed?
+## Edge cases
+What should happen when the data is imperfect?</pre>
+
+<h3><span class="num">6</span>Verify work you cannot read</h3>
+<p>You do not prove correctness by staring at unfamiliar code. You test its <b>results and behavior</b>.</p>
+<table><tr><th>Level</th><th>Verification method</th><th>Meaning</th></tr>
+<tr><td>1</td><td>Known-answer test</td><td>Run a case whose answer you already know.</td></tr>
+<tr><td>2</td><td>Reality questions</td><td>Check row counts, totals, missing rows, biggest customer, date ranges.</td></tr>
+<tr><td>3</td><td>Plain-English replay</td><td>Ask AI to explain what its code did step by step without code.</td></tr>
+<tr><td>4</td><td>Adversarial pass</td><td>Ask AI to attack its own result and identify assumptions/weaknesses.</td></tr>
+<tr><td>5</td><td>Cross-model check</td><td>Run the same brief/data through another model family and compare results.</td></tr></table>
+<div class="callout success"><b>Must remember:</b> Never rely on a precision-critical result before checking it against at least one answer you independently know.</div>
+
+<h3><span class="num">7</span>Errors are dialogue, not failure</h3>
+<p>If red error text appears, you do not need to understand it. Give the full error back to the AI and ask it to diagnose, fix, and rerun.</p>
+<pre>It stopped and showed this error.
+Diagnose it, fix the code, and run it again:
+[paste the complete error]</pre>
+<p>For <b>wrong-but-running</b>, report a symptom: “The output says 4.2 million, but I expect around 12 million. Show the row count, date range, and first five rows as the code sees them.” If the same fix fails three times, stop patching and ask for two completely different approaches.</p>
+
+<h3><span class="num">8</span>Keep the script</h3>
+<p>If the task repeats, save three things together: <b>brief + script + known-answer sample</b>. The brief preserves your intent, the script preserves the implementation, and the sample lets you test it later.</p>
+<pre>my-scripts/
+  monthly-report/
+    brief.md
+    monthly-report.py
+    sample-known-answer/</pre>
+<p>This turns “explain everything again next month” into “run the saved script on the new files.”</p>
+</section>
+
+<section id="part3">
+<h2>Part 3 · 🖥️ One Problem, Different Surfaces</h2>
+<p class="lead"><b>Surface</b> means the place where AI can run the code.</p>
+<table><tr><th>Surface</th><th>Best for</th><th>Main limitation / risk</th></tr>
+<tr><td>Browser chat: Claude.ai, ChatGPT, Gemini</td><td>Learning, one-off analysis, uploaded files</td><td>Temporary sandbox; only sees what you upload</td></tr>
+<tr><td>Claude Code / OpenCode</td><td>Work directly inside your folders; repeated scripts; schedules</td><td>Can touch real files, so mistakes matter</td></tr>
+<tr><td>Cowork / OpenWork</td><td>Desktop delegation for knowledge workers</td><td>Real-file access still requires careful approval</td></tr></table>
+
+<h3><span class="num">9</span>Browser chat: the learning/home surface</h3>
+<p>The AI runs code in a temporary <b>sandbox</b>. You upload files; the AI computes; charts/files/reports come back. This is ideal for learning because the code cannot casually reorganize your whole computer.</p>
+
+<h3><span class="num">10</span>Claude Code & OpenCode: agent in your folder</h3>
+<p>After installation, these tools can work inside a local folder. The AI can see files already there, create scripts, run them, repair errors, and leave reusable files behind. This is useful when uploading files repeatedly becomes annoying or when the task needs local access or scheduling.</p>
+
+<h3><span class="num">11</span>Cowork & OpenWork: desktop delegation</h3>
+<p>These give similar file-working power in a desktop-app style. A key safety idea is <b>plan-then-approve</b>: the agent proposes what it will do, and you approve before actions happen.</p>
+<div class="callout"><b>Graduation idea:</b> Start in the browser. Move to local/desktop agent tools when the problem truly lives in your folders, needs repeating, or needs scheduling.</div>
+</section>
+
+<section id="part4">
+<h2>Part 4 · 🛡️ Power, Safely Held</h2>
+<h3><span class="num">12</span>Blast radius: four rules</h3>
+<div class="grid">
+<div class="card accent-green"><b>1 · Work on copies</b><p>Back up a folder before allowing a new script to modify it.</p></div>
+<div class="card accent-yellow"><b>2 · Dry run first</b><p>See every rename, move, overwrite, or deletion before it happens.</p></div>
+<div class="card accent-purple"><b>3 · Smallest folder</b><p>Give the agent access only to the smallest folder needed, not your entire drive or home folder.</p></div>
+<div class="card accent-pink"><b>4 · New output files</b><p>Write results to new files. Keep originals untouched whenever possible.</p></div>
+</div>
+<pre>Copy the folder to a backup first.
+Show me your plan before changing anything and wait for approval.
+Write output to new files.
+Never modify the originals.</pre>
+<p>This is also a <b>permission ladder</b>: start with little freedom, inspect behavior, then grant more trust to a specific proven script.</p>
+
+<h3><span class="num">13</span>Know where one-prompt code ends</h3>
+<p>Some jobs need more engineering and governance than a simple script:</p>
+<div class="card">
+<p>• Multi-user software with accounts, payments, uptime requirements</p>
+<p>• Always-on automation with real consequences</p>
+<p>• No-undo high-stakes actions such as filing taxes, mass sending, or placing trades</p>
+<p>• Decisions that are fundamentally human judgment, such as deciding who deserves promotion</p>
+</div>
+<div class="callout warning"><b>Critical distinction:</b> Code can compute the criteria you give it. It should not silently invent the human values or policy behind a consequential decision.</div>
+</section>
+
+<section id="recap">
+<h2>⚡ The 13 Concepts in One Screen</h2>
+<div class="exam">
+<p>1. AI can write, run, and repair code. Your job is to describe the desired result.</p>
+<p>2. Code is exact, including when the instructions are wrong.</p>
+<p>3. Use <b>VPRF</b>: Volume, Precision, Repetition, Files.</p>
+<p>4. When precision matters, explicitly say <b>write and run code</b>.</p>
+<p>5. Use the five-part brief: Goal, Input, Output, Rules, Edge cases.</p>
+<p>6. Verify with known answers and progressively stronger checks.</p>
+<p>7. Treat errors as information. Paste errors; report wrong results as symptoms.</p>
+<p>8. Save the brief, script, and known-answer sample.</p>
+<p>9. Browser sandboxes are the safest learning surface.</p>
+<p>10. Claude Code/OpenCode bring the agent into your folder.</p>
+<p>11. Cowork/OpenWork provide desktop delegation and plan-before-action patterns.</p>
+<p>12. Shrink blast radius: backup, dry run, small scope, new outputs.</p>
+<p>13. Products, autonomous high-stakes workflows, irreversible actions, and judgment-heavy decisions need more than one-prompt code.</p>
+</div>
+</section>
+
+<section id="practical">
+<h2>🛠️ Practical Work</h2>
+<p class="lead">The source course repeatedly asks you to practice, not only read. These are the core exercises you should actually perform.</p>
+<details open><summary>1 · Make AI compute a small exact result</summary><p>Give it a short list of numbers and ask it to write and run code. Then manually verify one part.</p></details>
+<details><summary>2 · Classify Answer vs Code problems</summary><p>Take everyday tasks and apply VPRF. Drafting an email is usually an answer problem. Processing thousands of rows is a code problem.</p></details>
+<details><summary>3 · Prove the AI read a file</summary><p>Ask for exact row count, column names, and date range before analysis.</p></details>
+<details><summary>4 · Write a five-part brief</summary><p>Use Goal, Input, Output, Rules, and Edge cases on a messy real-world task.</p></details>
+<details><summary>5 · Perform a known-answer test</summary><p>Choose a small subtotal you can calculate yourself, then check whether the code reproduces it.</p></details>
+<details><summary>6 · Crash code on purpose</summary><p>Introduce a typo, let the program fail, then paste the full error back and ask the AI to diagnose, fix, and rerun.</p></details>
+<details><summary>7 · Save a reusable script</summary><p>Ask the AI to save the solution as a clearly named script with a plain-English header explaining expected inputs and rules.</p></details>
+<details><summary>8 · Produce an HTML report</summary><p>Give small data and ask for a clean one-page report with a total, chart/table, and observations.</p></details>
+<details><summary>9 · Practice a dry run</summary><p>Give a pretend file-renaming task and require the exact old-name → new-name plan. Tell it to change nothing until approval.</p></details>
+</section>
+
+<section id="projects">
+<h2>🚀 Four Course Projects</h2>
+<div class="grid">
+<div class="card accent-green"><h3>💸 1. Money Detective</h3><p>Analyze your historical money data. Find recurring charges, duplicate charges, and spending leaks. First verify known totals. Then save the script for next month.</p><p><b>Success:</b> It reproduces known numbers and finds at least one useful, actionable fact you did not already know.</p></div>
+<div class="card accent-yellow"><h3>📊 2. What’s My Grade, Really?</h3><p>Give your actual scores plus your teacher’s exact grading rules. Let code calculate the real grade and what score is needed next.</p><p><b>Success:</b> One category matches your hand calculation, then the script gives a trustworthy current grade/target.</p></div>
+<div class="card accent-purple"><h3>🧾 3. The Books Don’t Match</h3><p>Reconcile what people should owe with a messy payment record. Put your private rules into the brief and flag unknown payments instead of guessing.</p><p><b>Success:</b> The expected total matches your known count and the result identifies the specific gap to investigate.</p></div>
+<div class="card accent-pink"><h3>📸 4. Photo Gallery Rescue</h3><p>Find duplicate or near-duplicate photos, calculate wasted space, review the deletion plan, back up originals, then sort survivors by date.</p><p><b>Success:</b> You verify duplicates, catch false matches, preserve a backup, and leave originals protected.</p></div>
+</div>
+<div class="callout"><b>“Market of one”:</b> The best project is one with your own special rules and messy data, where a generic app cannot know the whole answer.</div>
+</section>
+
+<section id="test">
+<h2>🧠 Test Yourself</h2>
+<p class="lead">The official course page contains a “Test Your Understanding” section with 32 scenarios, but the questions were not exposed in the retrieved page. So these exam-style questions test the same core concepts. <b>Answers are intentionally hidden from this study page.</b></p>
+<div class="exam">
+<p><b>1.</b> You have 4,000 sales rows and need an exact monthly total. Which signal most clearly makes this a code problem?<br>A) Style &nbsp; B) Volume/Precision &nbsp; C) Creativity &nbsp; D) Tone</p>
+<p><b>2.</b> Which is the strongest everyday way to verify AI-written code you cannot read?<br>A) Trust the confident wording &nbsp; B) Read every Python line &nbsp; C) Known-answer test &nbsp; D) Ask it twice</p>
+<p><b>3.</b> What belongs in a complete code brief?<br>A) Goal, Input, Output, Rules, Edge cases &nbsp; B) Python, loops, libraries &nbsp; C) Only the goal &nbsp; D) UI colors</p>
+<p><b>4.</b> A script finishes but gives a suspicious total. What should you do?<br>A) Ignore it &nbsp; B) Report the symptom and expected value, then inspect row count/sample rows &nbsp; C) Delete the file &nbsp; D) Ask for prettier output</p>
+<p><b>5.</b> What is a dry run?<br>A) Running without internet &nbsp; B) Showing planned changes before making them &nbsp; C) Running twice &nbsp; D) Deleting temporary files</p>
+<p><b>6.</b> Which is safest before a new script modifies photos?<br>A) Give access to the whole disk &nbsp; B) Work directly on originals &nbsp; C) Backup + dry run + small folder &nbsp; D) Disable checks</p>
+<p><b>7.</b> What does VPRF stand for?<br>A) Volume, Precision, Repetition, Files &nbsp; B) Value, Prompt, Rules, Format &nbsp; C) Verification, Python, Report, Folder &nbsp; D) None</p>
+<p><b>8.</b> Why keep the brief beside the script?<br>A) The brief preserves what and why &nbsp; B) It makes Python faster &nbsp; C) It hides errors &nbsp; D) It replaces verification</p>
+<p><b>9.</b> When should a human remain especially involved?<br>A) Irreversible high-stakes actions &nbsp; B) Simple totals &nbsp; C) Formatting a table &nbsp; D) Counting rows</p>
+<p><b>10.</b> What is the central identity taught by this course?<br>A) You must become a syntax expert &nbsp; B) You are the client who describes and checks the work &nbsp; C) Never use code &nbsp; D) Always choose Python yourself</p>
+</div>
+</section>
+
+<section>
+<h2>🎯 What You Must Remember</h2>
+<div class="callout success">
+<b>For the exam, lock these into memory:</b><br>
+VPRF → Volume, Precision, Repetition, Files.<br>
+Brief → Goal, Input, Output, Rules, Edge cases.<br>
+Trust → known-answer test first, then stronger verification as stakes rise.<br>
+Safety → backup, dry run, smallest folder, new output files.<br>
+Core mindset → <b>AI writes/runs the code; you describe, supervise, and verify.</b>
+</div>
+</section>
+
+<div class="footer">
+<p>Study guide based closely on Panaversity Agent Factory’s “Code You Never Write” crash course. Designed as a learning companion, not a replacement for the official course.</p>
+</div>
+</main>
+</div>
+</body>
+</html>

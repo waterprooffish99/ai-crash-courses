@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ site.language }}" class="no-js">
+  <head>
+    {% set seoTitle = title %}
+    {% set seoDescription = description or site.description %}
+    {% set seoPath = page.url %}
+    {% if course %}
+      {% set seoTitle = course.title %}
+      {% set seoDescription = course.summary %}
+      {% set seoPath = course.publicStudyUrlPath %}
+    {% endif %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <title>{% if seoTitle %}{{ seoTitle }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ seoDescription }}">
+    <link rel="canonical" href="{{ seoPath | absoluteUrl }}">
+    <meta property="og:type" content="{% if course %}article{% else %}website{% endif %}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{% if seoTitle %}{{ seoTitle }} · {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{{ seoDescription }}">
+    <meta property="og:url" content="{{ seoPath | absoluteUrl }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% if seoTitle %}{{ seoTitle }} · {% endif %}{{ site.title }}">
+    <meta name="twitter:description" content="{{ seoDescription }}">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | url }}">
+    <script src="{{ '/assets/js/enhancements.js' | url }}" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+    {% include "components/site-header.njk" %}
+    <main id="main-content">
+      {{ content | safe }}
+    </main>
+    {% include "components/site-footer.njk" %}
+  </body>
+</html>

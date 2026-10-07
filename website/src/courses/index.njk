@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+title: All Courses
+description: Browse all ten beginner-friendly AI crash courses in their recommended learning sequence.
+permalink: /courses/index.html
+---
+<header class="catalog-hero shell">
+  <p class="eyebrow">Ten-course learning path</p>
+  <h1>All Courses</h1>
+  <p>Start at the beginning for a guided progression, or choose the topic that solves today’s learning need.</p>
+</header>
+<section class="course-catalog shell" aria-label="Course catalog">
+  <ol class="course-grid course-grid--compact">
+    {% for item in courses %}
+      <li class="course-card">
+        <span class="course-card__number" aria-hidden="true">{{ item.number | pad2 }}</span>
+        <div>
+          <p class="course-card__label">Course {{ item.number }}</p>
+          <h2><a href="{{ item.publicStudyUrlPath | url }}">{{ item.title }}</a></h2>
+          <p>{{ item.summary }}</p>
+        </div>
+        <a class="card-action" href="{{ item.publicStudyUrlPath | url }}" aria-label="Open Course {{ item.number }}: {{ item.title }}">Open Course <span aria-hidden="true">→</span></a>
+      </li>
+    {% endfor %}
+  </ol>
+</section>

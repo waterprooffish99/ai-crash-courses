@@ -1,0 +1,685 @@
+---
+title: "What AI Actually Is"
+description: "Build a simple mental model of language models, tokens, training, context, hallucinations, tools, agents, and reasoning."
+course: 2
+---
+
+★
+
+## Course map
+
+The official course is organized into three parts. The first explains the machine, the second explains its strange behavior, and the third explains how a predictor becomes an agent.
+
+Part 1
+
+### The machine
+
+**Idea 1:** predicts the next piece
+
+**Idea 2:** learned once, then froze
+
+**Idea 3:** no built-in truth checker
+
+Part 2
+
+### Why it behaves strangely
+
+**Idea 4:** tokens, not letters
+
+**Idea 5:** the context window
+
+**Idea 6:** confidence is style
+
+**Idea 7:** jagged capability
+
+Part 3
+
+### From predictor to agent
+
+**Idea 8:** tools let AI act
+
+**Idea 9:** “thinking” is more prediction
+
+Prediction machine
+
+→
+
+\+ Context
+
+→
+
+\+ Tools
+
+→
+
+\+ Loop
+
+→
+
+Agent
+
+**Why read this before the other Foundations courses?**
+
+Prompting, Skills & Connectors, Markdown/HTML, Code You Never Write, and AI-era thinking teach you how to use AI. This course first gives you the **engine picture** that makes those habits make sense.
+
+Aa
+
+## Quick glossary
+
+Learn the technical word, then attach a very simple picture to it. Search any term below.
+
+<Glossary items={[{"term":"Token","definition":"Small chunk of text the model reads or writes. A token can be a word, part of a word, punctuation, or sometimes a character."},{"term":"Tokenizer","definition":"The component that cuts text into tokens before the model processes it."},{"term":"Stochastic","definition":"Not always fixed. The model samples from several likely next tokens, so two answers can differ."},{"term":"Weights / Parameters","definition":"The huge collection of numbers inside the model that encode what training taught it. “Parameters” is another name for weights."},{"term":"Training","definition":"The expensive learning process that adjusts the model’s weights."},{"term":"Pretraining","definition":"The first big training stage: learn from a huge amount of text by predicting missing/next pieces."},{"term":"Instruction tuning","definition":"A later training stage that teaches the model to respond to requests like an assistant instead of merely continuing text."},{"term":"RLHF","definition":"Reinforcement Learning from Human Feedback. Humans rate answers, helping shape the model toward helpful, fluent behavior."},{"term":"Inference","definition":"Normal use after training. You send input; frozen weights produce an output. The model is being used, not retrained."},{"term":"Knowledge cutoff","definition":"The point after which new events are not part of the model’s trained weights."},{"term":"Stateless","definition":"The model has no personal memory of its own between separate calls. Memory-like behavior is built around it."},{"term":"Hallucination","definition":"A fluent answer that contains invented or false information."},{"term":"Context window","definition":"The temporary working space containing everything the model can see for the current response."},{"term":"System prompt","definition":"Instructions the AI product puts into context before your message, such as behavior, date, formatting, or safety rules."},{"term":"API","definition":"Application Programming Interface. A program-to-program way to call a model without using a normal chat screen."},{"term":"Frontier model","definition":"One of the most capable models available at a given time."},{"term":"Temperature","definition":"A control related to how conservatively or creatively the model samples likely next tokens. Lower tends to be steadier; higher tends to vary more."},{"term":"Mixture of Experts (MoE)","definition":"A model design where only part of the huge network is activated for a given token, helping very large models run more efficiently."},{"term":"Quantization","definition":"Storing model numbers with lower precision so the model needs less memory and cheaper hardware."},{"term":"Patch","definition":"A small image region that is converted into model-readable units. Think: image chunk."},{"term":"Segment","definition":"A short piece of audio converted into model-readable units. Think: sound chunk."},{"term":"Sycophancy","definition":"The model’s tendency to agree with what it thinks you want to hear."},{"term":"Jagged frontier","definition":"AI capability is uneven: excellent at one task, unexpectedly weak at another nearby task."},{"term":"Tool","definition":"An external action the model can request, such as search, code execution, reading a file, or sending a draft."},{"term":"Connector","definition":"A tool integration with a real app such as Drive, Gmail, Slack, a database, or Calendar."},{"term":"MCP","definition":"Model Context Protocol. A standard way for agents and external tools/data sources to connect."},{"term":"Agent","definition":"A model with tools running a repeated predict → act → observe loop toward a goal."},{"term":"Reasoning","definition":"Extra intermediate computational work before the final answer. It can improve difficult answers but does not guarantee truth."},{"term":"Skill","definition":"A reusable package of instructions and reference material that can be loaded when a matching task appears."},{"term":"Progressive disclosure","definition":"Keep most knowledge outside context and load only what is needed now. This protects limited context space."},{"term":"Artifact","definition":"In Claude terminology, a document, webpage, code item, or interactive object shown separately from the chat."},{"term":"Project","definition":"A workspace with its own instructions and knowledge files so new chats inside it start with relevant context."}]} />
+
+9
+
+## The nine ideas, deeply simplified
+
+Every idea follows the same pattern: what it is, why it matters, the technical terms, a mental picture, and the exam trap to avoid.
+
+1
+
+### AI predicts the next piece. It does not naturally “look up” facts.
+
+Think **world-class autocomplete**, not “secret encyclopedia.”
+
+A language model receives the text already in front of it and calculates which token is likely to come next. It chooses one, adds it to the answer, then repeats. The answer grows piece by piece.
+
+**Simple example:** You type “Happy birthday to…” and autocomplete suggests “you.” An LLM does a much more powerful version of this for explanations, code, stories, plans, questions, and more.
+
+**Stochastic**Several next tokens may be plausible, so repeated answers can differ.
+
+**Temperature**Lower tends to stay near the most likely choices. Higher explores less-likely choices more often.
+
+**Rare-topic danger**If training contained little reliable material, the model can still generate a plausible continuation.
+
+Why it matters: On common facts, prediction can look exactly like lookup. On obscure facts, prediction can produce something that merely *sounds right*.
+
+Exam trap: The *product* may use web search. The underlying model itself still predicts from whatever information has been placed into its context.
+
+<Exercise title={"But ChatGPT/Claude/Gemini can search. Isn't that lookup?"}>
+
+Search is a **tool**. The product fetches real pages, puts relevant information into the context window, and the language model then predicts an answer from that context. Tool use adds lookup around the model; it does not change the model’s core next-token mechanism.
+
+</Exercise>
+
+**Memory hook:** *AI writes forward. Tools bring facts in.*
+
+2
+
+### It learned by reading, then the learning froze.
+
+Training is school. Inference is doing the job after school.
+
+#### The simple training loop
+
+Hide next piece
+
+→
+
+Model guesses
+
+→
+
+Compare
+
+→
+
+Adjust weights
+
+↻
+
+The model is exposed to huge amounts of human text. Its internal weights/parameters are repeatedly adjusted so it becomes better at prediction. When training is complete, the finished model’s weights are frozen for normal use.
+
+#### Three important education stages
+
+| Stage | Super-simple meaning | What it teaches |
+| --- | --- | --- |
+| **Pretraining** | Read a huge pile of text and learn patterns. | Language, knowledge patterns, code patterns, styles. |
+| **Instruction tuning** | Practice request → good response examples. | Answer questions and complete tasks like an assistant. |
+| **Human-feedback tuning / RLHF** | Humans prefer some responses over others. | Helpful, polished, cooperative behavior. |
+
+Inference is normal usage after training. You send text, frozen weights run, and an answer is generated. Correcting the model in chat can help the *current context*, but does not directly rewrite its weights.
+
+#### Knowledge cutoff
+
+If training stopped before an event happened, that event is not naturally encoded in those frozen weights. Current tools can supply newer information.
+
+#### Private information
+
+Your company records, today's inbox, private files, and calendar are not magically in the model. They must be supplied through context or tools.
+
+#### Why intentionally keep the model stateless?
+
+| Reason | Simple meaning |
+| --- | --- |
+| Cost | Full training is vastly more expensive than simply running the finished model. |
+| Safety & testing | A stable frozen model can be tested. A model that rewrites itself after every user could drift unpredictably. |
+| Consistency | Shared frozen weights make behavior easier to reproduce and debug. |
+
+Stateless means the underlying model has no personal memory of its own. A product can create memory-like behavior by storing notes or transcripts and putting them back into context later.
+
+<Exercise title={"Extra vocabulary: MoE and quantization"}>
+
+**Mixture of Experts (MoE)** activates only parts of a very large network for each token, improving efficiency. **Quantization** stores weights at lower precision so a model needs less memory and can run on smaller hardware. These change how the machine is built or run, not the nine core ideas about what it does.
+
+</Exercise>
+
+**Memory hook:** *Training changes the brain-like weights. Chatting normally does not.*
+
+3
+
+### There is no separate built-in truth checker.
+
+The machine is excellent at producing a continuation. That is not the same as proving the continuation is true.
+
+#### Human mental picture
+
+“Here is my answer… wait, am I sure? Where did I learn this?”
+
+#### LLM mental picture
+
+“Produce the most fitting continuation.” There is no guaranteed independent truth organ that certifies it before you see it.
+
+Hallucination means a fluent but false or invented claim. It is especially likely when the topic is rare, the prompt strongly demands an answer, and there is little reliable information to predict from.
+
+**Example:** Ask for the exact fee schedule of a tiny local academy with almost no public information. A model might create a neat, realistic table. The formatting can be excellent while every number is invented.
+
+Critical rule: Fluency is not evidence. Confidence is not evidence. For important facts, verify against a reliable source or use tools that fetch the evidence.
+
+**Memory hook:** *AI can be the writer. You are the fact-checker.*
+
+4
+
+### It reads tokens, not text exactly like a human reads letters.
+
+The machine receives chunks.
+
+A token is a chunk that the model processes. Common short words may be one token; unusual words may become several. The exact split depends on the tokenizer.
+
+#### Unit of meaning
+
+Tokens are the pieces the model reads and writes.
+
+#### Unit of context
+
+Context-window size is measured in tokens.
+
+#### Unit of cost
+
+API usage is commonly priced by input/output tokens.
+
+This explains why exact letter counting, some anagrams, or wordplay can be oddly difficult even for a powerful model. It also explains why typos often do not destroy meaning: the chunks can still land near familiar language patterns.
+
+**Famous demonstration:** Ask a model to count a chosen letter in a strange invented string. If it fails, then ask it to spell the string character by character first. Explicitly exposing the letters can make the counting easier.
+
+#### Other languages
+
+English has historically tokenized efficiently in many models. Urdu, Arabic, Chinese, and other scripts may use more tokens for the same amount of meaning, depending on the tokenizer. More tokens can mean more context usage and potentially more cost. Tokenizers keep improving, so treat exact ratios as model-specific.
+
+#### Images and audio
+
+Modern multimodal systems also convert non-text input into model-readable units. Images are commonly represented as visual chunks or patches; audio can be represented in short segments. The basic lesson survives: the model is operating on encoded pieces, not seeing exactly like a human eye or hearing exactly like a human ear.
+
+**Memory hook:** *Tokens are meaning pieces, memory pieces, and money pieces.*
+
+5
+
+### The context window is the model’s working desk.
+
+If information is not on the desk, the model cannot use it for that answer.
+
+The context window is the temporary information available while producing a response. It can contain your prompt, previous chat turns, attached files, tool descriptions, retrieved results, skill instructions, and product-level instructions.
+
+System instructions
+
+Chat history
+
+Your prompt
+
+Files
+
+Tool results
+
+Skills
+
+All compete for the same finite working space.
+
+#### System prompt
+
+A system prompt is product-provided instruction text placed into context before your request. It can describe role, behavior, current date, formatting, tool rules, and safety rules. Mechanically, it is still text the model receives.
+
+#### Chat history is replayed context
+
+The underlying model does not need to “remember” message 1 internally. The application can store the transcript in its database and send relevant history back with later requests. That is why the same chat can appear continuous.
+
+| What you observe | What is really happening |
+| --- | --- |
+| “It remembers this chat.” | Earlier turns are present again in context. |
+| Long chats can become slower/costlier. | More transcript tokens may need to be processed again. |
+| Very old details may disappear. | The application may trim or summarize old context when space becomes tight. |
+
+#### Context rot
+
+A huge context window is useful but not magical. Too much unrelated history can dilute the important signal. A fresh chat or a clean summary can improve focus.
+
+#### Skills and progressive disclosure
+
+A Skill can keep detailed instructions/files outside the main context until a matching task needs them. Progressive disclosure means loading only the knowledge required now instead of filling the desk with everything.
+
+**Memory hook:** *Context is the desk. History is a transcript put back on the desk. A skill is a file that visits the desk when needed.*
+
+6
+
+### Confidence is a learned style, not a truth meter.
+
+A confident sentence can be right or wrong.
+
+Human-feedback tuning such as RLHF helps make assistants useful, clear, and cooperative. Human readers often prefer confident and fluent answers. That can make the model sound certain even when the underlying claim is weak.
+
+Sycophancy is the tendency to tell you what you appear to want to hear. A leading question like “Don’t you agree this plan is excellent?” gives the model a strong cue toward agreement.
+
+#### Weak framing
+
+“Isn’t my business idea brilliant?”
+
+#### Better framing
+
+“Evaluate this idea against demand, cost, execution risk, and defensibility. Give the strongest case for and against it.”
+
+Exam point: Neutral framing and explicit criteria reduce the space for agreeable vagueness. A numeric score without criteria can still be sycophantic.
+
+**Memory hook:** *Tone tells you how it sounds, not how true it is.*
+
+7
+
+### AI capability is jagged.
+
+It can be amazing at a hard-looking task and surprisingly bad at an easy-looking one.
+
+The jagged frontier means AI ability does not form a smooth ladder from easy to hard. Different tasks sit in very different capability zones.
+
+```text
+Capability
+HIGH     ▲       ▲           ▲
+        / \     / \         / \
+       /   \___/   \_______/   \
+LOW  --------------------------------→ different tasks
+      explain   count   draft   logic   code
+      science   letters clause  puzzle
+```
+
+#### Three habits
+
+1.  **Do not generalize from one success.** A model winning at a hard task does not guarantee nearby easy tasks.
+2.  **Verify across the boundary.** Easy-looking tasks that you would normally skip checking can be dangerous.
+3.  **Compare models when it matters.** Different models can have differently shaped strengths and weaknesses.
+
+The frontier also moves as models improve, so re-test old assumptions periodically.
+
+**Memory hook:** *AI skill is a mountain range, not a smooth staircase.*
+
+8
+
+### Tools let the predictor act in the real world.
+
+Without tools it talks. With tools it can fetch, calculate, read, create, and act within permissions.
+
+A tool is a defined external action the model can request. Examples include web search, code execution, file reading, a database query, or drafting/sending through an app integration.
+
+Predict next action
+
+→
+
+Tool acts
+
+→
+
+Observe result
+
+↻
+
+Repeat toward the goal = agent loop.
+
+An agent is the same core predictor equipped with tools and allowed to repeat this **predict → act → observe** loop toward a goal.
+
+#### Connector vs MCP
+
+#### Connector
+
+A specific integration to a real service such as Drive, Gmail, Slack, Calendar, or a database. It works only with permissions you grant.
+
+#### MCP
+
+**Model Context Protocol** is a standard interface for connecting AI agents to tools and data. Easy analogy: MCP is the plug standard; a connector is one device that fits the plug.
+
+#### Three examples
+
+-   **Web search:** fetch current information and place it into context.
+-   **Code execution:** model writes a program; a real runtime executes it; actual results come back.
+-   **Connector:** agent reaches your real app/data within granted permissions.
+
+**Memory hook:** *Model = brain-like predictor. Tool = hand. Loop = repeated work. Goal = direction.*
+
+9
+
+### “Thinking” means more intermediate work before the final answer.
+
+Reasoning gives the model a scratchpad-like computational process, not a magical truth detector.
+
+A reasoning model can spend extra computation on intermediate steps before committing to a final answer. This often helps with multi-step problems, planning, architecture, and difficult tradeoffs.
+
+#### Quick task
+
+Lookup, reformat, short rewrite → deep reasoning may be unnecessary overhead.
+
+#### Hard task
+
+Multi-variable decision, complex reasoning, architecture → more reasoning can materially improve quality.
+
+More reasoning usually requires extra tokens/compute, so it can take more time and cost more. The visible “thinking” shown by a product may be a summary rather than raw internal computation.
+
+Important: Reasoning uses the same fallible model machinery. It can catch many mistakes, but it can also reason carefully from a false assumption.
+
+**Memory hook:** *Thinking narrows the error gap. It does not erase it.*
+
+…
+
+## What the course intentionally leaves out
+
+The crash course stays conceptual, so three deeper subjects are deliberately not taught in detail.
+
+### Training compute & cost
+
+Building frontier models takes enormous computing resources and money.
+
+### Safety & alignment
+
+The large field that shapes what models should or should not do.
+
+### Deep weight mathematics
+
+The internal mathematical machinery of how parameters are arranged and updated.
+
+✓
+
+## What you must remember
+
+1.  **Prediction:** the native act is predicting the next token.
+2.  **Frozen learning:** training changes weights; inference normally does not.
+3.  **No guaranteed truth organ:** hallucinations can sound fluent.
+4.  **Tokens:** the model processes chunks; tokens affect meaning, context, and cost.
+5.  **Context window:** the temporary working desk. History, files, tools, and instructions must land there to matter.
+6.  **Confidence:** learned communication style, not proof.
+7.  **Jagged frontier:** ability is uneven across tasks and changes over time.
+8.  **Tools:** let the predictor act. Agent = model + tools + loop + goal.
+9.  **Reasoning:** extra intermediate work can improve hard answers but still needs checking.
+
+🛠
+
+## Practical Work
+
+These six exercises closely follow the course’s closing practice section. Do them in any chatbot. The point is to *observe the mechanism*, not merely read about it.
+
+### 1\. See prediction instead of lookup
+
+Use an invented traditional-game name and ask for its setup, turns, and win condition **without web search**.
+
+Without using search, explain the traditional board game “Karakush”: how it is set up, what happens on a turn, and how a player wins.
+
+**Notice:** If the model invents polished rules, fluency did not prove truth. If it says it does not know, that is good refusal behavior. You can try another invented name.
+
+### 2\. Watch your correction fail to become training
+
+In one or two sentences, give me one specific fact about \[a topic I know well\].
+
+Correct one detail. Then start a new chat and ask the original question again. If the product has cross-chat memory, disable/avoid it for the experiment.
+
+**Notice:** Normal conversation did not rewrite the frozen weights.
+
+### 3\. Catch the missing truth checker
+
+Give me three peer-reviewed studies, including authors and publication years, about \[a very narrow topic\].
+
+Verify each citation independently before using it. Some models may fabricate realistic-looking references.
+
+**Notice:** You cannot reliably identify a fake citation from confident writing alone.
+
+### 4\. Catch transcript replay
+
+In a chat with several previous turns, ask:
+
+Repeat my very first message in this conversation exactly.
+
+Then ask the same thing in a fresh chat.
+
+**Notice:** Continuity inside a chat comes from stored transcript/context, not from weights learning you during the chat.
+
+### 5\. Feel the jagged frontier
+
+Do both in one reply: 1) Explain a genuinely difficult topic clearly. 2) Count exactly how many times the letter “r” appears in: braverrikromarent
+
+**Notice:** Difficulty from a human viewpoint does not reliably predict AI capability.
+
+### 6\. Compare ordinary answering with deeper reasoning
+
+Ask one difficult reasoning question normally. Then ask it again while explicitly requesting careful reasoning/working before the conclusion.
+
+\[Your hard reasoning problem.\] Think carefully before answering, check the important steps, then give the conclusion.
+
+**Notice:** More intermediate work can improve the result, but it still cannot certify its own truth.
+
+### Practice completion checklist
+
+ I observed prediction/hallucination on an invented topic.  I tested whether a correction carries into a fresh chat.  I verified narrow citations instead of trusting the writing.  I tested transcript replay.  I tested the jagged frontier.  I compared normal vs deeper reasoning.
+
+?
+
+## 19 course questions you should be able to answer
+
+The official course frames these as teacher/self-tester questions. Try to answer each in two or three sentences before opening the hint.
+
+<Exercise title={"1. What is a language model doing when it answers? Does it look facts up?"}>
+
+It predicts tokens from context and frozen weights. A product may use a search tool, but the model itself still generates by prediction.
+
+</Exercise>
+
+<Exercise title={"2. What does stochastic mean?"}>
+
+Several next tokens can have non-zero probability, so the model can sample different continuations on different runs.
+
+</Exercise>
+
+<Exercise title={"3. How are LLMs built, and where does training data come from?"}>
+
+Training repeatedly adjusts weights from very large text/code collections. Exact datasets vary and are often only partly disclosed.
+
+</Exercise>
+
+<Exercise title={"4. What is a knowledge cutoff?"}>
+
+The boundary after which newer information is not naturally contained in the trained weights.
+
+</Exercise>
+
+<Exercise title={"5. If it predicts text, why does it answer instead of merely continuing the question?"}>
+
+Instruction tuning teaches the pattern that a question is followed by an answer and a request by a completed task.
+
+</Exercise>
+
+<Exercise title={"6. What does stateless mean?"}>
+
+The underlying model has no personal persistent memory of its own between calls.
+
+</Exercise>
+
+<Exercise title={"7. Why is statelessness intentional?"}>
+
+Cost, safety/testing, and consistency. Products build memory around the frozen model instead of retraining it every turn.
+
+</Exercise>
+
+<Exercise title={"8. What is hallucination and why does it happen?"}>
+
+A fluent false claim. Prediction can continue plausibly even where no reliable fact pattern exists, and there is no guaranteed separate truth checker.
+
+</Exercise>
+
+<Exercise title={"9. What are tokens and what do they measure?"}>
+
+Model-readable chunks. They are central to input/output, context-window size, and commonly API cost.
+
+</Exercise>
+
+<Exercise title={"10. What does a large context window actually mean?"}>
+
+It is the maximum working-space capacity, measured in tokens, for prompts, history, files, instructions, and tool information.
+
+</Exercise>
+
+<Exercise title={"11. What is a system prompt?"}>
+
+Product-supplied instruction text placed in context before the user’s request.
+
+</Exercise>
+
+<Exercise title={"12. What is chat history and where is it stored?"}>
+
+The application stores the transcript externally and can replay relevant portions into context on later turns.
+
+</Exercise>
+
+<Exercise title={"13. How are context window and chat history related?"}>
+
+History matters because it is inserted back into the current context window.
+
+</Exercise>
+
+<Exercise title={"14. What are Skills and how do they relate to context?"}>
+
+Reusable instructions/reference files can remain outside the active window and load when the request matches. This is progressive disclosure.
+
+</Exercise>
+
+<Exercise title={"15. Why does AI sound confident and tend to agree?"}>
+
+Training and human feedback reward useful, fluent, cooperative styles. This can produce confident tone and sycophancy independent of truth.
+
+</Exercise>
+
+<Exercise title={"16. Why can AI be brilliant at one task and weak at an easier one?"}>
+
+Its capability frontier is jagged because task strength depends on training patterns, representation, tools, and model-specific weaknesses.
+
+</Exercise>
+
+<Exercise title={"17. What turns a text predictor into an agent?"}>
+
+Tools plus a repeated predict → act → observe loop directed toward a goal.
+
+</Exercise>
+
+<Exercise title={"18. Connector vs MCP?"}>
+
+A connector is a specific integration to a service. MCP is a standard protocol/interface that lets agents and external tools/data sources interoperate.
+
+</Exercise>
+
+<Exercise title={"19. What is a reasoning model doing when it “thinks”?"}>
+
+It spends extra computation on intermediate work before the final answer. This can increase accuracy but still does not guarantee truth.
+
+</Exercise>
+
+🧠
+
+## Test Yourself
+
+Choose your answers, then press **Check score**. The answers stay hidden until you submit.
+
+<Quiz questions={[{"question":"1. What is the most accurate core description of an LLM?","options":[{"value":"a","label":"A. A database that retrieves stored sentences"},{"value":"b","label":"B. A model that predicts the next token from context and learned weights"},{"value":"c","label":"C. A search engine that always checks the web"},{"value":"d","label":"D. A permanent personal memory"}],"answer":"b"},{"question":"2. Why can the same prompt produce different wording?","options":[{"value":"a","label":"A. The model retrains after every message"},{"value":"b","label":"B. The tokenizer changes each time"},{"value":"c","label":"C. Generation is stochastic and samples from likely continuations"},{"value":"d","label":"D. The knowledge cutoff moves"}],"answer":"c"},{"question":"3. Which stage mainly teaches “a question should be answered like an assistant”?","options":[{"value":"a","label":"A. Quantization"},{"value":"b","label":"B. Inference"},{"value":"c","label":"C. Tokenization"},{"value":"d","label":"D. Instruction tuning"}],"answer":"d"},{"question":"4. What normally changes the model’s weights?","options":[{"value":"a","label":"A. Training"},{"value":"b","label":"B. Starting a new chat"},{"value":"c","label":"C. Asking the model to remember"},{"value":"d","label":"D. A system prompt"}],"answer":"a"},{"question":"5. A model gives a realistic but fake paper citation. What concept is this?","options":[{"value":"a","label":"A. Quantization"},{"value":"b","label":"B. Hallucination"},{"value":"c","label":"C. Progressive disclosure"},{"value":"d","label":"D. Inference"}],"answer":"b"},{"question":"6. Why can exact letter-counting be awkward for an LLM?","options":[{"value":"a","label":"A. It cannot process words"},{"value":"b","label":"B. It has no vocabulary"},{"value":"c","label":"C. It primarily processes token chunks, not a clean human-style row of letters"},{"value":"d","label":"D. It always uses web search"}],"answer":"c"},{"question":"7. What is the context window?","options":[{"value":"a","label":"A. The temporary working information available for the current response"},{"value":"b","label":"B. The entire internet"},{"value":"c","label":"C. Permanent memory inside the weights"},{"value":"d","label":"D. Only the latest user message"}],"answer":"a"},{"question":"8. “The AI remembers message 1 inside the same chat.” What is the better explanation?","options":[{"value":"a","label":"A. The weights changed after message 1"},{"value":"b","label":"B. The tokenizer stored it forever"},{"value":"c","label":"C. Temperature stores old messages"},{"value":"d","label":"D. The application stores/replays relevant transcript into context"}],"answer":"d"},{"question":"9. What is sycophancy?","options":[{"value":"a","label":"A. An agent calling a tool twice"},{"value":"b","label":"B. A tendency to agree with what the user appears to want"},{"value":"c","label":"C. Compressing model weights"},{"value":"d","label":"D. Breaking text into tokens"}],"answer":"b"},{"question":"10. AI writes excellent code but fails a simple logic puzzle. Which idea best explains this?","options":[{"value":"a","label":"A. API"},{"value":"b","label":"B. Knowledge cutoff"},{"value":"c","label":"C. Jagged frontier"},{"value":"d","label":"D. System prompt"}],"answer":"c"},{"question":"11. Which formula best matches an agent?","options":[{"value":"a","label":"A. Predictor + tools + repeated loop + goal"},{"value":"b","label":"B. Database + spreadsheet only"},{"value":"c","label":"C. Search engine + memory only"},{"value":"d","label":"D. Bigger context window only"}],"answer":"a"},{"question":"12. What is the clearest relationship between MCP and a connector?","options":[{"value":"a","label":"A. They are both training algorithms"},{"value":"b","label":"B. MCP is a model and connector is a tokenizer"},{"value":"c","label":"C. Connector is a protocol and MCP is an app"},{"value":"d","label":"D. MCP is a standard interface; a connector is a specific integration"}],"answer":"d"},{"question":"13. What does deeper reasoning guarantee?","options":[{"value":"a","label":"A. Truth"},{"value":"b","label":"B. Permanent learning"},{"value":"c","label":"C. Nothing absolute; it often improves hard answers but can still be wrong"},{"value":"d","label":"D. Access to private files"}],"answer":"c"},{"question":"14. Which is progressive disclosure?","options":[{"value":"a","label":"A. Put every file into context at all times"},{"value":"b","label":"B. Keep detailed knowledge outside active context and load it only when needed"},{"value":"c","label":"C. Raise temperature"},{"value":"d","label":"D. Retrain after each message"}],"answer":"b"},{"question":"15. What is the safest mental rule for confident AI output?","options":[{"value":"a","label":"A. Confidence is style; important claims still need evidence/checking"},{"value":"b","label":"B. Confident wording means at least 95% certainty"},{"value":"c","label":"C. Long answers are always more factual"},{"value":"d","label":"D. Reasoning mode removes hallucinations"}],"answer":"a"}]} />
+
+↻
+
+## Fast flashcards
+
+Click a card to reveal the simple answer.
+
+<Flashcard front={"Training vs inference?"} back={"Training changes weights. Inference uses frozen weights."} />
+
+<Flashcard front={"What is stateless?"} back={"The underlying model has no personal persistent memory of its own."} />
+
+<Flashcard front={"What is hallucination?"} back={"A fluent false or invented claim."} />
+
+<Flashcard front={"Context window?"} back={"The temporary working desk containing what the model can see now."} />
+
+<Flashcard front={"Sycophancy?"} back={"Tendency to tell you what you appear to want to hear."} />
+
+<Flashcard front={"Agent?"} back={"Predictor + tools + predict/act/observe loop + goal."} />
+
+A
+
+## Optional Claude.ai cockpit appendix
+
+**Important:** This part is product-specific and changes faster than the nine core ideas. Model names, buttons, plan limits, and pricing can change. Use the live Claude product/help center as the authority when a current interface differs.
+
+### A.1 Getting in
+
+Claude is available through web, desktop, and mobile apps. The course’s key lesson is not to memorize limits or prices. Usage is fundamentally tied to the amount of model work, and token usage matters.
+
+### A.2 Main controls
+
+**Prompt box:** puts your request/files into context. **Model selector:** chooses a different set of trained weights/capabilities. **Thinking/effort:** changes how much reasoning work happens before the answer.
+
+### A.3 Model ladder
+
+Use the middle/default model for most work, a stronger model for difficult depth/coherence, and a smaller/faster one for simple high-volume jobs. Memorize the *selection logic*, not temporary model names.
+
+### A.4 Thinking & effort
+
+Higher effort means more reasoning compute/tokens. Spend it on hard decisions and multi-variable problems, not simple lookup or formatting.
+
+### A.5 Context controls
+
+**Account instructions** can apply broadly; **Projects** scope instructions/knowledge to a workspace; **Memory** can re-feed stored user context; **past-chat search** retrieves stored transcript and brings useful pieces back into current context.
+
+### A.6 Uploads
+
+Files become context the model can inspect. Full source material can be much better than a tiny summary when details matter. Tiny text inside images can still be difficult.
+
+### A.7 Artifacts & files
+
+Claude can place substantial outputs in an Artifact-like workspace and, when file/code capabilities are available, can create structured deliverables. Mechanically this is tool use around the model.
+
+### A.8 Search, Research, Skills, Connectors
+
+**Search** fetches current facts. **Research** runs a longer multi-search workflow where available. **Skills** load reusable procedures. **Connectors** bring real app data/actions through granted permissions, commonly using standards such as MCP.
+
+### A.9 30-minute setup idea
+
+Find model/thinking controls, set broadly valid instructions, create one project, decide how you want memory handled, make one artifact, run one sourced research/search task, and turn one repeated workflow into a skill.
+
+### A.10 What changes vs what stays
+
+Product UI changes. The durable map does not: a control either selects weights, changes reasoning effort, puts information into context, or connects a tool into the agent loop.
+
+→
+
+## Where this leads
+
+**AI Prompting** turns prediction, context, and sycophancy into daily prompting habits.
+
+**How to Think in the AI Era** builds the human checking discipline required because the model is not a truth machine.
+
+**Markdown In, HTML Out** and **Code You Never Write** focus on what flows through context and what execution tools can produce.
+
+**Skills & Connectors** adds reusable expertise and real-app connections to the same predictor.
+
+**Agents and Digital FTEs** scale the predict → act → observe loop with goals, tools, context, governance, and repeated work.
+
+<SourceLink course={2} />
+
+<CourseVideo course={2} />
+
+<CourseNavigation course={2} />

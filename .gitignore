@@ -1,0 +1,34 @@
+# Original course videos (read-only source material)
+videos/*.mp4
+videos/*.mov
+videos/*.mkv
+videos/*.webm
+sources/videos/*.mp4
+sources/videos/*.mov
+sources/videos/*.mkv
+sources/videos/*.webm
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated build output
+node_modules/
+dist/
+.next/
+coverage/
+website/_site/
+website-fumadocs/node_modules/
+website-fumadocs/.next/
+website-fumadocs/out/
+website-fumadocs/.source/
+
+# Logs and caches
+*.log
+.cache/
+*.tsbuildinfo
+
+# Operating-system files
+.DS_Store
+Thumbs.db

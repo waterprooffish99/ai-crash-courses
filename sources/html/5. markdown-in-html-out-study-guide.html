@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markdown In, HTML Out — Simple Exam Study Guide</title>
+<style>
+  :root{
+    --bg:#0b1020;
+    --panel:#121a2f;
+    --panel2:#18223b;
+    --text:#eef3ff;
+    --muted:#b9c5df;
+    --accent:#7dd3fc;
+    --accent2:#a7f3d0;
+    --warn:#fde68a;
+    --line:#2a3858;
+    --code:#09101f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#08101f 0%,var(--bg) 100%);
+    color:var(--text);
+    font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  }
+  .wrap{max-width:940px;margin:auto;padding:22px 16px 70px}
+  header{
+    padding:28px 22px;
+    background:linear-gradient(135deg,#172448,#101a32);
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
+  }
+  h1{font-size:clamp(2rem,6vw,3.3rem);line-height:1.1;margin:.1em 0 .3em}
+  h2{font-size:1.55rem;margin:0 0 .6rem}
+  h3{font-size:1.12rem;margin:1.1rem 0 .35rem;color:var(--accent2)}
+  p{margin:.55rem 0}
+  .lead{font-size:1.08rem;color:var(--muted)}
+  .rule{
+    margin:18px 0 0;
+    padding:14px 16px;
+    border-left:4px solid var(--accent);
+    background:rgba(125,211,252,.08);
+    border-radius:12px;
+    font-weight:700;
+  }
+  nav{
+    position:sticky;top:0;z-index:5;
+    margin:18px 0;
+    padding:10px;
+    border:1px solid var(--line);
+    background:rgba(11,16,32,.92);
+    backdrop-filter:blur(12px);
+    border-radius:14px;
+    overflow:auto;
+    white-space:nowrap;
+  }
+  nav a{
+    display:inline-block;color:var(--text);text-decoration:none;
+    padding:8px 10px;border-radius:9px;
+  }
+  nav a:hover{background:var(--panel2)}
+  section{
+    margin:18px 0;
+    padding:20px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:18px;
+  }
+  .concept{
+    padding:16px;
+    margin:12px 0;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .term{
+    color:var(--accent);
+    font-weight:800;
+  }
+  .exam{
+    margin-top:10px;
+    padding:10px 12px;
+    background:rgba(253,230,138,.08);
+    border-left:3px solid var(--warn);
+    border-radius:9px;
+  }
+  table{width:100%;border-collapse:collapse;margin:12px 0;display:block;overflow-x:auto}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#1a2746}
+  code{
+    background:var(--code);
+    border:1px solid #25334f;
+    border-radius:6px;
+    padding:.1em .38em;
+    color:#e0f2fe;
+  }
+  pre{
+    background:var(--code);
+    border:1px solid #25334f;
+    border-radius:12px;
+    padding:14px;
+    overflow:auto;
+    white-space:pre-wrap;
+  }
+  ul,ol{padding-left:1.35rem}
+  li{margin:.35rem 0}
+  .mini{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px;
+  }
+  .mini > div{
+    background:var(--panel2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+  }
+  details{
+    background:var(--panel2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin:8px 0;
+    padding:10px 12px;
+  }
+  summary{cursor:pointer;font-weight:750}
+  .mcq{margin:14px 0;padding:14px;background:var(--panel2);border-radius:12px;border:1px solid var(--line)}
+  .tag{
+    display:inline-block;padding:4px 8px;border:1px solid var(--line);
+    border-radius:999px;color:var(--accent2);font-size:.84rem;margin-right:5px;
+  }
+  footer{color:var(--muted);text-align:center;margin-top:28px;font-size:.92rem}
+  @media(max-width:600px){
+    section{padding:15px}
+    .concept{padding:13px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">Agent Factory</span>
+  <span class="tag">Exam Study Guide</span>
+  <h1>Markdown In, HTML Out</h1>
+  <p class="lead">A super-simple study version of the crash course. The goal is not to memorize tags. The goal is to know which format to use, why it matters, and how to brief an AI clearly.</p>
+  <div class="rule">Main idea: Write instructions precise enough for an AI in <strong>Markdown</strong>. Ask for rich, readable <strong>HTML</strong> when a human will read the result.</div>
+</header>
+
+<nav>
+  <a href="#big-picture">Big Picture</a>
+  <a href="#part1">Part 1</a>
+  <a href="#part2">Part 2</a>
+  <a href="#part3">Part 3</a>
+  <a href="#part4">Part 4</a>
+  <a href="#formats">Formats</a>
+  <a href="#practical">Practical</a>
+  <a href="#test">MCQs</a>
+</nav>
+
+<section id="big-picture">
+<h2>🧠 Big Picture</h2>
+<p>There are two different directions when you work with AI:</p>
+<table>
+<tr><th>Direction</th><th>Best format</th><th>Simple reason</th></tr>
+<tr><td>You → AI</td><td><strong>Markdown</strong></td><td>It gives clear structure, so the AI has less to guess.</td></tr>
+<tr><td>AI → Human</td><td><strong>HTML</strong></td><td>It can be designed, visual, easy to scan, and easy to share in a browser.</td></tr>
+<tr><td>AI → AI</td><td><strong>Markdown</strong></td><td>It is compact and easier for models to process than decorative HTML.</td></tr>
+</table>
+
+<h3>Important technical terms</h3>
+<div class="mini">
+  <div><span class="term">Markdown</span><br>Plain text with simple marks such as <code>#</code> headings and <code>-</code> bullets. It matters because the structure tells the AI what belongs where.</div>
+  <div><span class="term">HTML</span><br>The language browsers render as web pages. It matters because it can present long information with layout, tables, diagrams, and controls.</div>
+  <div><span class="term">Specification (spec)</span><br>A precise document describing what the AI should build, what rules it must follow, and what is outside the task.</div>
+  <div><span class="term">Asymmetry</span><br>The two directions are intentionally different: Markdown going in, HTML coming out.</div>
+</div>
+</section>
+
+<section id="part1">
+<h2>Part 1: The Two Languages</h2>
+
+<div class="concept">
+<h3>1. Why agents need structure</h3>
+<p><strong>What it is:</strong> Structured instructions separate the goal, requirements, limits, and exclusions.</p>
+<p><strong>Why it matters:</strong> An AI can sound confident even when it guessed wrong. Good structure reduces guessing.</p>
+<p><strong>Simple example:</strong> Instead of saying, “Make me a nice shop page with prices and contact,” write separate sections for Goal, Requirements, Hard constraints, and Out of scope.</p>
+<div class="exam"><strong>Exam point:</strong> Anything the AI must not get wrong should have its own heading or bullet, not be hidden inside a long sentence.</div>
+</div>
+
+<div class="concept">
+<h3>2. The asymmetry: Markdown in, HTML out</h3>
+<p><strong>What it means:</strong> The best format for giving instructions is not always the best format for reading the answer.</p>
+<p><strong>Why HTML for humans?</strong> It can show tables, visual hierarchy, diagrams, tabs, collapsible sections, and interactive controls.</p>
+<p><strong>Why Markdown for AI?</strong> HTML contains lots of layout tags. Those tags can add unnecessary text when the next reader is another model.</p>
+<div class="exam"><strong>Exam question to remember:</strong> <em>Who reads this last?</em> Human in a browser → HTML. AI later → Markdown. Social feed → usually plain text.</div>
+</div>
+</section>
+
+<section id="part2">
+<h2>Part 2: Markdown, the Writing Language</h2>
+
+<div class="concept">
+<h3>3. Headings</h3>
+<p><span class="term">Heading</span> = a title that tells the AI the role and importance of a section.</p>
+<pre># Main title
+## Major section
+### Subsection</pre>
+<p>Use one <code>#</code> main title. Keep levels in order. A specific heading is stronger than a vague one.</p>
+<p><strong>Better:</strong> <code>## Budget: PKR 50,000 hard ceiling</code><br>
+<strong>Weaker:</strong> <code>## Budget</code></p>
+</div>
+
+<div class="concept">
+<h3>4. Lists: bullets vs numbers</h3>
+<p><strong>Bullets</strong> mean a set of independent items. <strong>Numbered lists</strong> mean a sequence where order matters.</p>
+<pre>- Mobile-first
+- WhatsApp button
+- Price table
+
+1. Review the draft
+2. Correct mistakes
+3. Publish it</pre>
+<p><span class="term">Checkable bullet</span> = a requirement that can be marked clearly as done or not done.</p>
+<p>“Make it fast” is vague. “Loads in under 3 seconds on a slow connection” is checkable.</p>
+</div>
+
+<div class="concept">
+<h3>5. Code fences</h3>
+<p><span class="term">Code fence</span> = triple backticks around text the AI should treat mainly as data or an example.</p>
+<pre>```text
+ERROR: Connection timed out
+```</pre>
+<p>This helps separate quoted material from your instructions. It is a strong signal, not a security guarantee.</p>
+<div class="exam"><strong>Exam point:</strong> Use fences for error messages, quoted text, code, and examples of the output format you want.</div>
+</div>
+
+<div class="concept">
+<h3>6. Links and images</h3>
+<p>Markdown link:</p>
+<pre>[Course page](https://example.com)</pre>
+<p>Markdown image:</p>
+<pre>![Description of the image](image.png)</pre>
+<p><span class="term">Alt text</span> = the words inside the image brackets. It explains the image to tools or people who cannot directly see it.</p>
+</div>
+
+<div class="concept">
+<h3>7. Your first complete specification</h3>
+<p>A reusable spec skeleton:</p>
+<pre># [Thing] Specification
+
+## Goal
+What you are making and who it is for.
+
+## Context
+Facts, links, files, and background the AI needs.
+
+## Requirements
+- Checkable requirement
+- Checkable requirement
+
+## Hard constraints
+- Rules that must not be broken
+
+## Out of scope
+- Things you do NOT want
+
+## Expected output
+Describe or show the required result.</pre>
+<p><strong>Why “Out of scope” matters:</strong> it prevents unnecessary extra features.</p>
+<p><strong>Why “Expected output” matters:</strong> it reduces format drift.</p>
+<p><strong>Best habit:</strong> Ask the AI to find ambiguities, missing constraints, and grade the spec before building from it.</p>
+<div class="exam"><strong>Exam point:</strong> In spec-driven work, the specification is not just paperwork. Improving the spec improves every regenerated output.</div>
+</div>
+</section>
+
+<section id="part3">
+<h2>Part 3: HTML, the Reading Language</h2>
+
+<div class="concept">
+<h3>8. Why ask for HTML?</h3>
+<p>Use HTML when an answer is long, visual, shared, or something you will revisit.</p>
+<ul>
+<li><strong>Information density:</strong> tables and diagrams can replace walls of bullets.</li>
+<li><strong>Navigability:</strong> table of contents, tabs, collapsible sections.</li>
+<li><strong>Shareability:</strong> opens in a browser.</li>
+<li><strong>Interactivity:</strong> buttons, sliders, toggles, draggable cards.</li>
+<li><strong>Copy-back loop:</strong> a tool can export your choices as text for the AI.</li>
+</ul>
+<p><strong>Caveat:</strong> HTML usually costs more tokens than plain Markdown and can become heavy if it uses large images or libraries. Do not use it for every tiny answer.</p>
+</div>
+
+<div class="concept">
+<h3>9. You do not write HTML, you brief the AI</h3>
+<p>The course does <strong>not</strong> expect you to hand-code HTML for this workflow. Your skill is writing a good brief and judging the result.</p>
+<p>Four things to include:</p>
+<ol>
+<li><strong>Who</strong> will read it.</li>
+<li><strong>What</strong> it must contain.</li>
+<li>Whether it should be <strong>interactive</strong>.</li>
+<li><strong>How</strong> it will be read, such as once on a phone or repeatedly as a reference.</li>
+</ol>
+<div class="exam"><strong>Exam point:</strong> “Make an HTML page” is not enough. Reader + contents + interaction + reading situation makes a strong brief.</div>
+</div>
+
+<div class="concept">
+<h3>10. Five common HTML patterns</h3>
+<table>
+<tr><th>Pattern</th><th>Simple use</th></tr>
+<tr><td>Plans & explorations</td><td>Compare several choices side by side before deciding.</td></tr>
+<tr><td>Explainers & reports</td><td>Turn long information into a visual summary.</td></tr>
+<tr><td>Code review</td><td>Show changes, annotations, and flow diagrams.</td></tr>
+<tr><td>Design prototypes</td><td>Use controls to choose colors, spacing, sizes, and other visual preferences.</td></tr>
+<tr><td>Throwaway editors</td><td>Make a temporary tool for sorting, ranking, or prioritizing items.</td></tr>
+</table>
+</div>
+
+<div class="concept">
+<h3>11. When the destination is a social feed</h3>
+<p>LinkedIn, Facebook, and WhatsApp are not normal web pages. Their post bodies do not render arbitrary HTML.</p>
+<table>
+<tr><th>Destination</th><th>Best output</th></tr>
+<tr><td>WhatsApp message</td><td>Short plain text, with only the platform's simple formatting.</td></tr>
+<tr><td>LinkedIn / Facebook post</td><td>Plain text written for the platform.</td></tr>
+<tr><td>Web page shared in the post</td><td>HTML.</td></tr>
+<tr><td>Designed social graphic</td><td>Create the design, then export/share it as an image.</td></tr>
+</table>
+<p><span class="term">Open Graph tags</span> = hidden page metadata social platforms can use to build a link preview card.</p>
+</div>
+
+<div class="concept">
+<h3>12. Publishing: from HTML to a link</h3>
+<p>The course gives several possible publishing paths. The important concept is that <strong>building a page</strong> and <strong>publishing it on the internet</strong> are separate steps.</p>
+<ul>
+<li>Built-in AI artifact publishing: fastest for a quick public link.</li>
+<li>GitHub Gist: useful for keeping one file.</li>
+<li>GitHub Pages: good for a lasting site if you use Git.</li>
+<li>Netlify: simple deployment of a static HTML file.</li>
+</ul>
+<p><strong>Privacy warning:</strong> a public link should not contain private information.</p>
+</div>
+
+<div class="concept">
+<h3>13. When the destination is a document</h3>
+<p>The final format should match what the recipient will do with it.</p>
+<table id="formats">
+<tr><th>What the person needs to do</th><th>Format</th></tr>
+<tr><td>Just read it in a browser</td><td>HTML</td></tr>
+<tr><td>Sign, print, or archive it</td><td>PDF</td></tr>
+<tr><td>Edit or comment</td><td>DOCX</td></tr>
+<tr><td>Present it</td><td>PPTX</td></tr>
+<tr><td>Work with numbers/formulas</td><td>XLSX</td></tr>
+<tr><td>Feed clean structured data to a tool or AI</td><td>CSV</td></tr>
+</table>
+<div class="exam"><strong>Exam point:</strong> The deciding question becomes: <em>Who reads this last, and what will they do with it?</em></div>
+</div>
+</section>
+
+<section id="part4">
+<h2>Part 4: One Job, Three Motions</h2>
+<p><span class="term">Motion</span> = one way of working with an AI agent.</p>
+
+<div class="concept">
+<h3>14. The three motions</h3>
+<table>
+<tr><th>Motion</th><th>What it means</th><th>Best when</th></tr>
+<tr><td>Chat</td><td>You paste context into a conversation.</td><td>Your information fits comfortably in chat and you want quick iteration.</td></tr>
+<tr><td>Terminal</td><td>An AI coding tool works with files and folders on your computer.</td><td>Your context is spread across many local files.</td></tr>
+<tr><td>Desktop</td><td>A visual app works with local files, usually with approval steps.</td><td>You want file access without living in a command line.</td></tr>
+</table>
+<p>The <strong>skill stays the same</strong>: clear structured input, correct output format, review, and iteration.</p>
+</div>
+</section>
+
+<section>
+<h2>🎯 What You Must Remember</h2>
+<ol>
+<li><strong>Markdown is mainly for precision and machine-readable structure.</strong></li>
+<li><strong>HTML is mainly for rich human reading in a browser.</strong></li>
+<li>Always ask: <strong>Who reads this last?</strong></li>
+<li>For a good spec, remember: <strong>Goal, Context, Requirements, Hard constraints, Out of scope, Expected output.</strong></li>
+<li>Bullets are sets. Numbers are sequences.</li>
+<li>Use fenced blocks when showing literal data, code, errors, or examples.</li>
+<li>Do not ask only for “HTML.” Brief the reader, content, interaction, and reading situation.</li>
+<li>Use the recipient's real working format when HTML is not appropriate: PDF, DOCX, PPTX, XLSX, or CSV.</li>
+</ol>
+</section>
+
+<section id="practical">
+<h2>🛠️ Practical Work</h2>
+<p>The official crash course is hands-on. These exercises are the most important ones to actually practice:</p>
+<ol>
+<li><strong>Messy notes → structured Markdown:</strong> Take one messy paragraph and divide it into Goal, Hard constraints, Already handled, and Open questions.</li>
+<li><strong>Bullets vs numbered list:</strong> Give the same five items to an AI once as bullets and once as numbered steps. Ask how it interprets each.</li>
+<li><strong>Practice code fences:</strong> Put an error message inside triple backticks and ask the AI to analyze it.</li>
+<li><strong>Write a real spec:</strong> Use the six-part spec skeleton. Ask the AI to grade it for clarity, completeness, and checkability. Improve it until it is strong.</li>
+<li><strong>Markdown → HTML:</strong> Take one long answer and ask for a mobile-friendly single HTML page with headings, a small table of contents, a table, and one diagram.</li>
+<li><strong>Build a tiny HTML tool:</strong> Make a Now / Next / Later prioritizer with draggable cards and a “Copy as text” result.</li>
+<li><strong>Complete pipeline:</strong> Use your improved spec to generate an HTML page, review it on your phone, improve it, then publish it using an appropriate method.</li>
+</ol>
+
+<details>
+<summary>Optional bigger projects from the course</summary>
+<p><strong>Project 1:</strong> Turn messy business notes into a precise Markdown spec, then into a mobile-friendly HTML page, then into a public link.</p>
+<p><strong>Project 2:</strong> Build an interactive spinning-wheel HTML tool, use it, and pass its result back to the AI as text.</p>
+<p><strong>Project 3:</strong> Turn the tool/project into a presentation and export the result as a PowerPoint file.</p>
+</details>
+</section>
+
+<section id="test">
+<h2>🧠 Test Yourself</h2>
+<p><strong>Do not look for answers yet.</strong> Reply with something like: <code>1-B, 2-C, 3-A...</code>. Then your answers can be checked and explained.</p>
+
+<div class="mcq"><strong>1. What is the main reason to use Markdown when instructing an AI?</strong>
+<br>A. It always looks prettier
+<br>B. It gives clear structure and reduces guessing
+<br>C. It uses more tokens
+<br>D. It is required by browsers
+</div>
+
+<div class="mcq"><strong>2. A human will read a long report in a browser. Which format is usually best?</strong>
+<br>A. CSV
+<br>B. Markdown only
+<br>C. HTML
+<br>D. Plain text
+</div>
+
+<div class="mcq"><strong>3. Which list should you use when order matters?</strong>
+<br>A. Numbered list
+<br>B. Bullet list
+<br>C. Image list
+<br>D. Heading list
+</div>
+
+<div class="mcq"><strong>4. What is a “checkable bullet”?</strong>
+<br>A. A colorful bullet
+<br>B. A requirement that can be clearly judged done or not done
+<br>C. A bullet written in HTML
+<br>D. A bullet that contains code
+</div>
+
+<div class="mcq"><strong>5. What is the main purpose of a code fence in a prompt?</strong>
+<br>A. To make text secret
+<br>B. To tell the AI the enclosed text is literal material/data to inspect
+<br>C. To publish a website
+<br>D. To reduce internet speed
+</div>
+
+<div class="mcq"><strong>6. Which section prevents the AI from adding features you never asked for?</strong>
+<br>A. Context
+<br>B. Goal
+<br>C. Out of scope
+<br>D. Title
+</div>
+
+<div class="mcq"><strong>7. Which question is central to choosing between Markdown and HTML?</strong>
+<br>A. How old is the file?
+<br>B. Who reads this last?
+<br>C. Which AI is cheapest?
+<br>D. What color is the page?
+</div>
+
+<div class="mcq"><strong>8. Which information should be included in a strong HTML brief?</strong>
+<br>A. Only “make it beautiful”
+<br>B. The reader, required contents, interaction needs, and reading situation
+<br>C. Only the HTML tags
+<br>D. Only the file name
+</div>
+
+<div class="mcq"><strong>9. What is the best format for data another tool or AI will process?</strong>
+<br>A. PPTX
+<br>B. PDF
+<br>C. CSV
+<br>D. PNG
+</div>
+
+<div class="mcq"><strong>10. Which format is most suitable when someone needs to edit and comment on a document?</strong>
+<br>A. DOCX
+<br>B. HTML only
+<br>C. JPEG
+<br>D. CSV
+</div>
+
+<div class="mcq"><strong>11. What are Open Graph tags mainly useful for?</strong>
+<br>A. Creating Python functions
+<br>B. Helping social platforms create a link preview
+<br>C. Compressing a PDF
+<br>D. Running formulas in Excel
+</div>
+
+<div class="mcq"><strong>12. What does “spec-driven development” mean in this lesson?</strong>
+<br>A. Build first and write instructions later
+<br>B. Write and improve the specification first, then generate from it
+<br>C. Never use an AI
+<br>D. Only write HTML manually
+</div>
+
+<div class="mcq"><strong>13. Which is NOT one of the three motions described in the course?</strong>
+<br>A. Chat
+<br>B. Terminal
+<br>C. Desktop
+<br>D. Spreadsheet
+</div>
+
+<div class="mcq"><strong>14. Why should HTML not automatically be used for every tiny answer?</strong>
+<br>A. Browsers cannot read HTML
+<br>B. It can add unnecessary token and bandwidth overhead
+<br>C. AI cannot generate HTML
+<br>D. HTML cannot contain tables
+</div>
+
+<div class="mcq"><strong>15. Which sentence best summarizes the whole course?</strong>
+<br>A. Always use HTML for everything
+<br>B. Write precise machine-friendly input and request the right human-friendly output
+<br>C. Never use Markdown
+<br>D. Learn every HTML tag by memory
+</div>
+</section>
+
+<footer>
+Study guide based on the official Agent Factory “Markdown In, HTML Out” crash course. This page is a simplified educational summary, not a copy of the original course.
+</footer>
+</div>
+</body>
+</html>

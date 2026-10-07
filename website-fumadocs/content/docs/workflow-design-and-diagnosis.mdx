@@ -1,0 +1,375 @@
+---
+title: "Workflow Design & Diagnosis"
+description: "Break work into useful steps, decide where AI belongs, diagnose failures, make fixes reusable, and keep human gates clear."
+course: 9
+---
+
+## 💡 The Big Idea
+
+A good AI result does **not** prove that AI should own the whole workflow. A bad result does **not** prove AI cannot do the task. You must inspect the **structure underneath the result**: which step is being done, what an error costs, whether it can be undone, who is accountable, and when a failure first appeared.
+
+Core mental model: judge **each workflow step**, not AI as a whole.
+
+## 🗺️ The Course in Six Stages
+
+1️⃣ Design  
+requirements
+
+2️⃣ Map  
+ownership
+
+3️⃣ Build  
+iterate
+
+4️⃣ Diagnose  
+timing
+
+5️⃣ Persist  
+configuration
+
+6️⃣ Communicate  
+name the gate
+
+Think of this as the lifecycle of an AI-assisted business workflow.
+
+## 1️⃣ Design the Work Before Placing AI
+
+### Concept 1: The unit of value is the step
+
+A step is one named piece of a workflow with one owner. “I use AI” is a personal habit. “Our workflow uses AI” means AI performs specific named steps repeatably for the team.
+
+**Example:** Instead of “AI helps with customer complaints,” map: retrieve complaint → summarize → classify severity → draft reply → approve → send.
+
+### Concept 2: Turn messy requests into requirements
+
+A vague request is dangerous because AI fills missing details with plausible defaults. A task definition settles five things:
+
+**What?**What exactly is produced?
+
+**For whom?**Who receives or uses it?
+
+**How often?**Once, daily, weekly?
+
+**From what data?**Which sources?
+
+**What format?**Table, email, dashboard?
+
+**Exam trap:** A summary tells you what a document says. **Requirement extraction** creates specific, traceable, testable items that people can work from. Ambiguity should become a clarifying question, not an AI guess.
+
+### Concept 3: If a number matters, compute it
+
+Synthesis means combining information into useful options. AI is good at this. But important calculations should use code execution, where code actually calculates the result. A generated number and a calculated number may look identical on screen, so use computation when the number affects a decision.
+
+Exam rule: **If a result matters, compute it. Never merely write it.** Then verify the code used the correct data.
+
+### Concept 4: The Window Test
+
+Ask: **“Can I put everything this step needs in front of the model?”** The model's context is everything it can see: prompt, files, conversation and available sources. If a decision depends on hidden information such as an unrecorded hiring freeze, personal relationship context, or inaccessible risk appetite, the step should stay human.
+
+**Synthesis step:** inputs can be supplied. **Judgment step:** important inputs cannot or should not be supplied. For current prices, dates, or news, use an external source you can verify.
+
+## 2️⃣ Build a Delegation Map
+
+A delegation map writes the workflow step by step, assigns an owner to every step, and records why.
+
+### First: Eligibility → Ownership → Implementation
+
+| Decision | Question |
+| --- | --- |
+| **Eligibility** | May this data enter the AI tool, and can all required inputs be supplied? |
+| **Ownership** | Should AI, a human, or both own this step? |
+| **Implementation** | What carries the step: Skill, knowledge, code execution, standing instruction, or human gate? |
+
+### Concept 5: Three ownership criteria
+
+**↩️ Reversibility**Can the action be undone? A draft can be rewritten. A sent message may be irreversible.
+
+**⚠️ Stakes**What does a mistake cost in the bad case? Think worst meaningful consequence, not average consequence.
+
+**👤 Accountability**Is this step the actual decision someone answers for, or merely an input a person judges later? Accountability never transfers to the machine.
+
+The three are **questions, not a score**. If they disagree, the strictest criterion wins.
+
+### Three classifications
+
+| Class | Meaning | Easy example |
+| --- | --- | --- |
+| 🤖 AI-appropriate | AI may own the step. | Extract clauses for later review. |
+| 🤝 Collaborative | AI produces; a named human judges. | AI drafts a contract redline, lawyer approves. |
+| 🧑 Human-retained | A person owns the step outright. | Sign and send a binding contract. |
+
+### Concept 6: Same criteria work across different workflows
+
+Contract review and employee onboarding look different, but the pattern repeats. Reversible drafting and extraction can often go to AI. Final approvals, binding sends, and accountable decisions usually remain human.
+
+### Concept 7: Three common mapping failures
+
+**🚨 Over-delegation**AI gets more authority than the risk of that step allows.
+
+**✨ Halo delegation**AI did the previous step well, so people wrongly assume it should own the next step too.
+
+**🚪 Unstaffed gate**A workflow says “human review,” but in practice nobody truly reviews it.
+
+**🛠 Tool-first mapping**The workflow is bent around a favorite feature instead of mapping the real work first.
+
+**Critical idea:** good drafting is evidence about drafting. It is not evidence that AI should make the decision.
+
+### Concept 8: Maps need an owner and a review date
+
+Workflows change silently. A map owner is one named person responsible for keeping the map true. A scheduled read is a fixed review of the map. Quarterly is a reasonable default in the course, sooner when volume, staffing, or legal conditions change.
+
+Review: Were steps added/removed? Are collaborative gates actually staffed? Did volume or stakes change? Are Skills, knowledge, and standing instructions still current?
+
+## 3️⃣ Build It, Then Watch It
+
+### Concept 9: The build loop
+
+💭 Ideate
+
+🧪 Prototype
+
+💬 Feedback
+
+✨ Refine
+
+AI is a design partner, not a vending machine. Build something concrete, inspect it, learn what is wrong, refine it, then repeat. Keep the work inside a stable Project when background and instructions need to remain consistent.
+
+**Important distinction:** if the problem is descriptive, better instructions may solve it. If the problem is a feature mismatch, such as important arithmetic being generated as prose, more wording will not fix the underlying issue.
+
+### Concept 10: Know when prompt-and-iterate is no longer enough
+
+Escalation signal means other people now depend on your small AI tool. At that point it is becoming infrastructure and may need engineering concerns such as access control, reliability, support, and stable behavior.
+
+| Signal | Meaning |
+| --- | --- |
+| Other people depend on it | Escalate toward developer/architect engineering. |
+| You solved the same shape the same way repeatedly | The method may be stable enough to turn into a repeatable worker. |
+
+## 4️⃣ Diagnose Bad Output by Timing
+
+### Concept 11: Four major causes
+
+| When did it go wrong? | Likely first hypothesis | Simple meaning |
+| --- | --- | --- |
+| Wrong from the first answer | **Under-specification** | The prompt did not contain what the task needed. |
+| Started well, then degraded | **Context overload** | The conversation became too long and early instructions lost force. |
+| Same repeatable error type | **Wrong feature/model** | The task went to the wrong tool or capability. |
+| Used to work, now doesn't | **Stale configuration** | Instructions, knowledge, or a Skill became outdated. |
+
+Timing gives you a **first hypothesis**, not absolute proof. Confirm cheaply before fixing.
+
+### Concept 12: Diagnostic sequence, cheapest first
+
+1.  Check the prompt: **role, context, task, constraints, format**.
+2.  Check session length and context overload.
+3.  Check feature and model choice.
+4.  Check whether configuration is current.
+5.  Only then ask whether the task itself is a bad fit.
+
+**Expectation mismatch** = asking the tool for something it cannot reliably provide, such as one exact future sales number. Reshape the task instead of endlessly tuning the prompt.
+
+## 5️⃣ Make the Fix Stick
+
+### Concept 13: Turn reactions into instructions
+
+“Too generic” is a reaction. “Name the audience and the single action they should take” is an instruction. Ask: **What must be present for this to be right, and which part of the setup controls it?**
+
+### Concept 14: Rule, Reference, or Procedure
+
+| Type | Meaning | Correct home |
+| --- | --- | --- |
+| 📏 Rule | A limit or behavior that always applies | Standing instruction |
+| 📚 Reference | Material the work must read | Knowledge base |
+| 🧭 Procedure | An ordered sequence of steps | Skill |
+
+Promotion means moving a useful fix out of a temporary chat and into shared configuration so it lasts.
+
+### Concept 15: Find friction
+
+Friction is a small repeated workflow cost you stopped noticing.
+
+| Signal | What it looks like |
+| --- | --- |
+| Repetition | You paste the same background every run. |
+| Correction | You repair the same flaw every time. |
+| Variance | Different people get inconsistent outputs for the same task. |
+
+**Consolidate first** by combining steps that need the same background. Then **promote** stable repeated patterns into configuration.
+
+### Concept 16: Measure what matters
+
+A baseline is the measurement taken **before** changing the workflow. Record time per run, revision rounds, and manual steps. Choose the metric that matches the purpose: time, consistency, accuracy, or variance.
+
+A parallel run means running old and new workflows together for a few cycles. It gives evidence, a fallback, and confidence before switching fully.
+
+## 6️⃣ Operate It and Explain It
+
+### Concept 17: When a bad output escapes
+
+Design the response before the incident:
+
+1.  **Stop** the workflow quickly.
+2.  **Scope** how many outputs were affected and where they went.
+3.  **Tell** the right people within the required time.
+4.  **Change the map** so the lesson becomes a lasting design change.
+
+### Concept 18: Say what AI does, then name the human gate
+
+Do not exaggerate with phrases like “fully automated,” “AI handles everything,” or “as good as a person.” State the AI's exact job and then the human checkpoint. When trust matters, also state what the workflow refuses or escalates.
+
+A clear human checkpoint usually increases trust because people can see where accountability lives.
+
+## 📖 High-Value Exam Terms
+
+**Delegation map**Steps + owner + reason for ownership.
+
+**Reversibility**Whether a wrong step can be undone.
+
+**Stakes**Cost of an error in the bad case.
+
+**Accountability**Who answers for the decision/outcome.
+
+**Window test**Can all required inputs be supplied to the model?
+
+**Under-specification**The prompt lacked needed information from the start.
+
+**Context overload**Long context causes earlier instructions to lose force.
+
+**Stale configuration**Saved instructions, knowledge, or Skills are outdated.
+
+**Expectation mismatch**The requested outcome does not fit the tool's capability.
+
+**Promotion**Move a discovered fix into persistent configuration.
+
+**Baseline**Measurement before workflow redesign.
+
+**Parallel run**Run old and new workflows together temporarily.
+
+## 🛠️ Practical Work
+
+The official course includes hands-on work. For exam preparation, do these in order:
+
+1.  **Choose one real workflow** with about 5–6 steps.
+2.  **Map it:** mark each step AI, Collaborative, or Human and justify it using reversibility, stakes, or accountability.
+3.  **Place the implementation:** Skill, knowledge base, code execution, standing instruction, or named human gate.
+4.  **Run one mechanical AI step** on real input.
+5.  **Break it deliberately:** ask for an important figure in prose that should have been computed, then diagnose the failure.
+6.  **Promote one fix:** decide whether it is a rule, reference, or procedure and place it in the right home.
+7.  **Record a baseline:** time, revision rounds, manual steps, and your main success metric.
+8.  **Complete the delegation map:** add a map owner, next review date, human gates, and stop/scope/tell/change incident plan.
+9.  **Explain the workflow three ways:** to a technical colleague, an executive, and a risk/compliance person. Keep the human checkpoint in all three.
+
+<Exercise title={"📋 One-page delegation map template"}>
+
+DELEGATION MAP: \[workflow name\] Owner: \[named person\] Last reviewed: \[date\] Next review: \[date\] ELIGIBILITY Data gate: May this data enter the tool? Input gate: Can everything each step needs be supplied? STEPS # | Step | Owner | Criterion | Carried by 1 | ... | AI / Collaborative / Human | reversibility / stakes / accountability | ... GATES For every collaborative/human step: Who reviews? When? What exactly do they check? BASELINE Time per run: Revision rounds: Manual steps: Main metric: time / consistency / accuracy / variance IF IT GOES WRONG Stopped by: Scope check: Who is told and by when: Map change:
+
+</Exercise>
+
+## 🧠 Test Yourself
+
+**Do not open any answer key yet.** These exam-style questions are based on the course concepts. Send me your choices later and I can score them.
+
+**1\. What is the best unit for deciding AI delegation?**
+
+1.  The whole AI session
+2.  Each workflow step
+3.  The model brand
+4.  The department
+
+**2\. Which three criteria decide ownership of a workflow step?**
+
+1.  Speed, price, creativity
+2.  Accuracy, model size, automation
+3.  Reversibility, stakes, accountability
+4.  Prompt, context, format
+
+**3\. AI drafts a contract change, but a lawyer approves every edit. This is:**
+
+1.  Human-retained
+2.  Collaborative
+3.  Fully automated
+4.  Context overload
+
+**4\. AI summarizes complaints well, so a team lets it decide complaint severity without separate analysis. This is closest to:**
+
+1.  Halo delegation
+2.  Baseline measurement
+3.  Promotion
+4.  Parallel run
+
+**5\. A calculation affects a financial decision. What should you prefer?**
+
+1.  Ask AI to write the number confidently
+2.  Code execution, then verify what was computed
+3.  A longer conversation
+4.  A prettier table
+
+**6\. Output is wrong from the very first response. What is the cheapest first hypothesis?**
+
+1.  Stale configuration
+2.  Context overload
+3.  Under-specification
+4.  Infrastructure failure
+
+**7\. Output starts correctly but stops following early instructions after a very long chat. Most likely first hypothesis?**
+
+1.  Context overload
+2.  Halo delegation
+3.  Stakes
+4.  Parallel run
+
+**8\. “Generate the weekly report using these five ordered steps” is primarily a:**
+
+1.  Reference
+2.  Procedure
+3.  Baseline
+4.  Stake
+
+**9\. Where should a reusable ordered procedure usually live?**
+
+1.  Knowledge base
+2.  Skill
+3.  Memory only
+4.  A random old chat
+
+**10\. What is the purpose of a baseline?**
+
+1.  Measure the workflow before changing it
+2.  Give AI more authority
+3.  Increase the context window
+4.  Replace human review
+
+**11\. Other teams now depend on your small prompt-built tool every week. What does this signal?**
+
+1.  Keep prompting forever
+2.  It may have become infrastructure and needs engineering
+3.  Remove all human gates
+4.  The task is under-specified
+
+**12\. Which description is safest and most accurate?**
+
+1.  “It is fully automated.”
+2.  “AI handles contract review.”
+3.  “AI drafts and flags issues; a qualified human reviews and approves before anything is sent.”
+4.  “It is basically as good as a lawyer.”
+
+## 🎯 What You Must Remember
+
+-   Judge **steps**, not impressive or disappointing outputs.
+-   Ownership uses **reversibility + stakes + accountability**.
+-   If all required inputs cannot enter the model's window, keep that judgment human.
+-   Important numbers should be **computed**, not merely generated in prose.
+-   Diagnose by **when the symptom appeared**, then check cheapest causes first.
+-   Persistent fix: **rule → standing instruction, reference → knowledge base, procedure → Skill**.
+-   Measure a **baseline before redesign**.
+-   A collaborative step needs a **real, named human gate**.
+-   When others depend on the tool, treat that as an **escalation signal**.
+-   Explain AI honestly: say what it does, then **name the human checkpoint**.
+
+Memory sentence: **Design → Map → Build → Diagnose → Persist → Communicate.**
+
+<SourceLink course={9} />
+
+<CourseVideo course={9} />
+
+<CourseNavigation course={9} />

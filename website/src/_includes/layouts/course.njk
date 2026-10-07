@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+---
+<article class="course-page">
+  <header class="course-hero shell">
+    <a class="eyebrow-link" href="{{ '/courses/' | url }}">Course {{ course.number }} of {{ courses.length }}</a>
+    <h1>{{ course.title }}</h1>
+    <p class="course-lead">{{ course.summary }}</p>
+  </header>
+
+  <div class="lesson-layout shell">
+    <aside class="lesson-sidebar">
+      {% courseToc course %}
+    </aside>
+    <div class="lesson-column">
+      <p class="presentation-note"><strong>About this lesson:</strong> This independent presentation preserves the concepts and learning activities in the supplied study guide while using a consistent, accessible format.</p>
+      {% migratedCourse course %}
+      {% include "components/source-attribution.njk" %}
+      {% include "components/video-placeholder.njk" %}
+    </div>
+  </div>
+
+  {% include "components/course-sequence.njk" %}
+</article>

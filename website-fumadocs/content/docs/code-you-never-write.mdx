@@ -1,0 +1,427 @@
+---
+title: "Code You Never Write"
+description: "Learn when code is the right tool, how to commission it from AI, and how to verify programs you may not be able to read yourself."
+course: 6
+---
+
+## 🌈 The Big Idea
+
+The old question was: **“Can I code this?”** The new question is: **“Can I describe exactly what I want done?”**
+
+### What AI does
+
+AI can choose a suitable programming language, write the program, run it, see errors, repair it, and return the result.
+
+### What YOU do
+
+You explain the goal, provide the real data and business rules, define what success looks like, and check whether the result is trustworthy.
+
+**Easy picture:** You hire a mechanic. You do not need to know how every engine part works, but you must explain the problem and check that the car now behaves correctly. AI-written code is similar.
+
+## 🧩 Important Technical Terms
+
+**Script**
+
+A small program saved as a file so it can be run again. **Why it matters:** one solved task can become reusable.
+
+**Sandbox**
+
+A temporary computer environment used by an AI service. Your local computer is not directly changed. Think of it as a safe practice room.
+
+**Brief**
+
+Your plain-English job description for the AI. It tells the AI what “done correctly” means.
+
+**CSV**
+
+A simple spreadsheet-like file containing rows of values, usually separated by commas.
+
+**Known-answer test**
+
+Test the code on a small case where you already know the correct answer. This is the most important everyday verification technique.
+
+**Dry run**
+
+The AI shows what it *would* change before changing anything. Essential for renaming, moving, deleting, or overwriting files.
+
+**Blast radius**
+
+The maximum damage a mistake could cause. Smaller access means smaller possible damage.
+
+**Intent Layer**
+
+Your written intention stored in files, such as the brief. It preserves the “what and why” even when the code changes.
+
+**Wrong-but-running**
+
+The program finishes without an error, but its result is wrong. This is more dangerous than obvious red error text.
+
+**Digital FTE**
+
+An AI worker designed to carry an ongoing role. This is beyond a simple one-prompt script because it can operate repeatedly and autonomously.
+
+## Part 1 · 🤝 The Deal
+
+### 1 Code is no longer gated by coding
+
+Previously, you either learned programming or asked a developer. Now, for many small and well-defined jobs, AI can act as the developer. It can write, execute, inspect errors, repair, and rerun the program.
+
+**Exam idea:** Your skill is not syntax. Your skill is describing the desired outcome and verifying it.
+
+### 2 What code actually is
+
+**Code** is a set of exact instructions a computer follows. Exactness is both its strength and its danger. Correct instructions can process thousands of rows perfectly. Wrong instructions can make the wrong change thousands of times just as perfectly.
+
+| Typical output | Language AI may choose | Simple example |
+| --- | --- | --- |
+| Numbers, files, data, charts, reports | Python | Total sales, merge CSVs, rename files |
+| Interactive browser experience | JavaScript / TypeScript | Calculator, quiz, clickable dashboard |
+
+You normally describe the outcome and let the AI make the technical language choice.
+
+### 3 The dividing line: Answer problem vs Code problem
+
+An **answer problem** mainly needs reasoning, explanation, drafting, or judgment. A **code problem** needs exact processing of data/files.
+
+### ANSWER problem
+
+“Explain mutual funds.” “Draft an email.” “Is this idea persuasive?”
+
+### CODE problem
+
+“Total 5,000 sales rows.” “Rename 300 photos.” “Reconcile two spreadsheets.”
+
+### VPRF: the four signals
+
+| Signal | Meaning | Example |
+| --- | --- | --- |
+| **V · Volume** | Too many items to do comfortably by hand | 2,000 sales rows |
+| **P · Precision** | A wrong digit matters | Payroll, grades, invoices |
+| **R · Repetition** | You will do the same task again | Weekly/monthly report |
+| **F · Files** | The problem lives inside files | CSV, Excel, logs, image folders |
+
+**Rule:** If even one VPRF signal fires, strongly consider treating the task as a code problem.
+
+## Part 2 · 🛠️ Commissioning Code
+
+### 4 Force computation when precision matters
+
+An AI may sometimes glance at data and produce a plausible answer instead of actually calculating it. For precision-critical work, explicitly ask it to **write and run code**.
+
+```text
+Write and run code to answer this.
+Show me the code you ran.
+Before analyzing, report the exact row count, column names, and date range.
+```
+
+Why row count and columns? They are a quick reality check that the AI actually read the file you supplied.
+
+### 5 Brief the problem, not the program
+
+A strong brief has five parts. You describe **what** must happen, not loops, libraries, or programming syntax.
+
+**1\. Goal**
+
+What problem should be solved?
+
+**2\. Input**
+
+What files/data are supplied and roughly how much?
+
+**3\. Output**
+
+What should come back: number, table, chart, cleaned file, HTML report?
+
+**4\. Rules**
+
+Your special domain knowledge that a stranger would not know.
+
+**5\. Edge cases**
+
+What to do with blanks, duplicates, odd dates, unreadable rows, strange formats?
+
+**Common beginner mistake:** skipping Rules and Edge cases. The AI may know Python, but it does not know the private rules of your school, shop, company, or workflow unless you state them.
+
+```text
+# Brief: [task name]
+## Goal
+What problem should be solved?
+## Input
+What am I giving you?
+## Output
+What exactly should I receive?
+## Rules
+What special rules must be followed?
+## Edge cases
+What should happen when the data is imperfect?
+```
+
+### 6 Verify work you cannot read
+
+You do not prove correctness by staring at unfamiliar code. You test its **results and behavior**.
+
+| Level | Verification method | Meaning |
+| --- | --- | --- |
+| 1 | Known-answer test | Run a case whose answer you already know. |
+| 2 | Reality questions | Check row counts, totals, missing rows, biggest customer, date ranges. |
+| 3 | Plain-English replay | Ask AI to explain what its code did step by step without code. |
+| 4 | Adversarial pass | Ask AI to attack its own result and identify assumptions/weaknesses. |
+| 5 | Cross-model check | Run the same brief/data through another model family and compare results. |
+
+**Must remember:** Never rely on a precision-critical result before checking it against at least one answer you independently know.
+
+### 7 Errors are dialogue, not failure
+
+If red error text appears, you do not need to understand it. Give the full error back to the AI and ask it to diagnose, fix, and rerun.
+
+```text
+It stopped and showed this error.
+Diagnose it, fix the code, and run it again:
+[paste the complete error]
+```
+
+For **wrong-but-running**, report a symptom: “The output says 4.2 million, but I expect around 12 million. Show the row count, date range, and first five rows as the code sees them.” If the same fix fails three times, stop patching and ask for two completely different approaches.
+
+### 8 Keep the script
+
+If the task repeats, save three things together: **brief + script + known-answer sample**. The brief preserves your intent, the script preserves the implementation, and the sample lets you test it later.
+
+```text
+my-scripts/
+  monthly-report/
+    brief.md
+    monthly-report.py
+    sample-known-answer/
+```
+
+This turns “explain everything again next month” into “run the saved script on the new files.”
+
+## Part 3 · 🖥️ One Problem, Different Surfaces
+
+**Surface** means the place where AI can run the code.
+
+| Surface | Best for | Main limitation / risk |
+| --- | --- | --- |
+| Browser chat: Claude.ai, ChatGPT, Gemini | Learning, one-off analysis, uploaded files | Temporary sandbox; only sees what you upload |
+| Claude Code / OpenCode | Work directly inside your folders; repeated scripts; schedules | Can touch real files, so mistakes matter |
+| Cowork / OpenWork | Desktop delegation for knowledge workers | Real-file access still requires careful approval |
+
+### 9 Browser chat: the learning/home surface
+
+The AI runs code in a temporary **sandbox**. You upload files; the AI computes; charts/files/reports come back. This is ideal for learning because the code cannot casually reorganize your whole computer.
+
+### 10 Claude Code & OpenCode: agent in your folder
+
+After installation, these tools can work inside a local folder. The AI can see files already there, create scripts, run them, repair errors, and leave reusable files behind. This is useful when uploading files repeatedly becomes annoying or when the task needs local access or scheduling.
+
+### 11 Cowork & OpenWork: desktop delegation
+
+These give similar file-working power in a desktop-app style. A key safety idea is **plan-then-approve**: the agent proposes what it will do, and you approve before actions happen.
+
+**Graduation idea:** Start in the browser. Move to local/desktop agent tools when the problem truly lives in your folders, needs repeating, or needs scheduling.
+
+## Part 4 · 🛡️ Power, Safely Held
+
+### 12 Blast radius: four rules
+
+**1 · Work on copies**
+
+Back up a folder before allowing a new script to modify it.
+
+**2 · Dry run first**
+
+See every rename, move, overwrite, or deletion before it happens.
+
+**3 · Smallest folder**
+
+Give the agent access only to the smallest folder needed, not your entire drive or home folder.
+
+**4 · New output files**
+
+Write results to new files. Keep originals untouched whenever possible.
+
+```text
+Copy the folder to a backup first.
+Show me your plan before changing anything and wait for approval.
+Write output to new files.
+Never modify the originals.
+```
+
+This is also a **permission ladder**: start with little freedom, inspect behavior, then grant more trust to a specific proven script.
+
+### 13 Know where one-prompt code ends
+
+Some jobs need more engineering and governance than a simple script:
+
+• Multi-user software with accounts, payments, uptime requirements
+
+• Always-on automation with real consequences
+
+• No-undo high-stakes actions such as filing taxes, mass sending, or placing trades
+
+• Decisions that are fundamentally human judgment, such as deciding who deserves promotion
+
+**Critical distinction:** Code can compute the criteria you give it. It should not silently invent the human values or policy behind a consequential decision.
+
+## ⚡ The 13 Concepts in One Screen
+
+1\. AI can write, run, and repair code. Your job is to describe the desired result.
+
+2\. Code is exact, including when the instructions are wrong.
+
+3\. Use **VPRF**: Volume, Precision, Repetition, Files.
+
+4\. When precision matters, explicitly say **write and run code**.
+
+5\. Use the five-part brief: Goal, Input, Output, Rules, Edge cases.
+
+6\. Verify with known answers and progressively stronger checks.
+
+7\. Treat errors as information. Paste errors; report wrong results as symptoms.
+
+8\. Save the brief, script, and known-answer sample.
+
+9\. Browser sandboxes are the safest learning surface.
+
+10\. Claude Code/OpenCode bring the agent into your folder.
+
+11\. Cowork/OpenWork provide desktop delegation and plan-before-action patterns.
+
+12\. Shrink blast radius: backup, dry run, small scope, new outputs.
+
+13\. Products, autonomous high-stakes workflows, irreversible actions, and judgment-heavy decisions need more than one-prompt code.
+
+## 🛠️ Practical Work
+
+The source course repeatedly asks you to practice, not only read. These are the core exercises you should actually perform.
+
+<Exercise title={"1 · Make AI compute a small exact result"}>
+
+Give it a short list of numbers and ask it to write and run code. Then manually verify one part.
+
+</Exercise>
+
+<Exercise title={"2 · Classify Answer vs Code problems"}>
+
+Take everyday tasks and apply VPRF. Drafting an email is usually an answer problem. Processing thousands of rows is a code problem.
+
+</Exercise>
+
+<Exercise title={"3 · Prove the AI read a file"}>
+
+Ask for exact row count, column names, and date range before analysis.
+
+</Exercise>
+
+<Exercise title={"4 · Write a five-part brief"}>
+
+Use Goal, Input, Output, Rules, and Edge cases on a messy real-world task.
+
+</Exercise>
+
+<Exercise title={"5 · Perform a known-answer test"}>
+
+Choose a small subtotal you can calculate yourself, then check whether the code reproduces it.
+
+</Exercise>
+
+<Exercise title={"6 · Crash code on purpose"}>
+
+Introduce a typo, let the program fail, then paste the full error back and ask the AI to diagnose, fix, and rerun.
+
+</Exercise>
+
+<Exercise title={"7 · Save a reusable script"}>
+
+Ask the AI to save the solution as a clearly named script with a plain-English header explaining expected inputs and rules.
+
+</Exercise>
+
+<Exercise title={"8 · Produce an HTML report"}>
+
+Give small data and ask for a clean one-page report with a total, chart/table, and observations.
+
+</Exercise>
+
+<Exercise title={"9 · Practice a dry run"}>
+
+Give a pretend file-renaming task and require the exact old-name → new-name plan. Tell it to change nothing until approval.
+
+</Exercise>
+
+## 🚀 Four Course Projects
+
+### 💸 1. Money Detective
+
+Analyze your historical money data. Find recurring charges, duplicate charges, and spending leaks. First verify known totals. Then save the script for next month.
+
+**Success:** It reproduces known numbers and finds at least one useful, actionable fact you did not already know.
+
+### 📊 2. What’s My Grade, Really?
+
+Give your actual scores plus your teacher’s exact grading rules. Let code calculate the real grade and what score is needed next.
+
+**Success:** One category matches your hand calculation, then the script gives a trustworthy current grade/target.
+
+### 🧾 3. The Books Don’t Match
+
+Reconcile what people should owe with a messy payment record. Put your private rules into the brief and flag unknown payments instead of guessing.
+
+**Success:** The expected total matches your known count and the result identifies the specific gap to investigate.
+
+### 📸 4. Photo Gallery Rescue
+
+Find duplicate or near-duplicate photos, calculate wasted space, review the deletion plan, back up originals, then sort survivors by date.
+
+**Success:** You verify duplicates, catch false matches, preserve a backup, and leave originals protected.
+
+**“Market of one”:** The best project is one with your own special rules and messy data, where a generic app cannot know the whole answer.
+
+## 🧠 Test Yourself
+
+The official course page contains a “Test Your Understanding” section with 32 scenarios, but the questions were not exposed in the retrieved page. So these exam-style questions test the same core concepts. **Answers are intentionally hidden from this study page.**
+
+**1.** You have 4,000 sales rows and need an exact monthly total. Which signal most clearly makes this a code problem?  
+A) Style   B) Volume/Precision   C) Creativity   D) Tone
+
+**2.** Which is the strongest everyday way to verify AI-written code you cannot read?  
+A) Trust the confident wording   B) Read every Python line   C) Known-answer test   D) Ask it twice
+
+**3.** What belongs in a complete code brief?  
+A) Goal, Input, Output, Rules, Edge cases   B) Python, loops, libraries   C) Only the goal   D) UI colors
+
+**4.** A script finishes but gives a suspicious total. What should you do?  
+A) Ignore it   B) Report the symptom and expected value, then inspect row count/sample rows   C) Delete the file   D) Ask for prettier output
+
+**5.** What is a dry run?  
+A) Running without internet   B) Showing planned changes before making them   C) Running twice   D) Deleting temporary files
+
+**6.** Which is safest before a new script modifies photos?  
+A) Give access to the whole disk   B) Work directly on originals   C) Backup + dry run + small folder   D) Disable checks
+
+**7.** What does VPRF stand for?  
+A) Volume, Precision, Repetition, Files   B) Value, Prompt, Rules, Format   C) Verification, Python, Report, Folder   D) None
+
+**8.** Why keep the brief beside the script?  
+A) The brief preserves what and why   B) It makes Python faster   C) It hides errors   D) It replaces verification
+
+**9.** When should a human remain especially involved?  
+A) Irreversible high-stakes actions   B) Simple totals   C) Formatting a table   D) Counting rows
+
+**10.** What is the central identity taught by this course?  
+A) You must become a syntax expert   B) You are the client who describes and checks the work   C) Never use code   D) Always choose Python yourself
+
+## 🎯 What You Must Remember
+
+**For the exam, lock these into memory:**  
+VPRF → Volume, Precision, Repetition, Files.  
+Brief → Goal, Input, Output, Rules, Edge cases.  
+Trust → known-answer test first, then stronger verification as stakes rise.  
+Safety → backup, dry run, smallest folder, new output files.  
+Core mindset → **AI writes/runs the code; you describe, supervise, and verify.**
+
+<SourceLink course={6} />
+
+<CourseVideo course={6} />
+
+<CourseNavigation course={6} />

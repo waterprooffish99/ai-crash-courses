@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workflow Design & Diagnosis — Exam Study Guide</title>
+<style>
+:root{
+  --ink:#18213b; --muted:#60708e; --paper:#fffdf8; --card:#ffffff;
+  --purple:#6c4cff; --pink:#ff4fa3; --cyan:#00bcd4; --blue:#2575fc;
+  --orange:#ff8a00; --green:#00a878; --yellow:#ffd54a; --red:#ef476f;
+  --line:#e9e7f2; --shadow:0 16px 45px rgba(56,43,118,.12);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);
+background:
+radial-gradient(circle at 10% 0%,#fff1a8 0,transparent 25%),
+radial-gradient(circle at 92% 8%,#d9c8ff 0,transparent 24%),
+linear-gradient(180deg,#fffdf8,#f7fbff 45%,#fff8fc);}
+a{color:inherit}
+.hero{padding:72px 20px 54px;background:linear-gradient(125deg,#ffef9b 0%,#ffd7ec 34%,#dcd1ff 67%,#bff4ff 100%);border-bottom:1px solid #fff}
+.wrap{max-width:1080px;margin:auto}
+.kicker{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid rgba(255,255,255,.7);padding:8px 13px;border-radius:999px;font-weight:800;box-shadow:0 8px 24px rgba(73,44,129,.1)}
+h1{font-size:clamp(2.4rem,7vw,5.4rem);line-height:.96;letter-spacing:-.055em;margin:20px 0 18px;max-width:920px}
+.hero p{font-size:1.12rem;line-height:1.75;max-width:760px;color:#35405f}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.pill{padding:9px 13px;border-radius:14px;background:#fff9;border:1px solid #fff;font-weight:750}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding:32px 20px 80px}
+nav{position:sticky;top:18px;align-self:start;background:#ffffffd9;backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:var(--shadow)}
+nav strong{display:block;padding:10px 11px 12px}nav a{display:block;text-decoration:none;padding:9px 11px;border-radius:11px;color:#52617e;font-size:.92rem}nav a:hover{background:#f0ecff;color:#4e31d7}
+main{min-width:0}
+section{margin:0 0 28px}.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:var(--shadow)}
+h2{font-size:1.8rem;margin:0 0 16px;letter-spacing:-.025em}h3{margin:24px 0 9px;font-size:1.16rem}
+p,li{line-height:1.72} .muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mini{padding:18px;border-radius:20px;background:#faf9ff;border:1px solid #ece8ff}.mini b{display:block;margin-bottom:6px}
+.accent-purple{border-top:6px solid var(--purple)}.accent-pink{border-top:6px solid var(--pink)}.accent-cyan{border-top:6px solid var(--cyan)}.accent-orange{border-top:6px solid var(--orange)}.accent-green{border-top:6px solid var(--green)}
+.callout{padding:18px 20px;border-radius:18px;background:linear-gradient(120deg,#f0ebff,#fff4cf);border-left:5px solid var(--purple);font-weight:650}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.flow div{text-align:center;padding:14px 8px;border-radius:16px;background:linear-gradient(145deg,#fff,#f1edff);border:1px solid #e5e0ff;font-weight:800;font-size:.88rem}
+table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:16px;margin:14px 0}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f4f0ff}tr:last-child td{border-bottom:0}
+.term{font-weight:850;color:#5239c7}.exam{background:linear-gradient(135deg,#fff5bf,#ffe4f2)}
+.code{white-space:pre-wrap;background:#172039;color:#edf2ff;border-radius:18px;padding:20px;overflow:auto;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
+details{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:#fff;margin:10px 0}summary{cursor:pointer;font-weight:800}
+.mcq{padding:16px 18px;border:1px solid #eadff7;border-radius:18px;margin:12px 0;background:#fff}.mcq ol{margin-bottom:0}
+.footer{text-align:center;color:#75809a;padding:20px}
+@media(max-width:820px){.layout{grid-template-columns:1fr}nav{position:relative;top:auto}.flow{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.card{padding:21px}h1{font-size:3.2rem}}
+@media print{nav{display:none}.layout{display:block}.card{box-shadow:none;break-inside:avoid}.hero{padding:30px 20px}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<span class="kicker">🌈 Agent Factory • Exam Study Guide</span>
+<h1>Workflow Design<br>& Diagnosis</h1>
+<p>A beginner-friendly guide to deciding <b>which workflow steps AI should own</b>, where humans must stay in control, how to diagnose bad AI output, and how to make improvements last.</p>
+<div class="pills"><span class="pill">🧩 18 core concepts</span><span class="pill">🧠 Exam focused</span><span class="pill">🛠 Practical work</span><span class="pill">⏱ Official course: ~55 min + exercises</span></div>
+</div>
+</header>
+
+<div class="layout wrap">
+<nav>
+<strong>📚 Jump to</strong>
+<a href="#big">Big Idea</a><a href="#six">Six Stages</a><a href="#design">1. Design</a><a href="#map">2. Delegation Map</a><a href="#build">3. Build</a><a href="#diagnose">4. Diagnose</a><a href="#persist">5. Make Fixes Stick</a><a href="#operate">6. Operate & Explain</a><a href="#terms">Key Terms</a><a href="#practical">Practical Work</a><a href="#test">Test Yourself</a><a href="#remember">Must Remember</a>
+</nav>
+<main>
+
+<section id="big" class="card accent-purple">
+<h2>💡 The Big Idea</h2>
+<p>A good AI result does <b>not</b> prove that AI should own the whole workflow. A bad result does <b>not</b> prove AI cannot do the task. You must inspect the <b>structure underneath the result</b>: which step is being done, what an error costs, whether it can be undone, who is accountable, and when a failure first appeared.</p>
+<div class="callout">Core mental model: judge <b>each workflow step</b>, not AI as a whole.</div>
+</section>
+
+<section id="six" class="card accent-pink">
+<h2>🗺️ The Course in Six Stages</h2>
+<div class="flow"><div>1️⃣ Design<br><small>requirements</small></div><div>2️⃣ Map<br><small>ownership</small></div><div>3️⃣ Build<br><small>iterate</small></div><div>4️⃣ Diagnose<br><small>timing</small></div><div>5️⃣ Persist<br><small>configuration</small></div><div>6️⃣ Communicate<br><small>name the gate</small></div></div>
+<p class="muted">Think of this as the lifecycle of an AI-assisted business workflow.</p>
+</section>
+
+<section id="design" class="card accent-cyan">
+<h2>1️⃣ Design the Work Before Placing AI</h2>
+<h3>Concept 1: The unit of value is the step</h3>
+<p>A <span class="term">step</span> is one named piece of a workflow with one owner. “I use AI” is a personal habit. “Our workflow uses AI” means AI performs specific named steps repeatably for the team.</p>
+<p><b>Example:</b> Instead of “AI helps with customer complaints,” map: retrieve complaint → summarize → classify severity → draft reply → approve → send.</p>
+
+<h3>Concept 2: Turn messy requests into requirements</h3>
+<p>A vague request is dangerous because AI fills missing details with plausible defaults. A <span class="term">task definition</span> settles five things:</p>
+<div class="grid"><div class="mini"><b>What?</b>What exactly is produced?</div><div class="mini"><b>For whom?</b>Who receives or uses it?</div><div class="mini"><b>How often?</b>Once, daily, weekly?</div><div class="mini"><b>From what data?</b>Which sources?</div><div class="mini"><b>What format?</b>Table, email, dashboard?</div></div>
+<p><b>Exam trap:</b> A summary tells you what a document says. <b>Requirement extraction</b> creates specific, traceable, testable items that people can work from. Ambiguity should become a clarifying question, not an AI guess.</p>
+
+<h3>Concept 3: If a number matters, compute it</h3>
+<p><span class="term">Synthesis</span> means combining information into useful options. AI is good at this. But important calculations should use <span class="term">code execution</span>, where code actually calculates the result. A generated number and a calculated number may look identical on screen, so use computation when the number affects a decision.</p>
+<div class="callout">Exam rule: <b>If a result matters, compute it. Never merely write it.</b> Then verify the code used the correct data.</div>
+
+<h3>Concept 4: The Window Test</h3>
+<p>Ask: <b>“Can I put everything this step needs in front of the model?”</b> The model's <span class="term">context</span> is everything it can see: prompt, files, conversation and available sources. If a decision depends on hidden information such as an unrecorded hiring freeze, personal relationship context, or inaccessible risk appetite, the step should stay human.</p>
+<p><b>Synthesis step:</b> inputs can be supplied. <b>Judgment step:</b> important inputs cannot or should not be supplied. For current prices, dates, or news, use an external source you can verify.</p>
+</section>
+
+<section id="map" class="card accent-orange">
+<h2>2️⃣ Build a Delegation Map</h2>
+<p>A <span class="term">delegation map</span> writes the workflow step by step, assigns an owner to every step, and records why.</p>
+<h3>First: Eligibility → Ownership → Implementation</h3>
+<table><tr><th>Decision</th><th>Question</th></tr><tr><td><b>Eligibility</b></td><td>May this data enter the AI tool, and can all required inputs be supplied?</td></tr><tr><td><b>Ownership</b></td><td>Should AI, a human, or both own this step?</td></tr><tr><td><b>Implementation</b></td><td>What carries the step: Skill, knowledge, code execution, standing instruction, or human gate?</td></tr></table>
+
+<h3>Concept 5: Three ownership criteria</h3>
+<div class="grid">
+<div class="mini"><b>↩️ Reversibility</b>Can the action be undone? A draft can be rewritten. A sent message may be irreversible.</div>
+<div class="mini"><b>⚠️ Stakes</b>What does a mistake cost in the bad case? Think worst meaningful consequence, not average consequence.</div>
+<div class="mini"><b>👤 Accountability</b>Is this step the actual decision someone answers for, or merely an input a person judges later? Accountability never transfers to the machine.</div>
+</div>
+<p>The three are <b>questions, not a score</b>. If they disagree, the strictest criterion wins.</p>
+
+<h3>Three classifications</h3>
+<table><tr><th>Class</th><th>Meaning</th><th>Easy example</th></tr><tr><td>🤖 AI-appropriate</td><td>AI may own the step.</td><td>Extract clauses for later review.</td></tr><tr><td>🤝 Collaborative</td><td>AI produces; a named human judges.</td><td>AI drafts a contract redline, lawyer approves.</td></tr><tr><td>🧑 Human-retained</td><td>A person owns the step outright.</td><td>Sign and send a binding contract.</td></tr></table>
+
+<h3>Concept 6: Same criteria work across different workflows</h3>
+<p>Contract review and employee onboarding look different, but the pattern repeats. Reversible drafting and extraction can often go to AI. Final approvals, binding sends, and accountable decisions usually remain human.</p>
+
+<h3>Concept 7: Three common mapping failures</h3>
+<div class="grid">
+<div class="mini"><b>🚨 Over-delegation</b>AI gets more authority than the risk of that step allows.</div>
+<div class="mini"><b>✨ Halo delegation</b>AI did the previous step well, so people wrongly assume it should own the next step too.</div>
+<div class="mini"><b>🚪 Unstaffed gate</b>A workflow says “human review,” but in practice nobody truly reviews it.</div>
+<div class="mini"><b>🛠 Tool-first mapping</b>The workflow is bent around a favorite feature instead of mapping the real work first.</div>
+</div>
+<p><b>Critical idea:</b> good drafting is evidence about drafting. It is not evidence that AI should make the decision.</p>
+
+<h3>Concept 8: Maps need an owner and a review date</h3>
+<p>Workflows change silently. A <span class="term">map owner</span> is one named person responsible for keeping the map true. A <span class="term">scheduled read</span> is a fixed review of the map. Quarterly is a reasonable default in the course, sooner when volume, staffing, or legal conditions change.</p>
+<p>Review: Were steps added/removed? Are collaborative gates actually staffed? Did volume or stakes change? Are Skills, knowledge, and standing instructions still current?</p>
+</section>
+
+<section id="build" class="card accent-green">
+<h2>3️⃣ Build It, Then Watch It</h2>
+<h3>Concept 9: The build loop</h3>
+<div class="flow" style="grid-template-columns:repeat(4,1fr)"><div>💭 Ideate</div><div>🧪 Prototype</div><div>💬 Feedback</div><div>✨ Refine</div></div>
+<p>AI is a design partner, not a vending machine. Build something concrete, inspect it, learn what is wrong, refine it, then repeat. Keep the work inside a stable Project when background and instructions need to remain consistent.</p>
+<p><b>Important distinction:</b> if the problem is descriptive, better instructions may solve it. If the problem is a feature mismatch, such as important arithmetic being generated as prose, more wording will not fix the underlying issue.</p>
+
+<h3>Concept 10: Know when prompt-and-iterate is no longer enough</h3>
+<p><span class="term">Escalation signal</span> means other people now depend on your small AI tool. At that point it is becoming infrastructure and may need engineering concerns such as access control, reliability, support, and stable behavior.</p>
+<table><tr><th>Signal</th><th>Meaning</th></tr><tr><td>Other people depend on it</td><td>Escalate toward developer/architect engineering.</td></tr><tr><td>You solved the same shape the same way repeatedly</td><td>The method may be stable enough to turn into a repeatable worker.</td></tr></table>
+</section>
+
+<section id="diagnose" class="card accent-purple">
+<h2>4️⃣ Diagnose Bad Output by Timing</h2>
+<h3>Concept 11: Four major causes</h3>
+<table><tr><th>When did it go wrong?</th><th>Likely first hypothesis</th><th>Simple meaning</th></tr><tr><td>Wrong from the first answer</td><td><b>Under-specification</b></td><td>The prompt did not contain what the task needed.</td></tr><tr><td>Started well, then degraded</td><td><b>Context overload</b></td><td>The conversation became too long and early instructions lost force.</td></tr><tr><td>Same repeatable error type</td><td><b>Wrong feature/model</b></td><td>The task went to the wrong tool or capability.</td></tr><tr><td>Used to work, now doesn't</td><td><b>Stale configuration</b></td><td>Instructions, knowledge, or a Skill became outdated.</td></tr></table>
+<p>Timing gives you a <b>first hypothesis</b>, not absolute proof. Confirm cheaply before fixing.</p>
+
+<h3>Concept 12: Diagnostic sequence, cheapest first</h3>
+<ol><li>Check the prompt: <b>role, context, task, constraints, format</b>.</li><li>Check session length and context overload.</li><li>Check feature and model choice.</li><li>Check whether configuration is current.</li><li>Only then ask whether the task itself is a bad fit.</li></ol>
+<div class="callout"><b>Expectation mismatch</b> = asking the tool for something it cannot reliably provide, such as one exact future sales number. Reshape the task instead of endlessly tuning the prompt.</div>
+</section>
+
+<section id="persist" class="card accent-pink">
+<h2>5️⃣ Make the Fix Stick</h2>
+<h3>Concept 13: Turn reactions into instructions</h3>
+<p>“Too generic” is a reaction. “Name the audience and the single action they should take” is an instruction. Ask: <b>What must be present for this to be right, and which part of the setup controls it?</b></p>
+
+<h3>Concept 14: Rule, Reference, or Procedure</h3>
+<table><tr><th>Type</th><th>Meaning</th><th>Correct home</th></tr><tr><td>📏 Rule</td><td>A limit or behavior that always applies</td><td>Standing instruction</td></tr><tr><td>📚 Reference</td><td>Material the work must read</td><td>Knowledge base</td></tr><tr><td>🧭 Procedure</td><td>An ordered sequence of steps</td><td>Skill</td></tr></table>
+<p><span class="term">Promotion</span> means moving a useful fix out of a temporary chat and into shared configuration so it lasts.</p>
+
+<h3>Concept 15: Find friction</h3>
+<p><span class="term">Friction</span> is a small repeated workflow cost you stopped noticing.</p>
+<table><tr><th>Signal</th><th>What it looks like</th></tr><tr><td>Repetition</td><td>You paste the same background every run.</td></tr><tr><td>Correction</td><td>You repair the same flaw every time.</td></tr><tr><td>Variance</td><td>Different people get inconsistent outputs for the same task.</td></tr></table>
+<p><b>Consolidate first</b> by combining steps that need the same background. Then <b>promote</b> stable repeated patterns into configuration.</p>
+
+<h3>Concept 16: Measure what matters</h3>
+<p>A <span class="term">baseline</span> is the measurement taken <b>before</b> changing the workflow. Record time per run, revision rounds, and manual steps. Choose the metric that matches the purpose: time, consistency, accuracy, or variance.</p>
+<p>A <span class="term">parallel run</span> means running old and new workflows together for a few cycles. It gives evidence, a fallback, and confidence before switching fully.</p>
+</section>
+
+<section id="operate" class="card accent-cyan">
+<h2>6️⃣ Operate It and Explain It</h2>
+<h3>Concept 17: When a bad output escapes</h3>
+<p>Design the response before the incident:</p>
+<ol><li><b>Stop</b> the workflow quickly.</li><li><b>Scope</b> how many outputs were affected and where they went.</li><li><b>Tell</b> the right people within the required time.</li><li><b>Change the map</b> so the lesson becomes a lasting design change.</li></ol>
+
+<h3>Concept 18: Say what AI does, then name the human gate</h3>
+<p>Do not exaggerate with phrases like “fully automated,” “AI handles everything,” or “as good as a person.” State the AI's exact job and then the human checkpoint. When trust matters, also state what the workflow refuses or escalates.</p>
+<div class="callout">A clear human checkpoint usually increases trust because people can see where accountability lives.</div>
+</section>
+
+<section id="terms" class="card accent-orange">
+<h2>📖 High-Value Exam Terms</h2>
+<div class="grid">
+<div class="mini"><b>Delegation map</b>Steps + owner + reason for ownership.</div>
+<div class="mini"><b>Reversibility</b>Whether a wrong step can be undone.</div>
+<div class="mini"><b>Stakes</b>Cost of an error in the bad case.</div>
+<div class="mini"><b>Accountability</b>Who answers for the decision/outcome.</div>
+<div class="mini"><b>Window test</b>Can all required inputs be supplied to the model?</div>
+<div class="mini"><b>Under-specification</b>The prompt lacked needed information from the start.</div>
+<div class="mini"><b>Context overload</b>Long context causes earlier instructions to lose force.</div>
+<div class="mini"><b>Stale configuration</b>Saved instructions, knowledge, or Skills are outdated.</div>
+<div class="mini"><b>Expectation mismatch</b>The requested outcome does not fit the tool's capability.</div>
+<div class="mini"><b>Promotion</b>Move a discovered fix into persistent configuration.</div>
+<div class="mini"><b>Baseline</b>Measurement before workflow redesign.</div>
+<div class="mini"><b>Parallel run</b>Run old and new workflows together temporarily.</div>
+</div>
+</section>
+
+<section id="practical" class="card accent-green">
+<h2>🛠️ Practical Work</h2>
+<p>The official course includes hands-on work. For exam preparation, do these in order:</p>
+<ol>
+<li><b>Choose one real workflow</b> with about 5–6 steps.</li>
+<li><b>Map it:</b> mark each step AI, Collaborative, or Human and justify it using reversibility, stakes, or accountability.</li>
+<li><b>Place the implementation:</b> Skill, knowledge base, code execution, standing instruction, or named human gate.</li>
+<li><b>Run one mechanical AI step</b> on real input.</li>
+<li><b>Break it deliberately:</b> ask for an important figure in prose that should have been computed, then diagnose the failure.</li>
+<li><b>Promote one fix:</b> decide whether it is a rule, reference, or procedure and place it in the right home.</li>
+<li><b>Record a baseline:</b> time, revision rounds, manual steps, and your main success metric.</li>
+<li><b>Complete the delegation map:</b> add a map owner, next review date, human gates, and stop/scope/tell/change incident plan.</li>
+<li><b>Explain the workflow three ways:</b> to a technical colleague, an executive, and a risk/compliance person. Keep the human checkpoint in all three.</li>
+</ol>
+<details><summary>📋 One-page delegation map template</summary>
+<div class="code">DELEGATION MAP: [workflow name]
+Owner: [named person]
+Last reviewed: [date]
+Next review: [date]
+
+ELIGIBILITY
+Data gate: May this data enter the tool?
+Input gate: Can everything each step needs be supplied?
+
+STEPS
+# | Step | Owner | Criterion | Carried by
+1 | ...  | AI / Collaborative / Human | reversibility / stakes / accountability | ...
+
+GATES
+For every collaborative/human step:
+Who reviews? When? What exactly do they check?
+
+BASELINE
+Time per run:
+Revision rounds:
+Manual steps:
+Main metric: time / consistency / accuracy / variance
+
+IF IT GOES WRONG
+Stopped by:
+Scope check:
+Who is told and by when:
+Map change:</div>
+</details>
+</section>
+
+<section id="test" class="card exam">
+<h2>🧠 Test Yourself</h2>
+<p><b>Do not open any answer key yet.</b> These exam-style questions are based on the course concepts. Send me your choices later and I can score them.</p>
+
+<div class="mcq"><b>1. What is the best unit for deciding AI delegation?</b><ol type="A"><li>The whole AI session</li><li>Each workflow step</li><li>The model brand</li><li>The department</li></ol></div>
+<div class="mcq"><b>2. Which three criteria decide ownership of a workflow step?</b><ol type="A"><li>Speed, price, creativity</li><li>Accuracy, model size, automation</li><li>Reversibility, stakes, accountability</li><li>Prompt, context, format</li></ol></div>
+<div class="mcq"><b>3. AI drafts a contract change, but a lawyer approves every edit. This is:</b><ol type="A"><li>Human-retained</li><li>Collaborative</li><li>Fully automated</li><li>Context overload</li></ol></div>
+<div class="mcq"><b>4. AI summarizes complaints well, so a team lets it decide complaint severity without separate analysis. This is closest to:</b><ol type="A"><li>Halo delegation</li><li>Baseline measurement</li><li>Promotion</li><li>Parallel run</li></ol></div>
+<div class="mcq"><b>5. A calculation affects a financial decision. What should you prefer?</b><ol type="A"><li>Ask AI to write the number confidently</li><li>Code execution, then verify what was computed</li><li>A longer conversation</li><li>A prettier table</li></ol></div>
+<div class="mcq"><b>6. Output is wrong from the very first response. What is the cheapest first hypothesis?</b><ol type="A"><li>Stale configuration</li><li>Context overload</li><li>Under-specification</li><li>Infrastructure failure</li></ol></div>
+<div class="mcq"><b>7. Output starts correctly but stops following early instructions after a very long chat. Most likely first hypothesis?</b><ol type="A"><li>Context overload</li><li>Halo delegation</li><li>Stakes</li><li>Parallel run</li></ol></div>
+<div class="mcq"><b>8. “Generate the weekly report using these five ordered steps” is primarily a:</b><ol type="A"><li>Reference</li><li>Procedure</li><li>Baseline</li><li>Stake</li></ol></div>
+<div class="mcq"><b>9. Where should a reusable ordered procedure usually live?</b><ol type="A"><li>Knowledge base</li><li>Skill</li><li>Memory only</li><li>A random old chat</li></ol></div>
+<div class="mcq"><b>10. What is the purpose of a baseline?</b><ol type="A"><li>Measure the workflow before changing it</li><li>Give AI more authority</li><li>Increase the context window</li><li>Replace human review</li></ol></div>
+<div class="mcq"><b>11. Other teams now depend on your small prompt-built tool every week. What does this signal?</b><ol type="A"><li>Keep prompting forever</li><li>It may have become infrastructure and needs engineering</li><li>Remove all human gates</li><li>The task is under-specified</li></ol></div>
+<div class="mcq"><b>12. Which description is safest and most accurate?</b><ol type="A"><li>“It is fully automated.”</li><li>“AI handles contract review.”</li><li>“AI drafts and flags issues; a qualified human reviews and approves before anything is sent.”</li><li>“It is basically as good as a lawyer.”</li></ol></div>
+</section>
+
+<section id="remember" class="card accent-purple">
+<h2>🎯 What You Must Remember</h2>
+<ul>
+<li>Judge <b>steps</b>, not impressive or disappointing outputs.</li>
+<li>Ownership uses <b>reversibility + stakes + accountability</b>.</li>
+<li>If all required inputs cannot enter the model's window, keep that judgment human.</li>
+<li>Important numbers should be <b>computed</b>, not merely generated in prose.</li>
+<li>Diagnose by <b>when the symptom appeared</b>, then check cheapest causes first.</li>
+<li>Persistent fix: <b>rule → standing instruction, reference → knowledge base, procedure → Skill</b>.</li>
+<li>Measure a <b>baseline before redesign</b>.</li>
+<li>A collaborative step needs a <b>real, named human gate</b>.</li>
+<li>When others depend on the tool, treat that as an <b>escalation signal</b>.</li>
+<li>Explain AI honestly: say what it does, then <b>name the human checkpoint</b>.</li>
+</ul>
+<div class="callout">Memory sentence: <b>Design → Map → Build → Diagnose → Persist → Communicate.</b></div>
+</section>
+
+<div class="footer">Built as a study companion from the Agent Factory “Workflow Design & Diagnosis” crash course • September 2026</div>
+</main>
+</div>
+</body>
+</html>

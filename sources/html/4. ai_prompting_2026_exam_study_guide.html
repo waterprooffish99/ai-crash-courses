@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Prompting in 2026 | Exam Study Guide</title>
+<style>
+  :root{
+    --bg:#07111f; --bg2:#0b1728; --panel:#0f2036; --panel2:#132944;
+    --text:#eef7ff; --muted:#a9bfd2; --cyan:#32e6ff; --pink:#ff4fc3;
+    --yellow:#ffd84d; --lime:#8cff66; --violet:#9f7aea; --orange:#ff9f43;
+    --red:#ff6b7a; --border:rgba(255,255,255,.10);
+    --shadow:0 18px 55px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);background:
+      radial-gradient(circle at 10% 0%,rgba(50,230,255,.13),transparent 28%),
+      radial-gradient(circle at 90% 10%,rgba(255,79,195,.12),transparent 30%),
+      radial-gradient(circle at 70% 90%,rgba(159,122,234,.12),transparent 30%),
+      var(--bg);line-height:1.7;
+  }
+  a{color:var(--cyan)}
+  .hero{
+    padding:72px 22px 46px;border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,rgba(50,230,255,.08),rgba(255,79,195,.06),rgba(255,216,77,.05));
+  }
+  .wrap{max-width:1180px;margin:auto}
+  .eyebrow{
+    display:inline-flex;gap:9px;align-items:center;padding:7px 12px;border:1px solid rgba(50,230,255,.25);
+    border-radius:999px;background:rgba(50,230,255,.07);color:#c9f8ff;font-size:.85rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase
+  }
+  h1{font-size:clamp(2.4rem,7vw,5.4rem);line-height:.98;margin:22px 0 18px;letter-spacing:-.055em}
+  .grad{background:linear-gradient(90deg,var(--cyan),var(--pink),var(--yellow));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{max-width:840px;color:#d3e3ef;font-size:1.13rem}
+  .hero-grid{display:grid;grid-template-columns:1.55fr .8fr;gap:22px;align-items:end}
+  .statbox{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .stat{padding:18px;border:1px solid var(--border);border-radius:18px;background:rgba(15,32,54,.76);backdrop-filter:blur(10px)}
+  .stat b{display:block;font-size:1.8rem;color:var(--yellow)}
+  .stat span{color:var(--muted);font-size:.88rem}
+  .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding:30px 22px 70px}
+  .side{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow:auto;padding:16px;border:1px solid var(--border);border-radius:20px;background:rgba(11,23,40,.84);backdrop-filter:blur(12px)}
+  .side h3{margin:0 0 10px;font-size:.92rem;color:var(--yellow);letter-spacing:.08em;text-transform:uppercase}
+  .side a{display:block;text-decoration:none;color:#c8d7e4;padding:8px 10px;border-radius:10px;font-size:.9rem}
+  .side a:hover{background:rgba(50,230,255,.09);color:white}
+  main{min-width:0}
+  section{scroll-margin-top:20px;margin-bottom:30px}
+  .section-title{font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.035em;margin:0 0 12px}
+  .sub{color:var(--muted);margin-top:0}
+  .card{
+    border:1px solid var(--border);border-radius:22px;padding:24px;margin:16px 0;
+    background:linear-gradient(180deg,rgba(19,41,68,.88),rgba(10,24,42,.88));box-shadow:var(--shadow)
+  }
+  .card h3{margin:0 0 10px;font-size:1.35rem}
+  .tag{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;font-size:.77rem;font-weight:800;margin:0 6px 8px 0}
+  .cyan{background:rgba(50,230,255,.12);color:#9cf4ff;border:1px solid rgba(50,230,255,.22)}
+  .pink{background:rgba(255,79,195,.12);color:#ff9bdc;border:1px solid rgba(255,79,195,.22)}
+  .yellow{background:rgba(255,216,77,.13);color:#ffe87e;border:1px solid rgba(255,216,77,.22)}
+  .lime{background:rgba(140,255,102,.12);color:#b9ff9f;border:1px solid rgba(140,255,102,.22)}
+  .violet{background:rgba(159,122,234,.16);color:#cbb8ff;border:1px solid rgba(159,122,234,.25)}
+  .orange{background:rgba(255,159,67,.13);color:#ffc184;border:1px solid rgba(255,159,67,.22)}
+  .term{border-left:4px solid var(--cyan);padding:10px 14px;background:rgba(50,230,255,.06);border-radius:0 12px 12px 0;margin:12px 0}
+  .term b{color:#bdf7ff}
+  .exam{border-left:4px solid var(--yellow);background:rgba(255,216,77,.055)}
+  .danger{border-left:4px solid var(--red);background:rgba(255,107,122,.06)}
+  .example{border-left:4px solid var(--pink);background:rgba(255,79,195,.06)}
+  .idea{border-left:4px solid var(--lime);background:rgba(140,255,102,.05)}
+  .box{padding:14px 16px;border-radius:14px;margin:12px 0}
+  .box strong{color:white}
+  .grid2,.grid3,.grid4{display:grid;gap:14px}
+  .grid2{grid-template-columns:repeat(2,1fr)}
+  .grid3{grid-template-columns:repeat(3,1fr)}
+  .grid4{grid-template-columns:repeat(4,1fr)}
+  .mini{padding:16px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.025)}
+  .mini h4{margin:0 0 5px}
+  .mini p{margin:5px 0;color:#c7d7e5}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:15px 0}
+  .step{padding:10px 13px;border-radius:12px;background:#112844;border:1px solid rgba(50,230,255,.18);font-weight:800}
+  .arrow{color:var(--yellow);font-weight:900}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+  th,td{border-bottom:1px solid var(--border);padding:11px 10px;text-align:left;vertical-align:top}
+  th{color:#aef4ff;background:rgba(50,230,255,.05)}
+  code,.prompt{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace
+  }
+  .prompt{
+    white-space:pre-wrap;background:#06101d;border:1px solid rgba(159,122,234,.25);
+    color:#ddf7ff;padding:15px;border-radius:14px;font-size:.9rem;overflow:auto
+  }
+  details{border:1px solid var(--border);border-radius:15px;padding:13px 15px;background:rgba(255,255,255,.022);margin:10px 0}
+  summary{cursor:pointer;font-weight:800;color:#eaf8ff}
+  details[open] summary{margin-bottom:10px;color:var(--yellow)}
+  .quote{font-size:1.18rem;font-weight:850;padding:22px;border-radius:18px;background:linear-gradient(90deg,rgba(50,230,255,.09),rgba(255,79,195,.08));border:1px solid rgba(255,255,255,.1)}
+  .concept{position:relative;overflow:hidden}
+  .concept:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:-55px;top:-55px;background:radial-gradient(circle,rgba(50,230,255,.14),transparent 70%)}
+  .num{font-size:.76rem;font-weight:900;letter-spacing:.12em;color:var(--pink);text-transform:uppercase}
+  .quizq{padding:18px;border:1px solid var(--border);border-radius:16px;margin:12px 0;background:rgba(255,255,255,.025)}
+  .quizq p{font-weight:800}
+  .quizq label{display:block;padding:8px 10px;margin:5px 0;border-radius:9px;cursor:pointer}
+  .quizq label:hover{background:rgba(50,230,255,.06)}
+  button{
+    border:0;border-radius:11px;padding:11px 15px;font-weight:850;cursor:pointer;color:#07111f;
+    background:linear-gradient(90deg,var(--cyan),#84f8ff)
+  }
+  .result{margin-top:15px;padding:14px;border-radius:12px;background:rgba(140,255,102,.08);display:none}
+  .footer{padding:28px 22px 48px;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
+  .kicker{color:var(--yellow);font-weight:900}
+  ul{padding-left:20px}
+  li{margin:7px 0}
+  .check li::marker{content:"✓  ";color:var(--lime)}
+  .warn li::marker{content:"⚠  ";color:var(--yellow)}
+  @media(max-width:900px){
+    .hero-grid,.layout{grid-template-columns:1fr}
+    .side{position:relative;top:auto;max-height:none}
+    .grid3,.grid4{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:620px){
+    .grid2,.grid3,.grid4,.statbox{grid-template-columns:1fr}
+    .hero{padding-top:46px}
+    .layout{padding-left:14px;padding-right:14px}
+    .card{padding:18px}
+    table{font-size:.86rem}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">✨ Agent Factory • Exam Study Edition</div>
+      <h1>AI Prompting<br><span class="grad">in 2026</span></h1>
+      <p class="lead">A super-simple, concept-clearing study guide based closely on the official Agent Factory crash course. Technical words are kept because you may see them in the exam, but every important word is explained like you are meeting it for the first time.</p>
+      <p><span class="tag cyan">13 Core Concepts</span><span class="tag pink">Practical Work</span><span class="tag yellow">Exam Points</span><span class="tag lime">Interactive Quiz</span></p>
+    </div>
+    <div class="statbox">
+      <div class="stat"><b>13</b><span>core prompting concepts</span></div>
+      <div class="stat"><b>3</b><span>knowledge / retrieval modes</span></div>
+      <div class="stat"><b>4</b><span>main kinds of ask</span></div>
+      <div class="stat"><b>1</b><span>big principle underneath it all</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+<aside class="side">
+  <h3>Study Map</h3>
+  <a href="#bigidea">🌟 Big idea</a>
+  <a href="#glossary">📚 Quick glossary</a>
+  <a href="#changed">⚡ What changed by 2026</a>
+  <a href="#c1">1. Briefing, not cleverness</a>
+  <a href="#c2">2. Pretrained knowledge</a>
+  <a href="#c3">3. Three retrieval modes</a>
+  <a href="#c4">4. Context is the game</a>
+  <a href="#c5">5. Reasoning / think hard</a>
+  <a href="#c6">6. Sycophancy & rubrics</a>
+  <a href="#c7">7. Brainstorm → iterate</a>
+  <a href="#c8">8. Multimodal AI</a>
+  <a href="#c9">9. Build small apps</a>
+  <a href="#c10">10. Data analysis</a>
+  <a href="#c11">11. Desktop permissions</a>
+  <a href="#c12">12. Cost, speed, models</a>
+  <a href="#c13">13. Models checking models</a>
+  <a href="#practice">🛠️ Practical work</a>
+  <a href="#projects">🔨 Course projects</a>
+  <a href="#quiz">🧠 Test yourself</a>
+  <a href="#remember">🎯 Must remember</a>
+</aside>
+
+<main>
+<section id="bigidea">
+  <h2 class="section-title">🌟 The whole course in one idea</h2>
+  <div class="quote">Good prompting is mainly this: <span class="grad">get the right context in, and keep the wrong context out.</span></div>
+  <p class="sub">A powerful prompt is usually not a clever sentence. It is a good briefing.</p>
+  <div class="flow">
+    <span class="step">Context</span><span class="arrow">→</span>
+    <span class="step">Clear Ask</span><span class="arrow">→</span>
+    <span class="step">Options</span><span class="arrow">→</span>
+    <span class="step">Feedback</span><span class="arrow">→</span>
+    <span class="step">Improve</span><span class="arrow">→</span>
+    <span class="step">Check</span>
+  </div>
+  <div class="box idea"><strong>Mental picture:</strong> Imagine a brilliant new employee on their first day. They are smart, but they do not automatically know your goal, files, limits, audience, budget, history, or preferences. Your prompt is their briefing.</div>
+</section>
+
+<section id="glossary">
+  <h2 class="section-title">📚 Quick Glossary</h2>
+  <p class="sub">Learn these terms. They are the language of the course.</p>
+  <div class="grid2">
+    <div class="term"><b>Pretrained knowledge</b><br>What the model learned during training, before your current question.</div>
+    <div class="term"><b>Knowledge cutoff</b><br>The latest point in time covered by the model's training data.</div>
+    <div class="term"><b>Web search</b><br>A tool that fetches current pages from the internet for the AI to read.</div>
+    <div class="term"><b>Deep research</b><br>A longer research process that checks many sources and builds a structured answer.</div>
+    <div class="term"><b>Slop</b><br>AI writing that sounds smooth but says little that is useful or memorable.</div>
+    <div class="term"><b>Rubric</b><br>A checklist of criteria used to judge quality, often with scores.</div>
+    <div class="term"><b>Sycophancy</b><br>The AI's tendency to agree with what it thinks you want to hear.</div>
+    <div class="term"><b>Context window</b><br>Everything the model can currently see while producing one answer.</div>
+    <div class="term"><b>System prompt</b><br>Hidden instructions the product gives the model before your message.</div>
+    <div class="term"><b>Stateless</b><br>The model itself does not permanently carry a private memory from turn to turn.</div>
+    <div class="term"><b>Memory</b><br>Stored notes a product may place back into later chats as context.</div>
+    <div class="term"><b>Context rot</b><br>Quality dropping because a long chat contains too much mixed or irrelevant material.</div>
+    <div class="term"><b>Compacting</b><br>Replacing older chat content with a shorter summary to save context space.</div>
+    <div class="term"><b>Reasoning</b><br>The model doing extra internal problem-solving before its final answer.</div>
+    <div class="term"><b>Extended thinking</b><br>Giving the model more time or effort for difficult reasoning.</div>
+    <div class="term"><b>Multimodal</b><br>Working with more than text, such as images, audio, PDFs, or spreadsheets.</div>
+    <div class="term"><b>Artifact</b><br>A usable output from chat, such as a webpage, app, document, or interactive object.</div>
+    <div class="term"><b>Code execution</b><br>The AI writes a small program and actually runs it to calculate or analyze something.</div>
+    <div class="term"><b>Model family</b><br>Models made by the same provider or company.</div>
+    <div class="term"><b>A/B test</b><br>Giving the same prompt to two systems and comparing the outputs.</div>
+    <div class="term"><b>Agent</b><br>An AI system that can carry out several steps toward a goal, not only answer once.</div>
+    <div class="term"><b>API</b><br>A way for one software program to communicate with another program or model.</div>
+  </div>
+</section>
+
+<section id="changed">
+  <h2 class="section-title">⚡ Why prompting feels different in 2026</h2>
+  <div class="grid4">
+    <div class="mini"><h4>🧠 Bigger context</h4><p>Models can work with much larger amounts of text and files than early chatbots.</p></div>
+    <div class="mini"><h4>🔍 Built-in search</h4><p>Modern systems can look up fresh information instead of relying only on training.</p></div>
+    <div class="mini"><h4>🧮 Code tools</h4><p>They can run calculations and analyze spreadsheets using code.</p></div>
+    <div class="mini"><h4>🖼️ Multimodal</h4><p>Photos, PDFs, audio and other files can become part of the prompt.</p></div>
+    <div class="mini"><h4>🧩 Projects</h4><p>Standing files and instructions can follow many chats in one workspace.</p></div>
+    <div class="mini"><h4>💻 Desktop agents</h4><p>Some AI apps can act on files with permission.</p></div>
+    <div class="mini"><h4>🛠️ Coding agents</h4><p>Developer agents can inspect projects, edit files and run tests.</p></div>
+    <div class="mini"><h4>🤔 Reasoning modes</h4><p>Difficult tasks can receive more deliberate thinking effort.</p></div>
+  </div>
+</section>
+
+<section id="c1" class="card concept">
+  <div class="num">Concept 01</div><h3>🧾 A power-user prompt is a briefing</h3>
+  <p>A weak prompt often gives only the question. A strong prompt gives the information needed to answer the question well.</p>
+  <div class="grid2">
+    <div class="box danger"><strong>Novice:</strong><br>“Which laptop should I buy?”</div>
+    <div class="box idea"><strong>Power user:</strong><br>“Budget: $900. I use VS Code, WSL and light AI work. Battery matters. I do not game much. Compare these 3 models on performance, battery and upgradeability.”</div>
+  </div>
+  <p><span class="tag cyan">Briefing formula</span> <b>Files + Goal + Limits + Exact Ask</b></p>
+  <div class="box exam"><strong>Exam point:</strong> Better prompting is usually better context and clearer constraints, not secret “magic words.”</div>
+</section>
+
+<section id="c2" class="card concept">
+  <div class="num">Concept 02</div><h3>📖 Pretrained knowledge: AI learned by reading</h3>
+  <p>The model learned patterns from huge amounts of text. It did not personally live through the world. This creates an important reliability pattern.</p>
+  <table>
+    <tr><th>Internet coverage</th><th>Simple meaning</th><th>Trust idea</th></tr>
+    <tr><td>Very common topic</td><td>Lots of examples existed in training</td><td>Usually stronger</td></tr>
+    <tr><td>Niche / local topic</td><td>Very little text existed</td><td>More checking needed</td></tr>
+    <tr><td>Private / new information</td><td>Training could not contain it</td><td>Do not assume the model knows it</td></tr>
+  </table>
+  <div class="box example"><strong>Simple example:</strong> Asking how to boil an egg is easy because the internet contains millions of cooking explanations. Asking about a family rule nobody published is impossible unless you provide that rule.</div>
+  <div class="box exam"><strong>Golden exam sentence:</strong> <b>Confidence is not proof of correctness.</b> A model can sound sure and still be wrong.</div>
+</section>
+
+<section id="c3" class="card concept">
+  <div class="num">Concept 03</div><h3>🔎 Three retrieval modes</h3>
+  <p><b>Retrieval</b> simply means “where the information is being obtained from.”</p>
+  <div class="grid3">
+    <div class="mini"><span class="tag cyan">Mode 1</span><h4>Pretrained</h4><p>Fast. Good for stable, common knowledge.</p><p><b>Example:</b> “What is recursion?”</p></div>
+    <div class="mini"><span class="tag pink">Mode 2</span><h4>Web Search</h4><p>Reads current pages. Good for news, prices, rules and recent events.</p><p><b>Example:</b> “What changed in Python this month?”</p></div>
+    <div class="mini"><span class="tag yellow">Mode 3</span><h4>Deep Research</h4><p>Checks many sources. Good for serious comparisons and reports.</p><p><b>Example:</b> “Research 3 cloud options for our company and cite evidence.”</p></div>
+  </div>
+  <div class="box idea"><strong>Reliability habit:</strong> Name trusted sources, ask for citations beside claims, and ask the AI to mark unsupported claims as <b>unverified</b>.</div>
+  <div class="box exam"><strong>Know the difference:</strong> Search is not automatically correct. It can still use an old, weak or misunderstood source.</div>
+</section>
+
+<section id="c4" class="card concept">
+  <div class="num">Concept 04</div><h3>🪟 Context is the whole game</h3>
+  <p>The <b>context window</b> is like the AI's temporary reading desk. Whatever is on the desk can influence the answer. Whatever is not there cannot help.</p>
+  <div class="flow">
+    <span class="step">System instructions</span><span class="arrow">+</span>
+    <span class="step">Memory</span><span class="arrow">+</span>
+    <span class="step">Tool descriptions</span><span class="arrow">+</span>
+    <span class="step">Your prompt</span><span class="arrow">+</span>
+    <span class="step">Chat history</span><span class="arrow">+</span>
+    <span class="step">Files</span>
+  </div>
+  <div class="box example"><strong>Analogy:</strong> If you ask a tailor to make a dress but never show the measurements, the tailor must guess. AI behaves similarly when essential context is missing.</div>
+  <p><b>Context rot</b> happens when a conversation becomes crowded with old or unrelated material. The model may pay less attention to what matters.</p>
+  <div class="box idea"><strong>Use a Project when:</strong> the same topic returns, the same background is reused, or the output style stays the same across chats.</div>
+  <div class="box exam"><strong>Important:</strong> More context is not always better. <b>Relevant context</b> is better.</div>
+</section>
+
+<section id="c5" class="card concept">
+  <div class="num">Concept 05</div><h3>🤔 Reasoning and “think hard”</h3>
+  <p>For a difficult decision, analysis or design task, a modern model can spend more effort before answering.</p>
+  <div class="term"><b>Extended thinking</b> = allowing the model to reason longer on a difficult problem.</div>
+  <div class="grid2">
+    <div class="box danger"><strong>Do not waste it on:</strong><br>“What does HTML stand for?”</div>
+    <div class="box idea"><strong>Use it for:</strong><br>“Compare two business strategies, identify hidden risks and tell me what would change your recommendation.”</div>
+  </div>
+  <div class="box exam"><strong>Exam point:</strong> The old trick “think step by step” is less central now because many modern products have explicit reasoning modes or can activate more reasoning automatically.</div>
+</section>
+
+<section id="c6" class="card concept">
+  <div class="num">Concept 06</div><h3>⚖️ Fight sycophancy with neutral wording + rubrics</h3>
+  <p><b>Sycophancy</b> means the model may lean toward agreeing with the opinion hidden inside your prompt.</p>
+  <div class="grid2">
+    <div class="box danger"><strong>Biased ask:</strong><br>“Don't you think my business idea is brilliant?”</div>
+    <div class="box idea"><strong>Neutral ask:</strong><br>“Evaluate this business idea objectively. Score demand, competition, cost, risk and defensibility.”</div>
+  </div>
+  <p>A <b>rubric</b> makes the evaluation concrete. Instead of “Is this good?”, define what “good” means.</p>
+  <div class="prompt">Score my proposal from 1–10 on:
+1) clarity
+2) evidence
+3) feasibility
+4) risk awareness
+For each score, give one reason and the smallest change that would improve it.</div>
+  <div class="box exam"><strong>Exam clue:</strong> Words like <b>evaluate, compare, critique</b> are safer than prompts that already tell the model what conclusion to reach.</div>
+</section>
+
+<section id="c7" class="card concept">
+  <div class="num">Concept 07</div><h3>🔁 Brainstorm → iterate → expand</h3>
+  <p>The first AI answer is often the most average answer. The course teaches a loop instead of “one prompt and done.”</p>
+  <div class="flow">
+    <span class="step">1. Load context</span><span class="arrow">→</span>
+    <span class="step">2. Ask 3–5 options</span><span class="arrow">→</span>
+    <span class="step">3. Give feedback</span><span class="arrow">→</span>
+    <span class="step">4. Ask again</span><span class="arrow">→</span>
+    <span class="step">5. Expand winner</span>
+  </div>
+  <p><b>Iteration</b> means improving something through repeated rounds.</p>
+  <table>
+    <tr><th>Kind of ask</th><th>Tighten</th><th>Loosen</th></tr>
+    <tr><td>Brainstorming</td><td>Problem, audience, what to avoid</td><td>Format, exact structure, fine details</td></tr>
+    <tr><td>Research</td><td>Scope, source quality, evidence rules</td><td>Your expected conclusion</td></tr>
+    <tr><td>Drafting</td><td>Voice, length, structure, facts, format</td><td>Very little</td></tr>
+    <tr><td>Analysis</td><td>Data, definitions, exact question</td><td>The conclusion</td></tr>
+  </table>
+  <div class="box exam"><strong>Big distinction:</strong> When exploring ideas, loosen output constraints. When executing a chosen idea, tighten the specification.</div>
+</section>
+
+<section id="c8" class="card concept">
+  <div class="num">Concept 08</div><h3>🎧🖼️ Multimodal AI</h3>
+  <p><b>Multimodal</b> means the AI can work across several kinds of information, not just typed text.</p>
+  <div class="grid4">
+    <div class="mini"><h4>📷 Image</h4><p>Read screenshots, whiteboards, receipts and photos.</p></div>
+    <div class="mini"><h4>🎙️ Audio</h4><p>Transcribe and summarize spoken material.</p></div>
+    <div class="mini"><h4>📄 Files</h4><p>Read PDFs, documents and spreadsheets.</p></div>
+    <div class="mini"><h4>🎨 Generation</h4><p>Create or transform visual material where supported.</p></div>
+  </div>
+  <div class="box danger"><strong>Common mistake:</strong> Assuming image understanding is perfect. Small text, crowded scenes and exact counting can still be difficult. Ask the model to flag uncertain parts.</div>
+</section>
+
+<section id="c9" class="card concept">
+  <div class="num">Concept 09</div><h3>🧪 One prompt can build a small app</h3>
+  <p>For small self-contained tools, you can describe the experience instead of writing the code yourself.</p>
+  <div class="quote"><span class="kicker">App Prompt Formula:</span> Goal → Input → Output</div>
+  <div class="prompt">Build a focus timer.
+Goal: 25 minutes work, then 5 minutes break.
+Input: I press Start.
+Output: A visible countdown, a clear reset button, and a bright yellow theme.</div>
+  <p><b>Best fit:</b> single-screen games, calculators, timers, study tools and simple interactive pages.</p>
+  <div class="box exam"><strong>Boundary:</strong> Accounts, networking, complex backends and many external services usually need multiple steps and real engineering.</div>
+</section>
+
+<section id="c10" class="card concept">
+  <div class="num">Concept 10</div><h3>📊 Data analysis: make sure code really ran</h3>
+  <p>Modern AI can write a small program, run it on your data, and report the result. This is usually safer than mental arithmetic.</p>
+  <div class="term"><b>Code execution</b> = the model uses an actual computation tool, rather than only predicting a number in text.</div>
+  <div class="box danger"><strong>Silent failure:</strong> Sometimes the AI gives a confident numerical answer without actually running code.</div>
+  <div class="prompt">Analyze this spreadsheet. Write and run code for the calculations. Show the calculation method, then summarize the findings. Do not estimate values by inspection.</div>
+  <div class="box exam"><strong>Exam point:</strong> If the task depends on arithmetic, statistics or graphs, ask explicitly for real computation.</div>
+</section>
+
+<section id="c11" class="card concept">
+  <div class="num">Concept 11</div><h3>🔐 AI desktop apps and permissions</h3>
+  <p>Some AI apps can work directly with files on your computer. This is more powerful than normal chat, so permission discipline matters.</p>
+  <div class="flow">
+    <span class="step">Task</span><span class="arrow">→</span>
+    <span class="step">Plan</span><span class="arrow">→</span>
+    <span class="step">Human Review</span><span class="arrow">→</span>
+    <span class="step">Approval</span><span class="arrow">→</span>
+    <span class="step">Action</span>
+  </div>
+  <div class="term"><b>Least privilege</b> = give only the smallest level of access needed to complete the task.</div>
+  <div class="box exam"><strong>Example:</strong> If the AI only needs to read invoices, do not give it permission to delete the whole finance folder.</div>
+</section>
+
+<section id="c12" class="card concept">
+  <div class="num">Concept 12</div><h3>⚙️ Cost, speed and model choice</h3>
+  <p>There is no forever-best model. AI ability is <b>jagged</b>, meaning one model may be excellent at coding but merely average at another task.</p>
+  <div class="term"><b>Model ladder</b> = a provider's fast/light models, middle models and heavy/more capable models.</div>
+  <div class="grid3">
+    <div class="mini"><h4>⚡ Fast / light</h4><p>Good for everyday questions, extraction, rewriting and simple tasks.</p></div>
+    <div class="mini"><h4>🧠 Strong reasoning</h4><p>Use when the task is difficult, ambiguous or high-value.</p></div>
+    <div class="mini"><h4>🎥 Rich media</h4><p>Image, audio and video workloads may cost and behave very differently from text.</p></div>
+  </div>
+  <div class="box exam"><strong>Course habit:</strong> Try the same prompt in 2–3 different model families sometimes. Learn from real comparisons, not brand loyalty.</div>
+</section>
+
+<section id="c13" class="card concept">
+  <div class="num">Concept 13</div><h3>🧑‍⚖️ Models checking models</h3>
+  <p>If no expert is available, use a second model family as an independent reviewer.</p>
+  <div class="flow">
+    <span class="step">Draft with Model A</span><span class="arrow">→</span>
+    <span class="step">Score with rubric</span><span class="arrow">→</span>
+    <span class="step">Review with Model B</span><span class="arrow">→</span>
+    <span class="step">Compare disagreements</span>
+  </div>
+  <div class="box example"><strong>Example:</strong> Ask ChatGPT to grade a proposal on clarity, evidence and missing risks. Then give the exact same proposal and rubric to Claude or Gemini. Pay attention to problems only one reviewer caught.</div>
+  <div class="box exam"><strong>Why different families?</strong> Models from one family can share blind spots. A different family gives a more independent signal.</div>
+</section>
+
+<section id="practice">
+  <h2 class="section-title">🛠️ Practical Work</h2>
+  <p class="sub">The course strongly emphasizes trying the ideas. Reading teaches the vocabulary. Practice builds the skill.</p>
+
+  <details open><summary>1. Trigger web search</summary>
+    <p>Ask for major news from today in your country. Require a source beside each claim and ask unsupported points to be marked <b>unverified</b>.</p>
+  </details>
+  <details><summary>2. Ask a stable common-knowledge question</summary>
+    <p>Ask a simple question that should not need fresh information. Notice how the answer differs from a search-based task.</p>
+  </details>
+  <details><summary>3. Build a context-rich personal prompt</summary>
+    <p>Give several real constraints before asking for three options. The purpose is to feel how context changes the answer.</p>
+  </details>
+  <details><summary>4. Remove bias from a question</summary>
+    <p>Write a leading question such as “Isn't X obviously better?” Ask AI to rewrite it neutrally, then answer the neutral version.</p>
+  </details>
+  <details><summary>5. Run the brainstorm-iterate loop</summary>
+    <p>Ask for five short ideas. Reject some with reasons. Keep what you like. Ask for five revised options in the same chat.</p>
+  </details>
+  <details><summary>6. Outline before prose</summary>
+    <p>For a 600-word article, request three different outlines first. Do not request the full article until you choose a structure.</p>
+  </details>
+  <details><summary>7. Use extended thinking on a real decision</summary>
+    <p>Compare two real options. Ask for the three trade-offs that matter most, a recommendation, and the conditions that would reverse it.</p>
+  </details>
+  <details><summary>8. Grade your own writing with a rubric</summary>
+    <p>Paste something you wrote. Score it on clarity, structure, unnecessary sentences and ending quality. Ask for the highest-impact edit.</p>
+  </details>
+  <details><summary>9. Practice image input</summary>
+    <p>Upload a handwritten note or whiteboard photo. Ask for transcription, a three-bullet summary, and explicit flags on unreadable parts.</p>
+  </details>
+  <details><summary>10. Build a tiny app</summary>
+    <p>Use the <b>Goal → Input → Output</b> formula to build a timer, quiz, mini-game or calculator.</p>
+  </details>
+  <details><summary>11. Test the data-analysis silent failure</summary>
+    <p>First ask for statistics on a set of numbers without mentioning code. Then ask the AI to repeat the task by writing and running code. Compare the answers and evidence of calculation.</p>
+  </details>
+  <details><summary>12. Cross-model review</summary>
+    <p>Give the same 200–300 word draft and the same rubric to two different model families. Compare what each catches.</p>
+  </details>
+</section>
+
+<section id="projects">
+  <h2 class="section-title">🔨 Course Projects</h2>
+  <p class="sub">These are not just reading exercises. They show the prompting loop on real outputs.</p>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag cyan">Project 1</span><h3>🐍 Snake Battle</h3>
+      <p>Build a small snake game by describing what you want, play it, notice what feels wrong, then improve it one wish at a time. Finally publish the HTML so someone else can play it.</p>
+      <p><b>Skill:</b> Iteration from real feedback.</p>
+    </div>
+    <div class="card">
+      <span class="tag pink">Project 2</span><h3>🔨 Whack-a-Mole</h3>
+      <p>Build a simple game, then use scoring and repeated fixes to push it beyond “good enough.” Compare another AI tool's version and borrow the best ideas.</p>
+      <p><b>Skill:</b> Rubric-driven improvement + A/B comparison.</p>
+    </div>
+    <div class="card">
+      <span class="tag yellow">Project 3</span><h3>👤 A Page That Is You</h3>
+      <p>Build a one-page personal site. Give evidence about yourself instead of vague adjectives. Review it as a stranger and improve what is unclear.</p>
+      <p><b>Skill:</b> Context, proof, audience and iteration.</p>
+    </div>
+    <div class="card">
+      <span class="tag lime">Project 4</span><h3>📘 AI Mini Textbook</h3>
+      <p>Create a short learning chapter on a topic, using real sources, a prompt log, several outline options, a rubric, fact-checking and a reflection.</p>
+      <p><b>Skill:</b> Full prompting workflow from context to verification.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📘 Mini Textbook checklist</h3>
+    <ul class="check">
+      <li>Choose one specific topic and audience.</li>
+      <li>Give AI useful class notes, textbook material or teacher instructions.</li>
+      <li>Name trustworthy sources and identify how information was retrieved.</li>
+      <li>Ask for several possible structures before choosing one.</li>
+      <li>Give feedback and iterate.</li>
+      <li>Ask for the full chapter only after the plan is strong.</li>
+      <li>Score the chapter with a rubric.</li>
+      <li>List important factual claims and verify some yourself.</li>
+      <li>Keep a prompt log showing what changed from one round to the next.</li>
+      <li>Write a short reflection about what AI did well and what needed correction.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="quiz">
+  <h2 class="section-title">🧠 Test Yourself</h2>
+  <p class="sub">Choose your answers first. The page will score you only when you press the button.</p>
+
+  <form id="quizForm">
+    <div class="quizq">
+      <p>1. What is the best description of a power-user prompt?</p>
+      <label><input type="radio" name="q1" value="a"> A secret phrase that unlocks the model</label>
+      <label><input type="radio" name="q1" value="b"> A useful briefing containing context, limits and a clear ask</label>
+      <label><input type="radio" name="q1" value="c"> The longest prompt possible</label>
+    </div>
+    <div class="quizq">
+      <p>2. What does “pretrained knowledge” mean?</p>
+      <label><input type="radio" name="q2" value="a"> Knowledge the model learned during training</label>
+      <label><input type="radio" name="q2" value="b"> Information found only in your current files</label>
+      <label><input type="radio" name="q2" value="c"> A live web search</label>
+    </div>
+    <div class="quizq">
+      <p>3. Which task most clearly needs web search?</p>
+      <label><input type="radio" name="q3" value="a"> Define a variable</label>
+      <label><input type="radio" name="q3" value="b"> Summarize Hamlet</label>
+      <label><input type="radio" name="q3" value="c"> Find today's latest regulation change</label>
+    </div>
+    <div class="quizq">
+      <p>4. What is context rot?</p>
+      <label><input type="radio" name="q4" value="a"> The model physically losing its training</label>
+      <label><input type="radio" name="q4" value="b"> Quality dropping in a long chat full of mixed or irrelevant context</label>
+      <label><input type="radio" name="q4" value="c"> A broken internet connection</label>
+    </div>
+    <div class="quizq">
+      <p>5. Which wording best reduces sycophancy?</p>
+      <label><input type="radio" name="q5" value="a"> Prove that my idea is excellent</label>
+      <label><input type="radio" name="q5" value="b"> Tell me why I am right</label>
+      <label><input type="radio" name="q5" value="c"> Evaluate this objectively using these criteria</label>
+    </div>
+    <div class="quizq">
+      <p>6. During brainstorming, what should you usually do first?</p>
+      <label><input type="radio" name="q6" value="a"> Ask for several different options</label>
+      <label><input type="radio" name="q6" value="b"> Demand one final polished answer</label>
+      <label><input type="radio" name="q6" value="c"> Remove all context</label>
+    </div>
+    <div class="quizq">
+      <p>7. What does multimodal mean?</p>
+      <label><input type="radio" name="q7" value="a"> The AI only understands text</label>
+      <label><input type="radio" name="q7" value="b"> The AI can work with several forms such as text, images and audio</label>
+      <label><input type="radio" name="q7" value="c"> The AI has multiple passwords</label>
+    </div>
+    <div class="quizq">
+      <p>8. What is the best simple structure for a small-app prompt?</p>
+      <label><input type="radio" name="q8" value="a"> Goal → Input → Output</label>
+      <label><input type="radio" name="q8" value="b"> Color → Font → Brand</label>
+      <label><input type="radio" name="q8" value="c"> Search → Copy → Paste</label>
+    </div>
+    <div class="quizq">
+      <p>9. Why explicitly ask AI to run code for data analysis?</p>
+      <label><input type="radio" name="q9" value="a"> To make the answer longer</label>
+      <label><input type="radio" name="q9" value="b"> Because real computation is more reliable than guessed arithmetic</label>
+      <label><input type="radio" name="q9" value="c"> Because spreadsheets cannot contain numbers</label>
+    </div>
+    <div class="quizq">
+      <p>10. What does least privilege mean?</p>
+      <label><input type="radio" name="q10" value="a"> Give the AI every permission so it works faster</label>
+      <label><input type="radio" name="q10" value="b"> Give only the access required for the specific job</label>
+      <label><input type="radio" name="q10" value="c"> Never allow any AI to read a file</label>
+    </div>
+    <div class="quizq">
+      <p>11. Why compare different model families?</p>
+      <label><input type="radio" name="q11" value="a"> Different families can have different strengths and blind spots</label>
+      <label><input type="radio" name="q11" value="b"> It guarantees both answers are correct</label>
+      <label><input type="radio" name="q11" value="c"> Model families always produce identical answers</label>
+    </div>
+    <div class="quizq">
+      <p>12. Which sentence best summarizes the course?</p>
+      <label><input type="radio" name="q12" value="a"> Use the longest prompt possible</label>
+      <label><input type="radio" name="q12" value="b"> Always use deep research</label>
+      <label><input type="radio" name="q12" value="c"> Get the right context in and keep the wrong context out</label>
+    </div>
+
+    <button type="button" onclick="gradeQuiz()">Check My Score</button>
+    <div id="quizResult" class="result"></div>
+  </form>
+</section>
+
+<section id="remember">
+  <h2 class="section-title">🎯 What You Must Remember</h2>
+  <div class="card">
+    <ul class="check">
+      <li>A strong prompt is a <b>briefing</b>, not a magical sentence.</li>
+      <li>AI is strong where training data is rich and weaker where information is rare, private or new.</li>
+      <li>Know whether the answer came from <b>pretrained knowledge, web search, or deep research</b>.</li>
+      <li><b>Context</b> decides a large part of answer quality.</li>
+      <li>Use more reasoning effort for difficult problems, not trivial ones.</li>
+      <li>Fight <b>sycophancy</b> with neutral wording and a scored <b>rubric</b>.</li>
+      <li>Do not accept the first creative answer. <b>Brainstorm, give feedback, iterate, then expand.</b></li>
+      <li>Multimodal AI can work with images, files and audio, but uncertainty still exists.</li>
+      <li>Small apps work best when described as <b>Goal → Input → Output</b>.</li>
+      <li>For numerical analysis, make sure <b>code actually ran</b>.</li>
+      <li>Give file-aware AI the <b>smallest permission</b> it needs.</li>
+      <li>No model stays best at everything. Compare tools when the work matters.</li>
+      <li>For important work, use <b>cross-model checking</b> and verify critical facts yourself.</li>
+    </ul>
+  </div>
+
+  <div class="quote">If you remember only one line for the exam:<br><span class="grad">Right context in. Wrong context out.</span></div>
+</section>
+
+<section class="card">
+  <h3>📌 Source</h3>
+  <p>This study page is an original teaching summary and elaboration based on the official Agent Factory lesson:</p>
+  <p><a href="https://agentfactory.panaversity.org/docs/ai-prompting-2026" target="_blank" rel="noopener">AI Prompting in 2026: A Crash Course — The AI Agent Factory</a></p>
+  <p class="sub">The official lesson remains the source of truth. This page simplifies and reorganizes it for learning and exam preparation.</p>
+</section>
+</main>
+</div>
+
+<footer class="footer">
+  Built for focused study • Bright ideas on a dark canvas ✨
+</footer>
+
+<script>
+function gradeQuiz(){
+  const answers={q1:'b',q2:'a',q3:'c',q4:'b',q5:'c',q6:'a',q7:'b',q8:'a',q9:'b',q10:'b',q11:'a',q12:'c'};
+  let score=0, answered=0, wrong=[];
+  for(const [q,a] of Object.entries(answers)){
+    const chosen=document.querySelector(`input[name="${q}"]:checked`);
+    if(chosen){answered++; if(chosen.value===a) score++; else wrong.push(q.replace('q',''));}
+  }
+  const box=document.getElementById('quizResult');
+  box.style.display='block';
+  if(answered<12){
+    box.innerHTML=`You answered <b>${answered}/12</b>. Complete all questions first if you want a full score. Current correct answers: <b>${score}</b>.`;
+    return;
+  }
+  let msg=`Score: <b>${score}/12</b>. `;
+  if(score===12) msg += 'Excellent. Your core concepts are strong. 🌟';
+  else if(score>=9) msg += 'Very good. Review the few concepts you missed. ✅';
+  else if(score>=6) msg += 'Good start, but revise the related sections before the exam. 📚';
+  else msg += 'Go back through the 13 concepts once more, then retry. 💡';
+  if(wrong.length) msg += `<br>Questions to revise: <b>${wrong.join(', ')}</b>.`;
+  box.innerHTML=msg;
+}
+</script>
+</body>
+</html>

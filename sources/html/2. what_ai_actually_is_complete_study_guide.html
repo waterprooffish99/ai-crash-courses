@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What AI Actually Is — Complete Beginner Study Guide</title>
+<meta name="description" content="A complete beginner-friendly study guide based on the Agent Factory crash course What AI Actually Is.">
+<style>
+  :root{
+    --bg:#070b14;
+    --bg2:#0b1120;
+    --panel:#101827;
+    --panel2:#131d30;
+    --line:#24314d;
+    --text:#eaf0ff;
+    --muted:#a9b5cf;
+    --cyan:#5ee7f7;
+    --blue:#6ca7ff;
+    --violet:#a78bfa;
+    --pink:#fb7cc6;
+    --green:#58e6a9;
+    --yellow:#ffd166;
+    --orange:#ff9f68;
+    --red:#ff7088;
+    --radius:20px;
+    --shadow:0 16px 44px rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 12% -5%, rgba(94,231,247,.10), transparent 27rem),
+      radial-gradient(circle at 95% 10%, rgba(167,139,250,.10), transparent 30rem),
+      linear-gradient(180deg,var(--bg),#060911 60%,#080c15);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.72;
+  }
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));width:0;z-index:999}
+  .topbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(7,11,20,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .topbar-inner{max-width:1240px;margin:auto;padding:12px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+  .brand{font-weight:800;letter-spacing:.01em;display:flex;gap:10px;align-items:center}
+  .brand-dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 22px rgba(94,231,247,.75)}
+  .nav{display:flex;gap:8px;overflow:auto;white-space:nowrap;padding-bottom:2px}
+  .nav a{color:#c9d5ef;font-size:.88rem;padding:7px 10px;border:1px solid transparent;border-radius:999px}
+  .nav a:hover{border-color:var(--line);background:#101827;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 20px 80px}
+  .hero{
+    margin-top:18px;padding:48px 42px;border:1px solid rgba(255,255,255,.09);border-radius:28px;
+    background:
+      linear-gradient(135deg,rgba(94,231,247,.09),rgba(167,139,250,.07) 48%,rgba(251,124,198,.06)),
+      #0d1422;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero:after{content:"";position:absolute;right:-90px;top:-120px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,rgba(94,231,247,.16),transparent 68%)}
+  .eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--cyan);font-weight:800}
+  h1{font-size:clamp(2.45rem,6vw,5rem);line-height:1.02;margin:.4rem 0 1rem;letter-spacing:-.05em;max-width:920px}
+  .lead{font-size:1.12rem;color:#c8d3ec;max-width:850px}
+  .hero-grid{display:grid;grid-template-columns:1.6fr .8fr;gap:22px;align-items:end}
+  .big-idea{padding:20px;border:1px solid rgba(94,231,247,.25);background:rgba(8,16,28,.72);border-radius:18px}
+  .big-idea strong{color:var(--yellow)}
+  .meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .pill{font-size:.82rem;padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:#0a1220;color:#c8d4ec}
+  .pill.cyan{border-color:rgba(94,231,247,.35);color:var(--cyan)}
+  .pill.green{border-color:rgba(88,230,169,.35);color:var(--green)}
+  .pill.violet{border-color:rgba(167,139,250,.35);color:#c9baff}
+  section{scroll-margin-top:82px;margin-top:54px}
+  .section-title{display:flex;align-items:center;gap:13px;margin-bottom:10px}
+  .section-title .num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#071019;font-weight:900}
+  h2{font-size:clamp(1.65rem,3vw,2.35rem);letter-spacing:-.025em;margin:0}
+  h3{font-size:1.3rem;margin:1.4rem 0 .5rem}
+  h4{font-size:1.04rem;margin:1.15rem 0 .35rem;color:#f5f7ff}
+  .sub{color:var(--muted);margin-top:0;max-width:900px}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .card{
+    background:linear-gradient(180deg,rgba(20,30,49,.96),rgba(13,20,34,.96));
+    border:1px solid rgba(255,255,255,.075);border-radius:var(--radius);padding:22px;box-shadow:0 10px 32px rgba(0,0,0,.14);
+  }
+  .card p:last-child{margin-bottom:0}
+  .accent-cyan{border-top:2px solid var(--cyan)}
+  .accent-violet{border-top:2px solid var(--violet)}
+  .accent-pink{border-top:2px solid var(--pink)}
+  .accent-green{border-top:2px solid var(--green)}
+  .accent-yellow{border-top:2px solid var(--yellow)}
+  .term{color:var(--cyan);font-weight:800}
+  .why{color:var(--green);font-weight:800}
+  .exam{color:var(--yellow);font-weight:800}
+  .danger{color:var(--red);font-weight:800}
+  .example{
+    margin:14px 0;padding:16px 18px;border-radius:14px;border-left:3px solid var(--violet);
+    background:#0a1220;color:#d9e3f8;
+  }
+  .memory{
+    padding:18px 20px;border:1px solid rgba(255,209,102,.25);background:rgba(255,209,102,.055);border-radius:16px
+  }
+  code,kbd{font-family:"SFMono-Regular",Consolas,monospace;background:#07101c;color:#a9f3fb;border:1px solid #1f324a;border-radius:7px;padding:.15em .4em}
+  pre{white-space:pre-wrap;background:#07101c;border:1px solid #20304b;border-radius:16px;padding:18px;overflow:auto;color:#dce9ff;line-height:1.55}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+  th,td{padding:13px 14px;border-bottom:1px solid #25314a;text-align:left;vertical-align:top}
+  th{color:#bdeff7;background:#0b1422}
+  tr:hover td{background:rgba(255,255,255,.018)}
+  .diagram{
+    background:#08111d;border:1px solid #21304a;border-radius:18px;padding:20px;margin:18px 0;overflow:auto
+  }
+  .flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+  .node{padding:12px 15px;border:1px solid #2d4363;border-radius:13px;background:#101c2d;min-width:130px;text-align:center;font-weight:700}
+  .arrow{color:var(--cyan);font-size:1.35rem}
+  .idea{
+    margin-top:28px;padding:26px;border:1px solid rgba(255,255,255,.085);background:#0c1422;border-radius:22px;
+    position:relative;overflow:hidden;
+  }
+  .idea:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--idea,var(--cyan))}
+  .idea-head{display:flex;gap:16px;align-items:flex-start}
+  .idea-badge{flex:none;width:52px;height:52px;border-radius:16px;background:color-mix(in srgb,var(--idea,var(--cyan)) 17%, transparent);border:1px solid color-mix(in srgb,var(--idea,var(--cyan)) 45%, transparent);display:grid;place-items:center;font-size:1.25rem;font-weight:900;color:var(--idea,var(--cyan))}
+  .idea h3{margin:0;font-size:1.45rem}
+  .simple{font-size:1.03rem;color:#dce7fb;margin:.2rem 0}
+  .mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+  .mini{padding:14px;border:1px solid #22324c;background:#09121f;border-radius:13px}
+  .mini b{display:block;color:#f2f6ff;margin-bottom:4px}
+  details{border:1px solid #263550;background:#0b1422;border-radius:14px;margin:10px 0}
+  summary{cursor:pointer;padding:15px 17px;font-weight:750;color:#e8efff}
+  details .inside{padding:0 17px 16px;color:#c8d3e9}
+  .glossary-controls{display:flex;gap:10px;align-items:center;margin:18px 0}
+  #glossarySearch{width:100%;padding:13px 15px;border:1px solid #2a3a57;border-radius:12px;background:#09121f;color:#eef4ff;outline:none}
+  #glossarySearch:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(94,231,247,.08)}
+  .glossary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .gterm{padding:15px;border:1px solid #243450;background:#0b1422;border-radius:14px}
+  .gterm strong{display:block;color:var(--cyan);margin-bottom:3px}
+  .prompt{position:relative;background:#080f1a;border:1px solid #273957;border-radius:14px;padding:17px 46px 17px 17px;margin:12px 0;color:#dce8fc;font-family:Consolas,monospace}
+  .copy{position:absolute;right:9px;top:9px;border:1px solid #344766;background:#121d30;color:#cfe0fb;border-radius:9px;padding:6px 8px;cursor:pointer;font-size:.75rem}
+  .copy:hover{border-color:var(--cyan)}
+  .checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;color:#d7e1f6}
+  input[type="checkbox"]{accent-color:#5ee7f7;margin-top:6px}
+  .quiz-card{padding:18px;border:1px solid #263550;border-radius:16px;background:#0b1422;margin:14px 0}
+  .qtitle{font-weight:800;margin-bottom:10px}
+  .opt{display:block;padding:9px 11px;margin:7px 0;border:1px solid #273754;border-radius:11px;cursor:pointer;background:#0a1220}
+  .opt:hover{border-color:#48628b}
+  .quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  button.primary,button.secondary{
+    border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer
+  }
+  button.primary{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#071018}
+  button.secondary{background:#152139;color:#dce9ff;border:1px solid #30425f}
+  #scoreBox{margin-top:14px;padding:16px;border-radius:14px;display:none}
+  .source{margin-top:48px;padding:20px;border:1px solid #253550;border-radius:18px;background:#0b1422;color:#afbdd7}
+  .small{font-size:.86rem;color:#93a2c0}
+  .callout{padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,rgba(94,231,247,.075),rgba(167,139,250,.07));border:1px solid rgba(94,231,247,.2)}
+  .footer{text-align:center;color:#8392ae;padding-top:44px;font-size:.9rem}
+  .tag{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-weight:800;padding:5px 8px;border-radius:8px;background:#15223a;color:#bdd1f3;margin-bottom:8px}
+  .appendix-note{border:1px dashed #4b3d67;background:rgba(167,139,250,.06);padding:16px;border-radius:14px;color:#cfc6e8}
+  .toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .toc-grid a{display:block;padding:11px 13px;border-radius:12px;background:#0b1422;border:1px solid #233450;color:#cbd8ef}
+  .toc-grid a:hover{text-decoration:none;border-color:#49678d}
+  .flash{min-height:150px;display:grid;place-items:center;text-align:center;cursor:pointer;perspective:1000px}
+  .flash-inner{width:100%;height:100%;min-height:150px;display:grid;place-items:center;padding:20px;border:1px solid #2a3b58;border-radius:16px;background:#0a1422;transition:.2s}
+  .flash:hover .flash-inner{border-color:#4e6995}
+  @media (max-width:900px){
+    .hero-grid,.grid,.grid3,.mini-grid,.glossary,.toc-grid{grid-template-columns:1fr}
+    .hero{padding:34px 23px}
+    .topbar-inner{align-items:flex-start;flex-direction:column}
+    .nav{width:100%}
+  }
+  @media print{
+    .topbar,.progress,.copy,.quiz-actions{display:none!important}
+    body{background:#fff;color:#111}
+    .card,.idea,.source,.quiz-card,details,.diagram,.gterm{background:#fff;color:#111;border-color:#bbb;box-shadow:none}
+    a,.term{color:#005e71}
+    .sub,.small{color:#444}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-dot"></span> AI Foundations Study Guide</div>
+    <nav class="nav">
+      <a href="#map">Course Map</a>
+      <a href="#glossary">Glossary</a>
+      <a href="#ideas">9 Ideas</a>
+      <a href="#practice">Practical Work</a>
+      <a href="#test">Test Yourself</a>
+      <a href="#appendix">Claude Appendix</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Agent Factory Foundations • Complete Beginner Version</div>
+        <h1>What AI Actually Is</h1>
+        <p class="lead">A simple mental model of the machine behind modern AI. The goal is not to memorize fancy words. The goal is to understand <strong>why AI behaves the way it does</strong>, so its strange mistakes stop being surprising.</p>
+        <div class="meta">
+          <span class="pill cyan">9 core ideas</span>
+          <span class="pill green">No math required</span>
+          <span class="pill violet">No code required</span>
+          <span class="pill">6 official-style exercises</span>
+          <span class="pill">Exam practice included</span>
+        </div>
+      </div>
+      <div class="big-idea">
+        <div class="tag">The sentence to remember</div>
+        <p><strong>AI is a prediction machine that learned by reading.</strong> It can be extremely fluent, but it has no built-in organ that guarantees truth. <strong>You are still the checker.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="section-title"><span class="num">★</span><h2>Course map</h2></div>
+    <p class="sub">The official course is organized into three parts. The first explains the machine, the second explains its strange behavior, and the third explains how a predictor becomes an agent.</p>
+    <div class="grid3">
+      <div class="card accent-cyan">
+        <div class="tag">Part 1</div>
+        <h3>The machine</h3>
+        <p><b>Idea 1:</b> predicts the next piece</p>
+        <p><b>Idea 2:</b> learned once, then froze</p>
+        <p><b>Idea 3:</b> no built-in truth checker</p>
+      </div>
+      <div class="card accent-violet">
+        <div class="tag">Part 2</div>
+        <h3>Why it behaves strangely</h3>
+        <p><b>Idea 4:</b> tokens, not letters</p>
+        <p><b>Idea 5:</b> the context window</p>
+        <p><b>Idea 6:</b> confidence is style</p>
+        <p><b>Idea 7:</b> jagged capability</p>
+      </div>
+      <div class="card accent-pink">
+        <div class="tag">Part 3</div>
+        <h3>From predictor to agent</h3>
+        <p><b>Idea 8:</b> tools let AI act</p>
+        <p><b>Idea 9:</b> “thinking” is more prediction</p>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="flow">
+        <div class="node">Prediction machine</div><div class="arrow">→</div>
+        <div class="node">+ Context</div><div class="arrow">→</div>
+        <div class="node">+ Tools</div><div class="arrow">→</div>
+        <div class="node">+ Loop</div><div class="arrow">→</div>
+        <div class="node" style="border-color:rgba(88,230,169,.55);color:var(--green)">Agent</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Why read this before the other Foundations courses?</b>
+      <p style="margin-bottom:0">Prompting, Skills &amp; Connectors, Markdown/HTML, Code You Never Write, and AI-era thinking teach you how to use AI. This course first gives you the <strong>engine picture</strong> that makes those habits make sense.</p>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <div class="section-title"><span class="num">Aa</span><h2>Quick glossary</h2></div>
+    <p class="sub">Learn the technical word, then attach a very simple picture to it. Search any term below.</p>
+    <div class="glossary-controls"><input id="glossarySearch" placeholder="Search: token, RLHF, MCP, inference..."></div>
+    <div class="glossary" id="glossaryGrid">
+      <div class="gterm"><strong>Token</strong>Small chunk of text the model reads or writes. A token can be a word, part of a word, punctuation, or sometimes a character.</div>
+      <div class="gterm"><strong>Tokenizer</strong>The component that cuts text into tokens before the model processes it.</div>
+      <div class="gterm"><strong>Stochastic</strong>Not always fixed. The model samples from several likely next tokens, so two answers can differ.</div>
+      <div class="gterm"><strong>Weights / Parameters</strong>The huge collection of numbers inside the model that encode what training taught it. “Parameters” is another name for weights.</div>
+      <div class="gterm"><strong>Training</strong>The expensive learning process that adjusts the model’s weights.</div>
+      <div class="gterm"><strong>Pretraining</strong>The first big training stage: learn from a huge amount of text by predicting missing/next pieces.</div>
+      <div class="gterm"><strong>Instruction tuning</strong>A later training stage that teaches the model to respond to requests like an assistant instead of merely continuing text.</div>
+      <div class="gterm"><strong>RLHF</strong><b>Reinforcement Learning from Human Feedback.</b> Humans rate answers, helping shape the model toward helpful, fluent behavior.</div>
+      <div class="gterm"><strong>Inference</strong>Normal use after training. You send input; frozen weights produce an output. The model is being used, not retrained.</div>
+      <div class="gterm"><strong>Knowledge cutoff</strong>The point after which new events are not part of the model’s trained weights.</div>
+      <div class="gterm"><strong>Stateless</strong>The model has no personal memory of its own between separate calls. Memory-like behavior is built around it.</div>
+      <div class="gterm"><strong>Hallucination</strong>A fluent answer that contains invented or false information.</div>
+      <div class="gterm"><strong>Context window</strong>The temporary working space containing everything the model can see for the current response.</div>
+      <div class="gterm"><strong>System prompt</strong>Instructions the AI product puts into context before your message, such as behavior, date, formatting, or safety rules.</div>
+      <div class="gterm"><strong>API</strong><b>Application Programming Interface.</b> A program-to-program way to call a model without using a normal chat screen.</div>
+      <div class="gterm"><strong>Frontier model</strong>One of the most capable models available at a given time.</div>
+      <div class="gterm"><strong>Temperature</strong>A control related to how conservatively or creatively the model samples likely next tokens. Lower tends to be steadier; higher tends to vary more.</div>
+      <div class="gterm"><strong>Mixture of Experts (MoE)</strong>A model design where only part of the huge network is activated for a given token, helping very large models run more efficiently.</div>
+      <div class="gterm"><strong>Quantization</strong>Storing model numbers with lower precision so the model needs less memory and cheaper hardware.</div>
+      <div class="gterm"><strong>Patch</strong>A small image region that is converted into model-readable units. Think: image chunk.</div>
+      <div class="gterm"><strong>Segment</strong>A short piece of audio converted into model-readable units. Think: sound chunk.</div>
+      <div class="gterm"><strong>Sycophancy</strong>The model’s tendency to agree with what it thinks you want to hear.</div>
+      <div class="gterm"><strong>Jagged frontier</strong>AI capability is uneven: excellent at one task, unexpectedly weak at another nearby task.</div>
+      <div class="gterm"><strong>Tool</strong>An external action the model can request, such as search, code execution, reading a file, or sending a draft.</div>
+      <div class="gterm"><strong>Connector</strong>A tool integration with a real app such as Drive, Gmail, Slack, a database, or Calendar.</div>
+      <div class="gterm"><strong>MCP</strong><b>Model Context Protocol.</b> A standard way for agents and external tools/data sources to connect.</div>
+      <div class="gterm"><strong>Agent</strong>A model with tools running a repeated <b>predict → act → observe</b> loop toward a goal.</div>
+      <div class="gterm"><strong>Reasoning</strong>Extra intermediate computational work before the final answer. It can improve difficult answers but does not guarantee truth.</div>
+      <div class="gterm"><strong>Skill</strong>A reusable package of instructions and reference material that can be loaded when a matching task appears.</div>
+      <div class="gterm"><strong>Progressive disclosure</strong>Keep most knowledge outside context and load only what is needed now. This protects limited context space.</div>
+      <div class="gterm"><strong>Artifact</strong>In Claude terminology, a document, webpage, code item, or interactive object shown separately from the chat.</div>
+      <div class="gterm"><strong>Project</strong>A workspace with its own instructions and knowledge files so new chats inside it start with relevant context.</div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="section-title"><span class="num">9</span><h2>The nine ideas, deeply simplified</h2></div>
+    <p class="sub">Every idea follows the same pattern: what it is, why it matters, the technical terms, a mental picture, and the exam trap to avoid.</p>
+
+    <article class="idea" style="--idea:var(--cyan)">
+      <div class="idea-head"><div class="idea-badge">1</div><div><h3>AI predicts the next piece. It does not naturally “look up” facts.</h3><p class="simple">Think <b>world-class autocomplete</b>, not “secret encyclopedia.”</p></div></div>
+      <p>A language model receives the text already in front of it and calculates which token is likely to come next. It chooses one, adds it to the answer, then repeats. The answer grows piece by piece.</p>
+      <div class="example"><b>Simple example:</b> You type “Happy birthday to…” and autocomplete suggests “you.” An LLM does a much more powerful version of this for explanations, code, stories, plans, questions, and more.</div>
+      <div class="mini-grid">
+        <div class="mini"><b><span class="term">Stochastic</span></b>Several next tokens may be plausible, so repeated answers can differ.</div>
+        <div class="mini"><b><span class="term">Temperature</span></b>Lower tends to stay near the most likely choices. Higher explores less-likely choices more often.</div>
+        <div class="mini"><b>Rare-topic danger</b>If training contained little reliable material, the model can still generate a plausible continuation.</div>
+      </div>
+      <p><span class="why">Why it matters:</span> On common facts, prediction can look exactly like lookup. On obscure facts, prediction can produce something that merely <em>sounds right</em>.</p>
+      <p><span class="exam">Exam trap:</span> The <em>product</em> may use web search. The underlying model itself still predicts from whatever information has been placed into its context.</p>
+      <details><summary>But ChatGPT/Claude/Gemini can search. Isn't that lookup?</summary><div class="inside">Search is a <b>tool</b>. The product fetches real pages, puts relevant information into the context window, and the language model then predicts an answer from that context. Tool use adds lookup around the model; it does not change the model’s core next-token mechanism.</div></details>
+      <div class="memory"><b>Memory hook:</b> <em>AI writes forward. Tools bring facts in.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--blue)">
+      <div class="idea-head"><div class="idea-badge">2</div><div><h3>It learned by reading, then the learning froze.</h3><p class="simple">Training is school. Inference is doing the job after school.</p></div></div>
+      <h4>The simple training loop</h4>
+      <div class="diagram"><div class="flow"><div class="node">Hide next piece</div><div class="arrow">→</div><div class="node">Model guesses</div><div class="arrow">→</div><div class="node">Compare</div><div class="arrow">→</div><div class="node">Adjust weights</div><div class="arrow">↻</div></div></div>
+      <p>The model is exposed to huge amounts of human text. Its internal <span class="term">weights/parameters</span> are repeatedly adjusted so it becomes better at prediction. When training is complete, the finished model’s weights are frozen for normal use.</p>
+      <h4>Three important education stages</h4>
+      <table>
+        <tr><th>Stage</th><th>Super-simple meaning</th><th>What it teaches</th></tr>
+        <tr><td><b>Pretraining</b></td><td>Read a huge pile of text and learn patterns.</td><td>Language, knowledge patterns, code patterns, styles.</td></tr>
+        <tr><td><b>Instruction tuning</b></td><td>Practice request → good response examples.</td><td>Answer questions and complete tasks like an assistant.</td></tr>
+        <tr><td><b>Human-feedback tuning / RLHF</b></td><td>Humans prefer some responses over others.</td><td>Helpful, polished, cooperative behavior.</td></tr>
+      </table>
+      <p><span class="term">Inference</span> is normal usage after training. You send text, frozen weights run, and an answer is generated. Correcting the model in chat can help the <em>current context</em>, but does not directly rewrite its weights.</p>
+      <div class="grid">
+        <div class="card accent-cyan"><h4>Knowledge cutoff</h4><p>If training stopped before an event happened, that event is not naturally encoded in those frozen weights. Current tools can supply newer information.</p></div>
+        <div class="card accent-violet"><h4>Private information</h4><p>Your company records, today's inbox, private files, and calendar are not magically in the model. They must be supplied through context or tools.</p></div>
+      </div>
+      <h4>Why intentionally keep the model stateless?</h4>
+      <table>
+        <tr><th>Reason</th><th>Simple meaning</th></tr>
+        <tr><td>Cost</td><td>Full training is vastly more expensive than simply running the finished model.</td></tr>
+        <tr><td>Safety &amp; testing</td><td>A stable frozen model can be tested. A model that rewrites itself after every user could drift unpredictably.</td></tr>
+        <tr><td>Consistency</td><td>Shared frozen weights make behavior easier to reproduce and debug.</td></tr>
+      </table>
+      <p><span class="term">Stateless</span> means the underlying model has no personal memory of its own. A product can create memory-like behavior by storing notes or transcripts and putting them back into context later.</p>
+      <details><summary>Extra vocabulary: MoE and quantization</summary><div class="inside"><b>Mixture of Experts (MoE)</b> activates only parts of a very large network for each token, improving efficiency. <b>Quantization</b> stores weights at lower precision so a model needs less memory and can run on smaller hardware. These change how the machine is built or run, not the nine core ideas about what it does.</div></details>
+      <div class="memory"><b>Memory hook:</b> <em>Training changes the brain-like weights. Chatting normally does not.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--red)">
+      <div class="idea-head"><div class="idea-badge">3</div><div><h3>There is no separate built-in truth checker.</h3><p class="simple">The machine is excellent at producing a continuation. That is not the same as proving the continuation is true.</p></div></div>
+      <div class="grid">
+        <div class="card accent-green"><h4>Human mental picture</h4><p>“Here is my answer… wait, am I sure? Where did I learn this?”</p></div>
+        <div class="card accent-pink"><h4>LLM mental picture</h4><p>“Produce the most fitting continuation.” There is no guaranteed independent truth organ that certifies it before you see it.</p></div>
+      </div>
+      <p><span class="term">Hallucination</span> means a fluent but false or invented claim. It is especially likely when the topic is rare, the prompt strongly demands an answer, and there is little reliable information to predict from.</p>
+      <div class="example"><b>Example:</b> Ask for the exact fee schedule of a tiny local academy with almost no public information. A model might create a neat, realistic table. The formatting can be excellent while every number is invented.</div>
+      <p><span class="danger">Critical rule:</span> Fluency is not evidence. Confidence is not evidence. For important facts, verify against a reliable source or use tools that fetch the evidence.</p>
+      <div class="memory"><b>Memory hook:</b> <em>AI can be the writer. You are the fact-checker.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--yellow)">
+      <div class="idea-head"><div class="idea-badge">4</div><div><h3>It reads tokens, not text exactly like a human reads letters.</h3><p class="simple">The machine receives chunks.</p></div></div>
+      <p>A <span class="term">token</span> is a chunk that the model processes. Common short words may be one token; unusual words may become several. The exact split depends on the <span class="term">tokenizer</span>.</p>
+      <div class="grid3">
+        <div class="card accent-cyan"><h4>Unit of meaning</h4><p>Tokens are the pieces the model reads and writes.</p></div>
+        <div class="card accent-violet"><h4>Unit of context</h4><p>Context-window size is measured in tokens.</p></div>
+        <div class="card accent-yellow"><h4>Unit of cost</h4><p>API usage is commonly priced by input/output tokens.</p></div>
+      </div>
+      <p>This explains why exact letter counting, some anagrams, or wordplay can be oddly difficult even for a powerful model. It also explains why typos often do not destroy meaning: the chunks can still land near familiar language patterns.</p>
+      <div class="example"><b>Famous demonstration:</b> Ask a model to count a chosen letter in a strange invented string. If it fails, then ask it to spell the string character by character first. Explicitly exposing the letters can make the counting easier.</div>
+      <h4>Other languages</h4>
+      <p>English has historically tokenized efficiently in many models. Urdu, Arabic, Chinese, and other scripts may use more tokens for the same amount of meaning, depending on the tokenizer. More tokens can mean more context usage and potentially more cost. Tokenizers keep improving, so treat exact ratios as model-specific.</p>
+      <h4>Images and audio</h4>
+      <p>Modern multimodal systems also convert non-text input into model-readable units. Images are commonly represented as visual chunks or <span class="term">patches</span>; audio can be represented in short <span class="term">segments</span>. The basic lesson survives: the model is operating on encoded pieces, not seeing exactly like a human eye or hearing exactly like a human ear.</p>
+      <div class="memory"><b>Memory hook:</b> <em>Tokens are meaning pieces, memory pieces, and money pieces.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--violet)">
+      <div class="idea-head"><div class="idea-badge">5</div><div><h3>The context window is the model’s working desk.</h3><p class="simple">If information is not on the desk, the model cannot use it for that answer.</p></div></div>
+      <p>The <span class="term">context window</span> is the temporary information available while producing a response. It can contain your prompt, previous chat turns, attached files, tool descriptions, retrieved results, skill instructions, and product-level instructions.</p>
+      <div class="diagram">
+        <div class="flow">
+          <div class="node">System instructions</div><div class="node">Chat history</div><div class="node">Your prompt</div><div class="node">Files</div><div class="node">Tool results</div><div class="node">Skills</div>
+        </div>
+        <p class="small" style="text-align:center;margin-bottom:0">All compete for the same finite working space.</p>
+      </div>
+      <h4>System prompt</h4>
+      <p>A <span class="term">system prompt</span> is product-provided instruction text placed into context before your request. It can describe role, behavior, current date, formatting, tool rules, and safety rules. Mechanically, it is still text the model receives.</p>
+      <h4>Chat history is replayed context</h4>
+      <p>The underlying model does not need to “remember” message 1 internally. The application can store the transcript in its database and send relevant history back with later requests. That is why the same chat can appear continuous.</p>
+      <table>
+        <tr><th>What you observe</th><th>What is really happening</th></tr>
+        <tr><td>“It remembers this chat.”</td><td>Earlier turns are present again in context.</td></tr>
+        <tr><td>Long chats can become slower/costlier.</td><td>More transcript tokens may need to be processed again.</td></tr>
+        <tr><td>Very old details may disappear.</td><td>The application may trim or summarize old context when space becomes tight.</td></tr>
+      </table>
+      <h4>Context rot</h4>
+      <p>A huge context window is useful but not magical. Too much unrelated history can dilute the important signal. A fresh chat or a clean summary can improve focus.</p>
+      <h4>Skills and progressive disclosure</h4>
+      <p>A <span class="term">Skill</span> can keep detailed instructions/files outside the main context until a matching task needs them. <span class="term">Progressive disclosure</span> means loading only the knowledge required now instead of filling the desk with everything.</p>
+      <div class="memory"><b>Memory hook:</b> <em>Context is the desk. History is a transcript put back on the desk. A skill is a file that visits the desk when needed.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--pink)">
+      <div class="idea-head"><div class="idea-badge">6</div><div><h3>Confidence is a learned style, not a truth meter.</h3><p class="simple">A confident sentence can be right or wrong.</p></div></div>
+      <p>Human-feedback tuning such as <span class="term">RLHF</span> helps make assistants useful, clear, and cooperative. Human readers often prefer confident and fluent answers. That can make the model sound certain even when the underlying claim is weak.</p>
+      <p><span class="term">Sycophancy</span> is the tendency to tell you what you appear to want to hear. A leading question like “Don’t you agree this plan is excellent?” gives the model a strong cue toward agreement.</p>
+      <div class="grid">
+        <div class="card accent-pink"><h4>Weak framing</h4><p>“Isn’t my business idea brilliant?”</p></div>
+        <div class="card accent-green"><h4>Better framing</h4><p>“Evaluate this idea against demand, cost, execution risk, and defensibility. Give the strongest case for and against it.”</p></div>
+      </div>
+      <p><span class="exam">Exam point:</span> Neutral framing and explicit criteria reduce the space for agreeable vagueness. A numeric score without criteria can still be sycophantic.</p>
+      <div class="memory"><b>Memory hook:</b> <em>Tone tells you how it sounds, not how true it is.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--orange)">
+      <div class="idea-head"><div class="idea-badge">7</div><div><h3>AI capability is jagged.</h3><p class="simple">It can be amazing at a hard-looking task and surprisingly bad at an easy-looking one.</p></div></div>
+      <p>The <span class="term">jagged frontier</span> means AI ability does not form a smooth ladder from easy to hard. Different tasks sit in very different capability zones.</p>
+      <div class="diagram">
+<pre style="margin:0">Capability
+HIGH     ▲       ▲           ▲
+        / \     / \         / \
+       /   \___/   \_______/   \
+LOW  --------------------------------→ different tasks
+      explain   count   draft   logic   code
+      science   letters clause  puzzle</pre>
+      </div>
+      <h4>Three habits</h4>
+      <ol>
+        <li><b>Do not generalize from one success.</b> A model winning at a hard task does not guarantee nearby easy tasks.</li>
+        <li><b>Verify across the boundary.</b> Easy-looking tasks that you would normally skip checking can be dangerous.</li>
+        <li><b>Compare models when it matters.</b> Different models can have differently shaped strengths and weaknesses.</li>
+      </ol>
+      <p>The frontier also moves as models improve, so re-test old assumptions periodically.</p>
+      <div class="memory"><b>Memory hook:</b> <em>AI skill is a mountain range, not a smooth staircase.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--green)">
+      <div class="idea-head"><div class="idea-badge">8</div><div><h3>Tools let the predictor act in the real world.</h3><p class="simple">Without tools it talks. With tools it can fetch, calculate, read, create, and act within permissions.</p></div></div>
+      <p>A <span class="term">tool</span> is a defined external action the model can request. Examples include web search, code execution, file reading, a database query, or drafting/sending through an app integration.</p>
+      <div class="diagram">
+        <div class="flow">
+          <div class="node">Predict next action</div><div class="arrow">→</div>
+          <div class="node">Tool acts</div><div class="arrow">→</div>
+          <div class="node">Observe result</div><div class="arrow">↻</div>
+        </div>
+        <p class="small" style="text-align:center;margin-bottom:0">Repeat toward the goal = agent loop.</p>
+      </div>
+      <p>An <span class="term">agent</span> is the same core predictor equipped with tools and allowed to repeat this <b>predict → act → observe</b> loop toward a goal.</p>
+      <h4>Connector vs MCP</h4>
+      <div class="grid">
+        <div class="card accent-cyan"><h4>Connector</h4><p>A specific integration to a real service such as Drive, Gmail, Slack, Calendar, or a database. It works only with permissions you grant.</p></div>
+        <div class="card accent-violet"><h4>MCP</h4><p><b>Model Context Protocol</b> is a standard interface for connecting AI agents to tools and data. Easy analogy: MCP is the plug standard; a connector is one device that fits the plug.</p></div>
+      </div>
+      <h4>Three examples</h4>
+      <ul>
+        <li><b>Web search:</b> fetch current information and place it into context.</li>
+        <li><b>Code execution:</b> model writes a program; a real runtime executes it; actual results come back.</li>
+        <li><b>Connector:</b> agent reaches your real app/data within granted permissions.</li>
+      </ul>
+      <div class="memory"><b>Memory hook:</b> <em>Model = brain-like predictor. Tool = hand. Loop = repeated work. Goal = direction.</em></div>
+    </article>
+
+    <article class="idea" style="--idea:var(--cyan)">
+      <div class="idea-head"><div class="idea-badge">9</div><div><h3>“Thinking” means more intermediate work before the final answer.</h3><p class="simple">Reasoning gives the model a scratchpad-like computational process, not a magical truth detector.</p></div></div>
+      <p>A <span class="term">reasoning model</span> can spend extra computation on intermediate steps before committing to a final answer. This often helps with multi-step problems, planning, architecture, and difficult tradeoffs.</p>
+      <div class="grid">
+        <div class="card accent-cyan"><h4>Quick task</h4><p>Lookup, reformat, short rewrite → deep reasoning may be unnecessary overhead.</p></div>
+        <div class="card accent-green"><h4>Hard task</h4><p>Multi-variable decision, complex reasoning, architecture → more reasoning can materially improve quality.</p></div>
+      </div>
+      <p>More reasoning usually requires extra tokens/compute, so it can take more time and cost more. The visible “thinking” shown by a product may be a summary rather than raw internal computation.</p>
+      <p><span class="danger">Important:</span> Reasoning uses the same fallible model machinery. It can catch many mistakes, but it can also reason carefully from a false assumption.</p>
+      <div class="memory"><b>Memory hook:</b> <em>Thinking narrows the error gap. It does not erase it.</em></div>
+    </article>
+  </section>
+
+  <section id="leftout">
+    <div class="section-title"><span class="num">…</span><h2>What the course intentionally leaves out</h2></div>
+    <p class="sub">The crash course stays conceptual, so three deeper subjects are deliberately not taught in detail.</p>
+    <div class="grid3">
+      <div class="card"><h3>Training compute &amp; cost</h3><p>Building frontier models takes enormous computing resources and money.</p></div>
+      <div class="card"><h3>Safety &amp; alignment</h3><p>The large field that shapes what models should or should not do.</p></div>
+      <div class="card"><h3>Deep weight mathematics</h3><p>The internal mathematical machinery of how parameters are arranged and updated.</p></div>
+    </div>
+  </section>
+
+  <section id="recap">
+    <div class="section-title"><span class="num">✓</span><h2>What you must remember</h2></div>
+    <div class="card accent-yellow">
+      <ol>
+        <li><b>Prediction:</b> the native act is predicting the next token.</li>
+        <li><b>Frozen learning:</b> training changes weights; inference normally does not.</li>
+        <li><b>No guaranteed truth organ:</b> hallucinations can sound fluent.</li>
+        <li><b>Tokens:</b> the model processes chunks; tokens affect meaning, context, and cost.</li>
+        <li><b>Context window:</b> the temporary working desk. History, files, tools, and instructions must land there to matter.</li>
+        <li><b>Confidence:</b> learned communication style, not proof.</li>
+        <li><b>Jagged frontier:</b> ability is uneven across tasks and changes over time.</li>
+        <li><b>Tools:</b> let the predictor act. Agent = model + tools + loop + goal.</li>
+        <li><b>Reasoning:</b> extra intermediate work can improve hard answers but still needs checking.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="practice">
+    <div class="section-title"><span class="num">🛠</span><h2>Practical Work</h2></div>
+    <p class="sub">These six exercises closely follow the course’s closing practice section. Do them in any chatbot. The point is to <em>observe the mechanism</em>, not merely read about it.</p>
+
+    <div class="card accent-cyan">
+      <h3>1. See prediction instead of lookup</h3>
+      <p>Use an invented traditional-game name and ask for its setup, turns, and win condition <b>without web search</b>.</p>
+      <div class="prompt">Without using search, explain the traditional board game “Karakush”: how it is set up, what happens on a turn, and how a player wins.<button class="copy">Copy</button></div>
+      <p><b>Notice:</b> If the model invents polished rules, fluency did not prove truth. If it says it does not know, that is good refusal behavior. You can try another invented name.</p>
+    </div>
+
+    <div class="card accent-blue" style="margin-top:14px">
+      <h3>2. Watch your correction fail to become training</h3>
+      <div class="prompt">In one or two sentences, give me one specific fact about [a topic I know well].<button class="copy">Copy</button></div>
+      <p>Correct one detail. Then start a new chat and ask the original question again. If the product has cross-chat memory, disable/avoid it for the experiment.</p>
+      <p><b>Notice:</b> Normal conversation did not rewrite the frozen weights.</p>
+    </div>
+
+    <div class="card accent-pink" style="margin-top:14px">
+      <h3>3. Catch the missing truth checker</h3>
+      <div class="prompt">Give me three peer-reviewed studies, including authors and publication years, about [a very narrow topic].<button class="copy">Copy</button></div>
+      <p>Verify each citation independently before using it. Some models may fabricate realistic-looking references.</p>
+      <p><b>Notice:</b> You cannot reliably identify a fake citation from confident writing alone.</p>
+    </div>
+
+    <div class="card accent-violet" style="margin-top:14px">
+      <h3>4. Catch transcript replay</h3>
+      <p>In a chat with several previous turns, ask:</p>
+      <div class="prompt">Repeat my very first message in this conversation exactly.<button class="copy">Copy</button></div>
+      <p>Then ask the same thing in a fresh chat.</p>
+      <p><b>Notice:</b> Continuity inside a chat comes from stored transcript/context, not from weights learning you during the chat.</p>
+    </div>
+
+    <div class="card accent-yellow" style="margin-top:14px">
+      <h3>5. Feel the jagged frontier</h3>
+      <div class="prompt">Do both in one reply:
+1) Explain a genuinely difficult topic clearly.
+2) Count exactly how many times the letter “r” appears in: braverrikromarent<button class="copy">Copy</button></div>
+      <p><b>Notice:</b> Difficulty from a human viewpoint does not reliably predict AI capability.</p>
+    </div>
+
+    <div class="card accent-green" style="margin-top:14px">
+      <h3>6. Compare ordinary answering with deeper reasoning</h3>
+      <p>Ask one difficult reasoning question normally. Then ask it again while explicitly requesting careful reasoning/working before the conclusion.</p>
+      <div class="prompt">[Your hard reasoning problem.] Think carefully before answering, check the important steps, then give the conclusion.<button class="copy">Copy</button></div>
+      <p><b>Notice:</b> More intermediate work can improve the result, but it still cannot certify its own truth.</p>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>Practice completion checklist</h3>
+      <div class="checklist">
+        <label><input type="checkbox"> I observed prediction/hallucination on an invented topic.</label>
+        <label><input type="checkbox"> I tested whether a correction carries into a fresh chat.</label>
+        <label><input type="checkbox"> I verified narrow citations instead of trusting the writing.</label>
+        <label><input type="checkbox"> I tested transcript replay.</label>
+        <label><input type="checkbox"> I tested the jagged frontier.</label>
+        <label><input type="checkbox"> I compared normal vs deeper reasoning.</label>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions">
+    <div class="section-title"><span class="num">?</span><h2>19 course questions you should be able to answer</h2></div>
+    <p class="sub">The official course frames these as teacher/self-tester questions. Try to answer each in two or three sentences before opening the hint.</p>
+    <div class="grid">
+      <div>
+        <details><summary>1. What is a language model doing when it answers? Does it look facts up?</summary><div class="inside">It predicts tokens from context and frozen weights. A product may use a search tool, but the model itself still generates by prediction.</div></details>
+        <details><summary>2. What does stochastic mean?</summary><div class="inside">Several next tokens can have non-zero probability, so the model can sample different continuations on different runs.</div></details>
+        <details><summary>3. How are LLMs built, and where does training data come from?</summary><div class="inside">Training repeatedly adjusts weights from very large text/code collections. Exact datasets vary and are often only partly disclosed.</div></details>
+        <details><summary>4. What is a knowledge cutoff?</summary><div class="inside">The boundary after which newer information is not naturally contained in the trained weights.</div></details>
+        <details><summary>5. If it predicts text, why does it answer instead of merely continuing the question?</summary><div class="inside">Instruction tuning teaches the pattern that a question is followed by an answer and a request by a completed task.</div></details>
+        <details><summary>6. What does stateless mean?</summary><div class="inside">The underlying model has no personal persistent memory of its own between calls.</div></details>
+        <details><summary>7. Why is statelessness intentional?</summary><div class="inside">Cost, safety/testing, and consistency. Products build memory around the frozen model instead of retraining it every turn.</div></details>
+        <details><summary>8. What is hallucination and why does it happen?</summary><div class="inside">A fluent false claim. Prediction can continue plausibly even where no reliable fact pattern exists, and there is no guaranteed separate truth checker.</div></details>
+        <details><summary>9. What are tokens and what do they measure?</summary><div class="inside">Model-readable chunks. They are central to input/output, context-window size, and commonly API cost.</div></details>
+        <details><summary>10. What does a large context window actually mean?</summary><div class="inside">It is the maximum working-space capacity, measured in tokens, for prompts, history, files, instructions, and tool information.</div></details>
+      </div>
+      <div>
+        <details><summary>11. What is a system prompt?</summary><div class="inside">Product-supplied instruction text placed in context before the user’s request.</div></details>
+        <details><summary>12. What is chat history and where is it stored?</summary><div class="inside">The application stores the transcript externally and can replay relevant portions into context on later turns.</div></details>
+        <details><summary>13. How are context window and chat history related?</summary><div class="inside">History matters because it is inserted back into the current context window.</div></details>
+        <details><summary>14. What are Skills and how do they relate to context?</summary><div class="inside">Reusable instructions/reference files can remain outside the active window and load when the request matches. This is progressive disclosure.</div></details>
+        <details><summary>15. Why does AI sound confident and tend to agree?</summary><div class="inside">Training and human feedback reward useful, fluent, cooperative styles. This can produce confident tone and sycophancy independent of truth.</div></details>
+        <details><summary>16. Why can AI be brilliant at one task and weak at an easier one?</summary><div class="inside">Its capability frontier is jagged because task strength depends on training patterns, representation, tools, and model-specific weaknesses.</div></details>
+        <details><summary>17. What turns a text predictor into an agent?</summary><div class="inside">Tools plus a repeated predict → act → observe loop directed toward a goal.</div></details>
+        <details><summary>18. Connector vs MCP?</summary><div class="inside">A connector is a specific integration to a service. MCP is a standard protocol/interface that lets agents and external tools/data sources interoperate.</div></details>
+        <details><summary>19. What is a reasoning model doing when it “thinks”?</summary><div class="inside">It spends extra computation on intermediate work before the final answer. This can increase accuracy but still does not guarantee truth.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="test">
+    <div class="section-title"><span class="num">🧠</span><h2>Test Yourself</h2></div>
+    <p class="sub">Choose your answers, then press <b>Check score</b>. The answers stay hidden until you submit.</p>
+    <form id="quiz">
+      <div class="quiz-card" data-answer="b">
+        <div class="qtitle">1. What is the most accurate core description of an LLM?</div>
+        <label class="opt"><input type="radio" name="q1" value="a"> A. A database that retrieves stored sentences</label>
+        <label class="opt"><input type="radio" name="q1" value="b"> B. A model that predicts the next token from context and learned weights</label>
+        <label class="opt"><input type="radio" name="q1" value="c"> C. A search engine that always checks the web</label>
+        <label class="opt"><input type="radio" name="q1" value="d"> D. A permanent personal memory</label>
+      </div>
+      <div class="quiz-card" data-answer="c">
+        <div class="qtitle">2. Why can the same prompt produce different wording?</div>
+        <label class="opt"><input type="radio" name="q2" value="a"> A. The model retrains after every message</label>
+        <label class="opt"><input type="radio" name="q2" value="b"> B. The tokenizer changes each time</label>
+        <label class="opt"><input type="radio" name="q2" value="c"> C. Generation is stochastic and samples from likely continuations</label>
+        <label class="opt"><input type="radio" name="q2" value="d"> D. The knowledge cutoff moves</label>
+      </div>
+      <div class="quiz-card" data-answer="d">
+        <div class="qtitle">3. Which stage mainly teaches “a question should be answered like an assistant”?</div>
+        <label class="opt"><input type="radio" name="q3" value="a"> A. Quantization</label>
+        <label class="opt"><input type="radio" name="q3" value="b"> B. Inference</label>
+        <label class="opt"><input type="radio" name="q3" value="c"> C. Tokenization</label>
+        <label class="opt"><input type="radio" name="q3" value="d"> D. Instruction tuning</label>
+      </div>
+      <div class="quiz-card" data-answer="a">
+        <div class="qtitle">4. What normally changes the model’s weights?</div>
+        <label class="opt"><input type="radio" name="q4" value="a"> A. Training</label>
+        <label class="opt"><input type="radio" name="q4" value="b"> B. Starting a new chat</label>
+        <label class="opt"><input type="radio" name="q4" value="c"> C. Asking the model to remember</label>
+        <label class="opt"><input type="radio" name="q4" value="d"> D. A system prompt</label>
+      </div>
+      <div class="quiz-card" data-answer="b">
+        <div class="qtitle">5. A model gives a realistic but fake paper citation. What concept is this?</div>
+        <label class="opt"><input type="radio" name="q5" value="a"> A. Quantization</label>
+        <label class="opt"><input type="radio" name="q5" value="b"> B. Hallucination</label>
+        <label class="opt"><input type="radio" name="q5" value="c"> C. Progressive disclosure</label>
+        <label class="opt"><input type="radio" name="q5" value="d"> D. Inference</label>
+      </div>
+      <div class="quiz-card" data-answer="c">
+        <div class="qtitle">6. Why can exact letter-counting be awkward for an LLM?</div>
+        <label class="opt"><input type="radio" name="q6" value="a"> A. It cannot process words</label>
+        <label class="opt"><input type="radio" name="q6" value="b"> B. It has no vocabulary</label>
+        <label class="opt"><input type="radio" name="q6" value="c"> C. It primarily processes token chunks, not a clean human-style row of letters</label>
+        <label class="opt"><input type="radio" name="q6" value="d"> D. It always uses web search</label>
+      </div>
+      <div class="quiz-card" data-answer="a">
+        <div class="qtitle">7. What is the context window?</div>
+        <label class="opt"><input type="radio" name="q7" value="a"> A. The temporary working information available for the current response</label>
+        <label class="opt"><input type="radio" name="q7" value="b"> B. The entire internet</label>
+        <label class="opt"><input type="radio" name="q7" value="c"> C. Permanent memory inside the weights</label>
+        <label class="opt"><input type="radio" name="q7" value="d"> D. Only the latest user message</label>
+      </div>
+      <div class="quiz-card" data-answer="d">
+        <div class="qtitle">8. “The AI remembers message 1 inside the same chat.” What is the better explanation?</div>
+        <label class="opt"><input type="radio" name="q8" value="a"> A. The weights changed after message 1</label>
+        <label class="opt"><input type="radio" name="q8" value="b"> B. The tokenizer stored it forever</label>
+        <label class="opt"><input type="radio" name="q8" value="c"> C. Temperature stores old messages</label>
+        <label class="opt"><input type="radio" name="q8" value="d"> D. The application stores/replays relevant transcript into context</label>
+      </div>
+      <div class="quiz-card" data-answer="b">
+        <div class="qtitle">9. What is sycophancy?</div>
+        <label class="opt"><input type="radio" name="q9" value="a"> A. An agent calling a tool twice</label>
+        <label class="opt"><input type="radio" name="q9" value="b"> B. A tendency to agree with what the user appears to want</label>
+        <label class="opt"><input type="radio" name="q9" value="c"> C. Compressing model weights</label>
+        <label class="opt"><input type="radio" name="q9" value="d"> D. Breaking text into tokens</label>
+      </div>
+      <div class="quiz-card" data-answer="c">
+        <div class="qtitle">10. AI writes excellent code but fails a simple logic puzzle. Which idea best explains this?</div>
+        <label class="opt"><input type="radio" name="q10" value="a"> A. API</label>
+        <label class="opt"><input type="radio" name="q10" value="b"> B. Knowledge cutoff</label>
+        <label class="opt"><input type="radio" name="q10" value="c"> C. Jagged frontier</label>
+        <label class="opt"><input type="radio" name="q10" value="d"> D. System prompt</label>
+      </div>
+      <div class="quiz-card" data-answer="a">
+        <div class="qtitle">11. Which formula best matches an agent?</div>
+        <label class="opt"><input type="radio" name="q11" value="a"> A. Predictor + tools + repeated loop + goal</label>
+        <label class="opt"><input type="radio" name="q11" value="b"> B. Database + spreadsheet only</label>
+        <label class="opt"><input type="radio" name="q11" value="c"> C. Search engine + memory only</label>
+        <label class="opt"><input type="radio" name="q11" value="d"> D. Bigger context window only</label>
+      </div>
+      <div class="quiz-card" data-answer="d">
+        <div class="qtitle">12. What is the clearest relationship between MCP and a connector?</div>
+        <label class="opt"><input type="radio" name="q12" value="a"> A. They are both training algorithms</label>
+        <label class="opt"><input type="radio" name="q12" value="b"> B. MCP is a model and connector is a tokenizer</label>
+        <label class="opt"><input type="radio" name="q12" value="c"> C. Connector is a protocol and MCP is an app</label>
+        <label class="opt"><input type="radio" name="q12" value="d"> D. MCP is a standard interface; a connector is a specific integration</label>
+      </div>
+      <div class="quiz-card" data-answer="c">
+        <div class="qtitle">13. What does deeper reasoning guarantee?</div>
+        <label class="opt"><input type="radio" name="q13" value="a"> A. Truth</label>
+        <label class="opt"><input type="radio" name="q13" value="b"> B. Permanent learning</label>
+        <label class="opt"><input type="radio" name="q13" value="c"> C. Nothing absolute; it often improves hard answers but can still be wrong</label>
+        <label class="opt"><input type="radio" name="q13" value="d"> D. Access to private files</label>
+      </div>
+      <div class="quiz-card" data-answer="b">
+        <div class="qtitle">14. Which is progressive disclosure?</div>
+        <label class="opt"><input type="radio" name="q14" value="a"> A. Put every file into context at all times</label>
+        <label class="opt"><input type="radio" name="q14" value="b"> B. Keep detailed knowledge outside active context and load it only when needed</label>
+        <label class="opt"><input type="radio" name="q14" value="c"> C. Raise temperature</label>
+        <label class="opt"><input type="radio" name="q14" value="d"> D. Retrain after each message</label>
+      </div>
+      <div class="quiz-card" data-answer="a">
+        <div class="qtitle">15. What is the safest mental rule for confident AI output?</div>
+        <label class="opt"><input type="radio" name="q15" value="a"> A. Confidence is style; important claims still need evidence/checking</label>
+        <label class="opt"><input type="radio" name="q15" value="b"> B. Confident wording means at least 95% certainty</label>
+        <label class="opt"><input type="radio" name="q15" value="c"> C. Long answers are always more factual</label>
+        <label class="opt"><input type="radio" name="q15" value="d"> D. Reasoning mode removes hallucinations</label>
+      </div>
+    </form>
+    <div class="quiz-actions">
+      <button class="primary" type="button" id="checkQuiz">Check score</button>
+      <button class="secondary" type="button" id="resetQuiz">Reset test</button>
+    </div>
+    <div id="scoreBox"></div>
+  </section>
+
+  <section id="flashcards">
+    <div class="section-title"><span class="num">↻</span><h2>Fast flashcards</h2></div>
+    <p class="sub">Click a card to reveal the simple answer.</p>
+    <div class="grid3">
+      <div class="flash" data-q="Training vs inference?" data-a="Training changes weights. Inference uses frozen weights."><div class="flash-inner">Training vs inference?</div></div>
+      <div class="flash" data-q="What is stateless?" data-a="The underlying model has no personal persistent memory of its own."><div class="flash-inner">What is stateless?</div></div>
+      <div class="flash" data-q="What is hallucination?" data-a="A fluent false or invented claim."><div class="flash-inner">What is hallucination?</div></div>
+      <div class="flash" data-q="Context window?" data-a="The temporary working desk containing what the model can see now."><div class="flash-inner">Context window?</div></div>
+      <div class="flash" data-q="Sycophancy?" data-a="Tendency to tell you what you appear to want to hear."><div class="flash-inner">Sycophancy?</div></div>
+      <div class="flash" data-q="Agent?" data-a="Predictor + tools + predict/act/observe loop + goal."><div class="flash-inner">Agent?</div></div>
+    </div>
+  </section>
+
+  <section id="appendix">
+    <div class="section-title"><span class="num">A</span><h2>Optional Claude.ai cockpit appendix</h2></div>
+    <div class="appendix-note"><b>Important:</b> This part is product-specific and changes faster than the nine core ideas. Model names, buttons, plan limits, and pricing can change. Use the live Claude product/help center as the authority when a current interface differs.</div>
+
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>A.1 Getting in</h3><p>Claude is available through web, desktop, and mobile apps. The course’s key lesson is not to memorize limits or prices. Usage is fundamentally tied to the amount of model work, and token usage matters.</p></div>
+      <div class="card"><h3>A.2 Main controls</h3><p><b>Prompt box:</b> puts your request/files into context. <b>Model selector:</b> chooses a different set of trained weights/capabilities. <b>Thinking/effort:</b> changes how much reasoning work happens before the answer.</p></div>
+      <div class="card"><h3>A.3 Model ladder</h3><p>Use the middle/default model for most work, a stronger model for difficult depth/coherence, and a smaller/faster one for simple high-volume jobs. Memorize the <em>selection logic</em>, not temporary model names.</p></div>
+      <div class="card"><h3>A.4 Thinking &amp; effort</h3><p>Higher effort means more reasoning compute/tokens. Spend it on hard decisions and multi-variable problems, not simple lookup or formatting.</p></div>
+      <div class="card"><h3>A.5 Context controls</h3><p><b>Account instructions</b> can apply broadly; <b>Projects</b> scope instructions/knowledge to a workspace; <b>Memory</b> can re-feed stored user context; <b>past-chat search</b> retrieves stored transcript and brings useful pieces back into current context.</p></div>
+      <div class="card"><h3>A.6 Uploads</h3><p>Files become context the model can inspect. Full source material can be much better than a tiny summary when details matter. Tiny text inside images can still be difficult.</p></div>
+      <div class="card"><h3>A.7 Artifacts &amp; files</h3><p>Claude can place substantial outputs in an Artifact-like workspace and, when file/code capabilities are available, can create structured deliverables. Mechanically this is tool use around the model.</p></div>
+      <div class="card"><h3>A.8 Search, Research, Skills, Connectors</h3><p><b>Search</b> fetches current facts. <b>Research</b> runs a longer multi-search workflow where available. <b>Skills</b> load reusable procedures. <b>Connectors</b> bring real app data/actions through granted permissions, commonly using standards such as MCP.</p></div>
+      <div class="card"><h3>A.9 30-minute setup idea</h3><p>Find model/thinking controls, set broadly valid instructions, create one project, decide how you want memory handled, make one artifact, run one sourced research/search task, and turn one repeated workflow into a skill.</p></div>
+      <div class="card"><h3>A.10 What changes vs what stays</h3><p>Product UI changes. The durable map does not: a control either selects weights, changes reasoning effort, puts information into context, or connects a tool into the agent loop.</p></div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="section-title"><span class="num">→</span><h2>Where this leads</h2></div>
+    <div class="card accent-green">
+      <p><b>AI Prompting</b> turns prediction, context, and sycophancy into daily prompting habits.</p>
+      <p><b>How to Think in the AI Era</b> builds the human checking discipline required because the model is not a truth machine.</p>
+      <p><b>Markdown In, HTML Out</b> and <b>Code You Never Write</b> focus on what flows through context and what execution tools can produce.</p>
+      <p><b>Skills &amp; Connectors</b> adds reusable expertise and real-app connections to the same predictor.</p>
+      <p style="margin-bottom:0"><b>Agents and Digital FTEs</b> scale the predict → act → observe loop with goals, tools, context, governance, and repeated work.</p>
+    </div>
+  </section>
+
+  <section class="source">
+    <h3 style="margin-top:0">Source of truth</h3>
+    <p>This study page is a beginner-friendly paraphrased teaching guide based on the official Agent Factory course:</p>
+    <p><a href="https://agentfactory.panaversity.org/docs/what-ai-actually-is-crash-course" target="_blank" rel="noopener">What AI Actually Is: A Crash Course — The AI Agent Factory ↗</a></p>
+    <p class="small">The core nine ideas are vendor-neutral. Product-specific details in the Claude appendix can change over time. This guide intentionally explains concepts in original wording rather than reproducing the course text.</p>
+  </section>
+
+  <footer class="footer">Study for understanding first. Memorization becomes easier when the mental picture is clear.</footer>
+</main>
+
+<script>
+  // Reading progress
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  });
+
+  // Glossary search
+  const search = document.getElementById('glossarySearch');
+  const terms = [...document.querySelectorAll('.gterm')];
+  search.addEventListener('input', () => {
+    const q = search.value.toLowerCase().trim();
+    terms.forEach(el => el.style.display = el.innerText.toLowerCase().includes(q) ? '' : 'none');
+  });
+
+  // Copy prompt buttons
+  document.querySelectorAll('.copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.childNodes[0].textContent.trim() + 
+        [...btn.parentElement.childNodes].slice(1,-1).map(n=>n.textContent||'').join('').trim();
+      try{
+        await navigator.clipboard.writeText(text);
+        const old = btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1100);
+      }catch(e){ btn.textContent='Select text'; }
+    });
+  });
+
+  // Quiz
+  const cards = [...document.querySelectorAll('.quiz-card')];
+  const scoreBox = document.getElementById('scoreBox');
+  document.getElementById('checkQuiz').addEventListener('click', () => {
+    let score = 0, answered = 0;
+    cards.forEach((card, i) => {
+      const checked = card.querySelector('input:checked');
+      card.style.borderColor = '#263550';
+      if(checked){
+        answered++;
+        const ok = checked.value === card.dataset.answer;
+        if(ok){score++; card.style.borderColor='rgba(88,230,169,.65)';}
+        else{card.style.borderColor='rgba(255,112,136,.7)';}
+      }
+    });
+    scoreBox.style.display='block';
+    let msg = score===15 ? 'Excellent. Your mental model is strong.' :
+              score>=12 ? 'Strong result. Review the red-marked questions once.' :
+              score>=9 ? 'Good base. Revisit the related idea sections before moving on.' :
+              'Re-read the nine ideas, then retake the test.';
+    scoreBox.style.background = score>=12 ? 'rgba(88,230,169,.08)' : score>=9 ? 'rgba(255,209,102,.08)' : 'rgba(255,112,136,.08)';
+    scoreBox.style.border = '1px solid ' + (score>=12 ? 'rgba(88,230,169,.35)' : score>=9 ? 'rgba(255,209,102,.35)' : 'rgba(255,112,136,.35)');
+    scoreBox.innerHTML = '<b>Score: '+score+'/15</b> ('+answered+' answered)<br>'+msg+'<br><span class="small">Green border = correct. Red border = incorrect. Unanswered questions keep the normal border.</span>';
+    scoreBox.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  document.getElementById('resetQuiz').addEventListener('click', () => {
+    document.getElementById('quiz').reset();
+    cards.forEach(c=>c.style.borderColor='#263550');
+    scoreBox.style.display='none';
+  });
+
+  // Flashcards
+  document.querySelectorAll('.flash').forEach(card => {
+    let open=false;
+    const inner=card.querySelector('.flash-inner');
+    card.addEventListener('click',()=>{
+      open=!open;
+      inner.textContent=open ? card.dataset.a : card.dataset.q;
+      inner.style.color=open ? '#58e6a9' : '#eaf0ff';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<aside class="source-attribution" aria-labelledby="source-heading">
+  <p class="section-kicker">Source attribution</p>
+  <h2 id="source-heading">Continue with the original course</h2>
+  <p>This page is an independent, standardized presentation of the supplied study guide. The original Agent Factory / Panaversity course remains the authoritative source.</p>
+  {% if course.officialSourceUrl %}
+    <a class="button-link button-link--secondary" href="{{ course.officialSourceUrl }}" rel="noopener noreferrer">Open the official source <span aria-hidden="true">↗</span></a>
+  {% else %}
+    <p><strong>Official source URL:</strong> awaiting verification.</p>
+  {% endif %}
+</aside>

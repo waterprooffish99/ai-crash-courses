@@ -1,0 +1,508 @@
+---
+title: "AI Prompting in 2026"
+description: "Treat prompts as clear briefings and learn how context, retrieval, reasoning, examples, rubrics, tools, and permissions shape results."
+course: 4
+---
+
+## 🌟 The whole course in one idea
+
+Good prompting is mainly this: get the right context in, and keep the wrong context out.
+
+A powerful prompt is usually not a clever sentence. It is a good briefing.
+
+Context→ Clear Ask→ Options→ Feedback→ Improve→ Check
+
+**Mental picture:** Imagine a brilliant new employee on their first day. They are smart, but they do not automatically know your goal, files, limits, audience, budget, history, or preferences. Your prompt is their briefing.
+
+## 📚 Quick Glossary
+
+Learn these terms. They are the language of the course.
+
+**Pretrained knowledge**  
+What the model learned during training, before your current question.
+
+**Knowledge cutoff**  
+The latest point in time covered by the model's training data.
+
+**Web search**  
+A tool that fetches current pages from the internet for the AI to read.
+
+**Deep research**  
+A longer research process that checks many sources and builds a structured answer.
+
+**Slop**  
+AI writing that sounds smooth but says little that is useful or memorable.
+
+**Rubric**  
+A checklist of criteria used to judge quality, often with scores.
+
+**Sycophancy**  
+The AI's tendency to agree with what it thinks you want to hear.
+
+**Context window**  
+Everything the model can currently see while producing one answer.
+
+**System prompt**  
+Hidden instructions the product gives the model before your message.
+
+**Stateless**  
+The model itself does not permanently carry a private memory from turn to turn.
+
+**Memory**  
+Stored notes a product may place back into later chats as context.
+
+**Context rot**  
+Quality dropping because a long chat contains too much mixed or irrelevant material.
+
+**Compacting**  
+Replacing older chat content with a shorter summary to save context space.
+
+**Reasoning**  
+The model doing extra internal problem-solving before its final answer.
+
+**Extended thinking**  
+Giving the model more time or effort for difficult reasoning.
+
+**Multimodal**  
+Working with more than text, such as images, audio, PDFs, or spreadsheets.
+
+**Artifact**  
+A usable output from chat, such as a webpage, app, document, or interactive object.
+
+**Code execution**  
+The AI writes a small program and actually runs it to calculate or analyze something.
+
+**Model family**  
+Models made by the same provider or company.
+
+**A/B test**  
+Giving the same prompt to two systems and comparing the outputs.
+
+**Agent**  
+An AI system that can carry out several steps toward a goal, not only answer once.
+
+**API**  
+A way for one software program to communicate with another program or model.
+
+## ⚡ Why prompting feels different in 2026
+
+### 🧠 Bigger context
+
+Models can work with much larger amounts of text and files than early chatbots.
+
+#### 🔍 Built-in search
+
+Modern systems can look up fresh information instead of relying only on training.
+
+#### 🧮 Code tools
+
+They can run calculations and analyze spreadsheets using code.
+
+#### 🖼️ Multimodal
+
+Photos, PDFs, audio and other files can become part of the prompt.
+
+#### 🧩 Projects
+
+Standing files and instructions can follow many chats in one workspace.
+
+#### 💻 Desktop agents
+
+Some AI apps can act on files with permission.
+
+#### 🛠️ Coding agents
+
+Developer agents can inspect projects, edit files and run tests.
+
+#### 🤔 Reasoning modes
+
+Difficult tasks can receive more deliberate thinking effort.
+
+Concept 01
+
+### 🧾 A power-user prompt is a briefing
+
+A weak prompt often gives only the question. A strong prompt gives the information needed to answer the question well.
+
+**Novice:**  
+“Which laptop should I buy?”
+
+**Power user:**  
+“Budget: $900. I use VS Code, WSL and light AI work. Battery matters. I do not game much. Compare these 3 models on performance, battery and upgradeability.”
+
+Briefing formula **Files + Goal + Limits + Exact Ask**
+
+**Exam point:** Better prompting is usually better context and clearer constraints, not secret “magic words.”
+
+Concept 02
+
+### 📖 Pretrained knowledge: AI learned by reading
+
+The model learned patterns from huge amounts of text. It did not personally live through the world. This creates an important reliability pattern.
+
+| Internet coverage | Simple meaning | Trust idea |
+| --- | --- | --- |
+| Very common topic | Lots of examples existed in training | Usually stronger |
+| Niche / local topic | Very little text existed | More checking needed |
+| Private / new information | Training could not contain it | Do not assume the model knows it |
+
+**Simple example:** Asking how to boil an egg is easy because the internet contains millions of cooking explanations. Asking about a family rule nobody published is impossible unless you provide that rule.
+
+**Golden exam sentence:** **Confidence is not proof of correctness.** A model can sound sure and still be wrong.
+
+Concept 03
+
+### 🔎 Three retrieval modes
+
+**Retrieval** simply means “where the information is being obtained from.”
+
+Mode 1
+
+#### Pretrained
+
+Fast. Good for stable, common knowledge.
+
+**Example:** “What is recursion?”
+
+Mode 2
+
+#### Web Search
+
+Reads current pages. Good for news, prices, rules and recent events.
+
+**Example:** “What changed in Python this month?”
+
+Mode 3
+
+#### Deep Research
+
+Checks many sources. Good for serious comparisons and reports.
+
+**Example:** “Research 3 cloud options for our company and cite evidence.”
+
+**Reliability habit:** Name trusted sources, ask for citations beside claims, and ask the AI to mark unsupported claims as **unverified**.
+
+**Know the difference:** Search is not automatically correct. It can still use an old, weak or misunderstood source.
+
+Concept 04
+
+### 🪟 Context is the whole game
+
+The **context window** is like the AI's temporary reading desk. Whatever is on the desk can influence the answer. Whatever is not there cannot help.
+
+System instructions+ Memory+ Tool descriptions+ Your prompt+ Chat history+ Files
+
+**Analogy:** If you ask a tailor to make a dress but never show the measurements, the tailor must guess. AI behaves similarly when essential context is missing.
+
+**Context rot** happens when a conversation becomes crowded with old or unrelated material. The model may pay less attention to what matters.
+
+**Use a Project when:** the same topic returns, the same background is reused, or the output style stays the same across chats.
+
+**Important:** More context is not always better. **Relevant context** is better.
+
+Concept 05
+
+### 🤔 Reasoning and “think hard”
+
+For a difficult decision, analysis or design task, a modern model can spend more effort before answering.
+
+**Extended thinking** = allowing the model to reason longer on a difficult problem.
+
+**Do not waste it on:**  
+“What does HTML stand for?”
+
+**Use it for:**  
+“Compare two business strategies, identify hidden risks and tell me what would change your recommendation.”
+
+**Exam point:** The old trick “think step by step” is less central now because many modern products have explicit reasoning modes or can activate more reasoning automatically.
+
+Concept 06
+
+### ⚖️ Fight sycophancy with neutral wording + rubrics
+
+**Sycophancy** means the model may lean toward agreeing with the opinion hidden inside your prompt.
+
+**Biased ask:**  
+“Don't you think my business idea is brilliant?”
+
+**Neutral ask:**  
+“Evaluate this business idea objectively. Score demand, competition, cost, risk and defensibility.”
+
+A **rubric** makes the evaluation concrete. Instead of “Is this good?”, define what “good” means.
+
+Score my proposal from 1–10 on: 1) clarity 2) evidence 3) feasibility 4) risk awareness For each score, give one reason and the smallest change that would improve it.
+
+**Exam clue:** Words like **evaluate, compare, critique** are safer than prompts that already tell the model what conclusion to reach.
+
+Concept 07
+
+### 🔁 Brainstorm → iterate → expand
+
+The first AI answer is often the most average answer. The course teaches a loop instead of “one prompt and done.”
+
+1\. Load context→ 2\. Ask 3–5 options→ 3\. Give feedback→ 4\. Ask again→ 5\. Expand winner
+
+**Iteration** means improving something through repeated rounds.
+
+| Kind of ask | Tighten | Loosen |
+| --- | --- | --- |
+| Brainstorming | Problem, audience, what to avoid | Format, exact structure, fine details |
+| Research | Scope, source quality, evidence rules | Your expected conclusion |
+| Drafting | Voice, length, structure, facts, format | Very little |
+| Analysis | Data, definitions, exact question | The conclusion |
+
+**Big distinction:** When exploring ideas, loosen output constraints. When executing a chosen idea, tighten the specification.
+
+Concept 08
+
+### 🎧🖼️ Multimodal AI
+
+**Multimodal** means the AI can work across several kinds of information, not just typed text.
+
+#### 📷 Image
+
+Read screenshots, whiteboards, receipts and photos.
+
+#### 🎙️ Audio
+
+Transcribe and summarize spoken material.
+
+#### 📄 Files
+
+Read PDFs, documents and spreadsheets.
+
+#### 🎨 Generation
+
+Create or transform visual material where supported.
+
+**Common mistake:** Assuming image understanding is perfect. Small text, crowded scenes and exact counting can still be difficult. Ask the model to flag uncertain parts.
+
+Concept 09
+
+### 🧪 One prompt can build a small app
+
+For small self-contained tools, you can describe the experience instead of writing the code yourself.
+
+App Prompt Formula: Goal → Input → Output
+
+Build a focus timer. Goal: 25 minutes work, then 5 minutes break. Input: I press Start. Output: A visible countdown, a clear reset button, and a bright yellow theme.
+
+**Best fit:** single-screen games, calculators, timers, study tools and simple interactive pages.
+
+**Boundary:** Accounts, networking, complex backends and many external services usually need multiple steps and real engineering.
+
+Concept 10
+
+### 📊 Data analysis: make sure code really ran
+
+Modern AI can write a small program, run it on your data, and report the result. This is usually safer than mental arithmetic.
+
+**Code execution** = the model uses an actual computation tool, rather than only predicting a number in text.
+
+**Silent failure:** Sometimes the AI gives a confident numerical answer without actually running code.
+
+Analyze this spreadsheet. Write and run code for the calculations. Show the calculation method, then summarize the findings. Do not estimate values by inspection.
+
+**Exam point:** If the task depends on arithmetic, statistics or graphs, ask explicitly for real computation.
+
+Concept 11
+
+### 🔐 AI desktop apps and permissions
+
+Some AI apps can work directly with files on your computer. This is more powerful than normal chat, so permission discipline matters.
+
+Task→ Plan→ Human Review→ Approval→ Action
+
+**Least privilege** = give only the smallest level of access needed to complete the task.
+
+**Example:** If the AI only needs to read invoices, do not give it permission to delete the whole finance folder.
+
+Concept 12
+
+### ⚙️ Cost, speed and model choice
+
+There is no forever-best model. AI ability is **jagged**, meaning one model may be excellent at coding but merely average at another task.
+
+**Model ladder** = a provider's fast/light models, middle models and heavy/more capable models.
+
+#### ⚡ Fast / light
+
+Good for everyday questions, extraction, rewriting and simple tasks.
+
+#### 🧠 Strong reasoning
+
+Use when the task is difficult, ambiguous or high-value.
+
+#### 🎥 Rich media
+
+Image, audio and video workloads may cost and behave very differently from text.
+
+**Course habit:** Try the same prompt in 2–3 different model families sometimes. Learn from real comparisons, not brand loyalty.
+
+Concept 13
+
+### 🧑‍⚖️ Models checking models
+
+If no expert is available, use a second model family as an independent reviewer.
+
+Draft with Model A→ Score with rubric→ Review with Model B→ Compare disagreements
+
+**Example:** Ask ChatGPT to grade a proposal on clarity, evidence and missing risks. Then give the exact same proposal and rubric to Claude or Gemini. Pay attention to problems only one reviewer caught.
+
+**Why different families?** Models from one family can share blind spots. A different family gives a more independent signal.
+
+## 🛠️ Practical Work
+
+The course strongly emphasizes trying the ideas. Reading teaches the vocabulary. Practice builds the skill.
+
+<Exercise title={"1. Trigger web search"}>
+
+Ask for major news from today in your country. Require a source beside each claim and ask unsupported points to be marked **unverified**.
+
+</Exercise>
+
+<Exercise title={"2. Ask a stable common-knowledge question"}>
+
+Ask a simple question that should not need fresh information. Notice how the answer differs from a search-based task.
+
+</Exercise>
+
+<Exercise title={"3. Build a context-rich personal prompt"}>
+
+Give several real constraints before asking for three options. The purpose is to feel how context changes the answer.
+
+</Exercise>
+
+<Exercise title={"4. Remove bias from a question"}>
+
+Write a leading question such as “Isn't X obviously better?” Ask AI to rewrite it neutrally, then answer the neutral version.
+
+</Exercise>
+
+<Exercise title={"5. Run the brainstorm-iterate loop"}>
+
+Ask for five short ideas. Reject some with reasons. Keep what you like. Ask for five revised options in the same chat.
+
+</Exercise>
+
+<Exercise title={"6. Outline before prose"}>
+
+For a 600-word article, request three different outlines first. Do not request the full article until you choose a structure.
+
+</Exercise>
+
+<Exercise title={"7. Use extended thinking on a real decision"}>
+
+Compare two real options. Ask for the three trade-offs that matter most, a recommendation, and the conditions that would reverse it.
+
+</Exercise>
+
+<Exercise title={"8. Grade your own writing with a rubric"}>
+
+Paste something you wrote. Score it on clarity, structure, unnecessary sentences and ending quality. Ask for the highest-impact edit.
+
+</Exercise>
+
+<Exercise title={"9. Practice image input"}>
+
+Upload a handwritten note or whiteboard photo. Ask for transcription, a three-bullet summary, and explicit flags on unreadable parts.
+
+</Exercise>
+
+<Exercise title={"10. Build a tiny app"}>
+
+Use the **Goal → Input → Output** formula to build a timer, quiz, mini-game or calculator.
+
+</Exercise>
+
+<Exercise title={"11. Test the data-analysis silent failure"}>
+
+First ask for statistics on a set of numbers without mentioning code. Then ask the AI to repeat the task by writing and running code. Compare the answers and evidence of calculation.
+
+</Exercise>
+
+<Exercise title={"12. Cross-model review"}>
+
+Give the same 200–300 word draft and the same rubric to two different model families. Compare what each catches.
+
+</Exercise>
+
+## 🔨 Course Projects
+
+These are not just reading exercises. They show the prompting loop on real outputs.
+
+Project 1
+
+### 🐍 Snake Battle
+
+Build a small snake game by describing what you want, play it, notice what feels wrong, then improve it one wish at a time. Finally publish the HTML so someone else can play it.
+
+**Skill:** Iteration from real feedback.
+
+Project 2
+
+### 🔨 Whack-a-Mole
+
+Build a simple game, then use scoring and repeated fixes to push it beyond “good enough.” Compare another AI tool's version and borrow the best ideas.
+
+**Skill:** Rubric-driven improvement + A/B comparison.
+
+Project 3
+
+### 👤 A Page That Is You
+
+Build a one-page personal site. Give evidence about yourself instead of vague adjectives. Review it as a stranger and improve what is unclear.
+
+**Skill:** Context, proof, audience and iteration.
+
+Project 4
+
+### 📘 AI Mini Textbook
+
+Create a short learning chapter on a topic, using real sources, a prompt log, several outline options, a rubric, fact-checking and a reflection.
+
+**Skill:** Full prompting workflow from context to verification.
+
+### 📘 Mini Textbook checklist
+
+-   Choose one specific topic and audience.
+-   Give AI useful class notes, textbook material or teacher instructions.
+-   Name trustworthy sources and identify how information was retrieved.
+-   Ask for several possible structures before choosing one.
+-   Give feedback and iterate.
+-   Ask for the full chapter only after the plan is strong.
+-   Score the chapter with a rubric.
+-   List important factual claims and verify some yourself.
+-   Keep a prompt log showing what changed from one round to the next.
+-   Write a short reflection about what AI did well and what needed correction.
+
+## 🧠 Test Yourself
+
+Choose your answers first. The page will score you only when you press the button.
+
+<Quiz questions={[{"question":"1. What is the best description of a power-user prompt?","options":[{"value":"a","label":"A secret phrase that unlocks the model"},{"value":"b","label":"A useful briefing containing context, limits and a clear ask"},{"value":"c","label":"The longest prompt possible"}],"answer":"b"},{"question":"2. What does “pretrained knowledge” mean?","options":[{"value":"a","label":"Knowledge the model learned during training"},{"value":"b","label":"Information found only in your current files"},{"value":"c","label":"A live web search"}],"answer":"a"},{"question":"3. Which task most clearly needs web search?","options":[{"value":"a","label":"Define a variable"},{"value":"b","label":"Summarize Hamlet"},{"value":"c","label":"Find today's latest regulation change"}],"answer":"c"},{"question":"4. What is context rot?","options":[{"value":"a","label":"The model physically losing its training"},{"value":"b","label":"Quality dropping in a long chat full of mixed or irrelevant context"},{"value":"c","label":"A broken internet connection"}],"answer":"b"},{"question":"5. Which wording best reduces sycophancy?","options":[{"value":"a","label":"Prove that my idea is excellent"},{"value":"b","label":"Tell me why I am right"},{"value":"c","label":"Evaluate this objectively using these criteria"}],"answer":"c"},{"question":"6. During brainstorming, what should you usually do first?","options":[{"value":"a","label":"Ask for several different options"},{"value":"b","label":"Demand one final polished answer"},{"value":"c","label":"Remove all context"}],"answer":"a"},{"question":"7. What does multimodal mean?","options":[{"value":"a","label":"The AI only understands text"},{"value":"b","label":"The AI can work with several forms such as text, images and audio"},{"value":"c","label":"The AI has multiple passwords"}],"answer":"b"},{"question":"8. What is the best simple structure for a small-app prompt?","options":[{"value":"a","label":"Goal → Input → Output"},{"value":"b","label":"Color → Font → Brand"},{"value":"c","label":"Search → Copy → Paste"}],"answer":"a"},{"question":"9. Why explicitly ask AI to run code for data analysis?","options":[{"value":"a","label":"To make the answer longer"},{"value":"b","label":"Because real computation is more reliable than guessed arithmetic"},{"value":"c","label":"Because spreadsheets cannot contain numbers"}],"answer":"b"},{"question":"10. What does least privilege mean?","options":[{"value":"a","label":"Give the AI every permission so it works faster"},{"value":"b","label":"Give only the access required for the specific job"},{"value":"c","label":"Never allow any AI to read a file"}],"answer":"b"},{"question":"11. Why compare different model families?","options":[{"value":"a","label":"Different families can have different strengths and blind spots"},{"value":"b","label":"It guarantees both answers are correct"},{"value":"c","label":"Model families always produce identical answers"}],"answer":"a"},{"question":"12. Which sentence best summarizes the course?","options":[{"value":"a","label":"Use the longest prompt possible"},{"value":"b","label":"Always use deep research"},{"value":"c","label":"Get the right context in and keep the wrong context out"}],"answer":"c"}]} />
+
+## 🎯 What You Must Remember
+
+-   A strong prompt is a **briefing**, not a magical sentence.
+-   AI is strong where training data is rich and weaker where information is rare, private or new.
+-   Know whether the answer came from **pretrained knowledge, web search, or deep research**.
+-   **Context** decides a large part of answer quality.
+-   Use more reasoning effort for difficult problems, not trivial ones.
+-   Fight **sycophancy** with neutral wording and a scored **rubric**.
+-   Do not accept the first creative answer. **Brainstorm, give feedback, iterate, then expand.**
+-   Multimodal AI can work with images, files and audio, but uncertainty still exists.
+-   Small apps work best when described as **Goal → Input → Output**.
+-   For numerical analysis, make sure **code actually ran**.
+-   Give file-aware AI the **smallest permission** it needs.
+-   No model stays best at everything. Compare tools when the work matters.
+-   For important work, use **cross-model checking** and verify critical facts yourself.
+
+If you remember only one line for the exam:  
+Right context in. Wrong context out.
+
+<SourceLink course={4} />
+
+<CourseVideo course={4} />
+
+<CourseNavigation course={4} />

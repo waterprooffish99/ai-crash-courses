@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Fluency Crash Course — Complete Exam Study Guide</title>
+<style>
+  :root{
+    --bg:#070914; --panel:#0e1223; --panel2:#12182c; --text:#eef2ff; --muted:#a9b3d1;
+    --cyan:#52e5ff; --purple:#a78bfa; --pink:#ff77c8; --lime:#a3ff8f; --yellow:#ffd166;
+    --orange:#ff9f6e; --red:#ff7b8b; --blue:#75a7ff; --border:rgba(255,255,255,.10);
+    --shadow:0 18px 50px rgba(0,0,0,.34);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--text); background:
+    radial-gradient(900px 500px at 10% -5%,rgba(82,229,255,.12),transparent 60%),
+    radial-gradient(800px 520px at 95% 5%,rgba(167,139,250,.15),transparent 58%),
+    radial-gradient(700px 500px at 60% 105%,rgba(255,119,200,.09),transparent 60%),
+    var(--bg);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.7;
+  }
+  a{color:var(--cyan)}
+  .progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:99;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink))}
+  .layout{display:grid;grid-template-columns:290px minmax(0,1fr);max-width:1450px;margin:auto}
+  aside{
+    position:sticky;top:0;height:100vh;padding:28px 18px;border-right:1px solid var(--border);
+    background:rgba(7,9,20,.84);backdrop-filter:blur(16px);overflow:auto
+  }
+  .brand{padding:8px 10px 22px}.brand .kicker{color:var(--cyan);font-weight:800;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+  .brand h2{margin:.3rem 0 0;font-size:1.15rem}.brand p{color:var(--muted);font-size:.86rem;margin:.35rem 0}
+  nav a{display:block;text-decoration:none;color:#c9d2ee;padding:9px 11px;border-radius:10px;margin:3px 0;font-size:.88rem}
+  nav a:hover{background:rgba(82,229,255,.08);color:white}
+  .nav-special{margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
+  main{min-width:0;padding:48px 52px 90px}
+  .hero{
+    border:1px solid var(--border);border-radius:28px;padding:48px;box-shadow:var(--shadow);
+    background:linear-gradient(140deg,rgba(82,229,255,.08),rgba(167,139,250,.10) 48%,rgba(255,119,200,.07));
+    position:relative;overflow:hidden
+  }
+  .hero:after{content:"4D";position:absolute;right:-20px;bottom:-90px;font-size:15rem;font-weight:900;color:rgba(255,255,255,.025);line-height:1}
+  .pill{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border:1px solid rgba(82,229,255,.25);border-radius:999px;background:rgba(82,229,255,.07);color:#bff7ff;font-size:.82rem;font-weight:700}
+  h1{font-size:clamp(2.3rem,5vw,4.7rem);line-height:1.03;margin:18px 0 16px;letter-spacing:-.045em}
+  h1 span{background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lead{max-width:830px;font-size:1.15rem;color:#ced7ef}
+  .memory-line{margin-top:25px;padding:18px 20px;border-left:4px solid var(--yellow);background:rgba(255,209,102,.07);border-radius:0 14px 14px 0;font-weight:800}
+  .meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.chip{font-size:.8rem;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--border)}
+  section{scroll-margin-top:22px;margin-top:60px}
+  h2{font-size:clamp(1.7rem,3vw,2.6rem);margin:0 0 18px;letter-spacing:-.025em}
+  h3{font-size:1.35rem;margin:28px 0 10px}
+  h4{font-size:1.05rem;margin:24px 0 8px;color:#fff}
+  .sub{color:var(--muted);max-width:900px}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,rgba(18,24,44,.94),rgba(12,16,31,.94));border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.17)}
+  .card h3,.card h4{margin-top:0}.card p:last-child{margin-bottom:0}
+  .accent-cyan{border-top:3px solid var(--cyan)}.accent-purple{border-top:3px solid var(--purple)}.accent-pink{border-top:3px solid var(--pink)}.accent-lime{border-top:3px solid var(--lime)}
+  .term{display:inline-block;color:#071018;background:var(--cyan);padding:2px 7px;border-radius:7px;font-weight:850;font-size:.85em}
+  .term.purple{background:var(--purple)}.term.pink{background:var(--pink)}.term.yellow{background:var(--yellow)}.term.lime{background:var(--lime)}
+  .simple{padding:14px 16px;border-radius:14px;background:rgba(163,255,143,.06);border:1px solid rgba(163,255,143,.16)}
+  .exam{padding:14px 16px;border-radius:14px;background:rgba(255,209,102,.06);border:1px solid rgba(255,209,102,.17)}
+  .warning{padding:14px 16px;border-radius:14px;background:rgba(255,123,139,.06);border:1px solid rgba(255,123,139,.18)}
+  .example{padding:15px 17px;border-radius:14px;background:rgba(117,167,255,.07);border-left:4px solid var(--blue)}
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:20px 0}
+  .flow .box{flex:1;min-width:150px;text-align:center;padding:18px 12px;border-radius:16px;background:var(--panel2);border:1px solid var(--border)}
+  .arrow{align-self:center;color:var(--muted);font-size:1.5rem}
+  table{width:100%;border-collapse:collapse;margin:18px 0;background:rgba(14,18,35,.65);border-radius:14px;overflow:hidden}
+  th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:#fff;background:rgba(255,255,255,.04)}td{color:#cbd4ec}
+  ul,ol{padding-left:1.3rem}li{margin:.35rem 0}strong{color:#fff}
+  .big-4d{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+  .d{padding:18px;border-radius:17px;border:1px solid var(--border)}
+  .d b{display:block;font-size:1.25rem}.d small{color:var(--muted)}
+  .d1{background:rgba(82,229,255,.08)}.d2{background:rgba(167,139,250,.09)}.d3{background:rgba(255,119,200,.08)}.d4{background:rgba(163,255,143,.07)}
+  details{border:1px solid var(--border);background:rgba(14,18,35,.7);border-radius:14px;margin:10px 0;padding:0 16px}
+  summary{cursor:pointer;padding:15px 2px;font-weight:800;color:#eef2ff}
+  details>div{padding:0 2px 16px;color:#cbd4ec}
+  code{font-family:"Cascadia Code","SFMono-Regular",Consolas,monospace;background:#080b16;border:1px solid var(--border);padding:2px 6px;border-radius:6px;color:#d8f9ff}
+  pre{white-space:pre-wrap;background:#080b16;border:1px solid var(--border);border-radius:14px;padding:16px;color:#d8f9ff;overflow:auto}
+  .prompt{position:relative}.copybtn{position:absolute;top:9px;right:9px;border:1px solid var(--border);background:#161c31;color:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+  .quiz{margin-top:20px}.q{padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--panel);margin:14px 0}
+  .q p{font-weight:800}.opt{display:block;padding:9px 10px;margin:6px 0;border-radius:10px;background:rgba(255,255,255,.035);cursor:pointer}
+  .opt:hover{background:rgba(82,229,255,.06)}
+  .quiz-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  button.primary{border:0;border-radius:11px;padding:12px 17px;font-weight:850;cursor:pointer;color:#071018;background:linear-gradient(90deg,var(--cyan),var(--lime))}
+  button.secondary{border:1px solid var(--border);border-radius:11px;padding:12px 17px;font-weight:800;cursor:pointer;color:#fff;background:#141a2e}
+  #result{font-weight:850}
+  .glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.g{padding:14px;border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.025)}.g b{color:var(--cyan)}
+  .footer{margin-top:70px;padding-top:25px;border-top:1px solid var(--border);color:var(--muted);font-size:.9rem}
+  .topbtn{position:fixed;right:18px;bottom:18px;z-index:20;text-decoration:none;background:#171e34;border:1px solid var(--border);color:#fff;width:42px;height:42px;border-radius:50%;display:grid;place-items:center}
+  @media(max-width:1050px){.layout{grid-template-columns:1fr}aside{display:none}main{padding:28px 20px 70px}.grid4,.big-4d{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){main{padding:16px 13px 60px}.hero{padding:28px 20px;border-radius:20px}.grid,.grid3,.grid4,.big-4d,.glossary{grid-template-columns:1fr}.arrow{display:none}h1{font-size:2.45rem}table{font-size:.86rem}th,td{padding:10px}}
+  @media print{aside,.progress,.topbtn,.copybtn,.quiz-actions{display:none!important}.layout{display:block}body{background:#fff;color:#111}.card,details,.q{break-inside:avoid;color:#111;background:#fff;border-color:#bbb}.hero{background:#fff;color:#111}.hero .lead,.sub,td,.footer{color:#333}h1 span{color:#111}.term{border:1px solid #555;background:#fff;color:#111}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="layout">
+<aside>
+  <div class="brand">
+    <div class="kicker">Agent Factory · Exam Prep</div>
+    <h2>AI Fluency Crash Course</h2>
+    <p>Complete beginner-friendly study guide</p>
+  </div>
+  <nav>
+    <a href="#start">🏁 Start Here</a>
+    <a href="#big-picture">🧠 Big Picture</a>
+    <a href="#modes">🤝 3 Ways to Work with AI</a>
+    <a href="#delegation">1️⃣ Delegation</a>
+    <a href="#description">2️⃣ Description</a>
+    <a href="#discernment">3️⃣ Discernment</a>
+    <a href="#diligence">4️⃣ Diligence</a>
+    <a href="#loop">🔄 The 4D Loop</a>
+    <a href="#factory">🏭 From Chat to Agent Factory</a>
+    <a href="#survival">🧭 10-80-10 Connection</a>
+    <a href="#mistakes">⚠️ Beginner Mistakes</a>
+    <a href="#checklist">✅ Daily Checklist</a>
+    <div class="nav-special">
+      <a href="#practical">🛠️ Practical Work</a>
+      <a href="#test">🧠 Test Yourself</a>
+      <a href="#glossary">📚 Technical Terms</a>
+      <a href="#remember">🎯 Must Remember</a>
+    </div>
+  </nav>
+</aside>
+
+<main id="top">
+<section class="hero" id="start">
+  <span class="pill">✨ COMPLETE STUDY GUIDE · SIMPLE ENGLISH</span>
+  <h1>AI <span>Fluency</span></h1>
+  <p class="lead"><strong>AI Fluency</strong> means knowing how to work with AI well. Not just how to type prompts, but how to decide what AI should do, give it the right information, judge its work, and use it responsibly.</p>
+  <div class="memory-line">🧠 One sentence for the whole course: <br>Decide what AI should do → Describe the work clearly → Check what comes back → Own what happens next.</div>
+  <div class="meta">
+    <span class="chip">4 competencies</span><span class="chip">3 human-AI work modes</span><span class="chip">6 practical exercises</span><span class="chip">Exam-focused</span><span class="chip">Technical terms explained</span>
+  </div>
+</section>
+
+<section id="big-picture">
+  <h2>🧠 Part 1 · The Big Picture</h2>
+  <p class="sub">The course begins with a simple idea: having access to a powerful AI does not automatically make you good at using it.</p>
+
+  <div class="example"><strong>Imagine this:</strong> You hire a talented new employee and say only, “Make a course about AI agents.” The employee makes something polished, but it is for PhD researchers, too long, and has no practice. The employee was capable. <strong>Your instruction was incomplete.</strong> AI has the same problem, except it may also confidently invent facts.</div>
+
+  <h3>AI access ≠ AI fluency</h3>
+  <div class="grid4">
+    <div class="card accent-cyan"><h4>✅ Effective</h4><p><strong>Meaning:</strong> You reach the real goal.</p><p><strong>Example:</strong> The study plan actually helps you prepare for the exam.</p></div>
+    <div class="card accent-purple"><h4>⚡ Efficient</h4><p><strong>Meaning:</strong> You do not waste time, effort, or <span class="term purple">tokens</span>.</p><p><strong>Tokens:</strong> small pieces of text an AI reads and writes.</p></div>
+    <div class="card accent-pink"><h4>⚖️ Ethical</h4><p><strong>Meaning:</strong> You use AI fairly and honestly.</p><p><strong>Example:</strong> You do not mislead people about AI's role when that role matters.</p></div>
+    <div class="card accent-lime"><h4>🛡️ Safe</h4><p><strong>Meaning:</strong> You protect people, privacy, security, and important information.</p><p><strong>Example:</strong> Do not paste private customer data into an unapproved tool.</p></div>
+  </div>
+
+  <div class="exam"><strong>🎯 Exam point:</strong> AI fluency has four qualities: <strong>effective, efficient, ethical, safe.</strong></div>
+
+  <h3>The 4Ds</h3>
+  <div class="big-4d">
+    <div class="d d1"><b>Delegation</b><small>DECIDE<br>What should AI do?</small></div>
+    <div class="d d2"><b>Description</b><small>EXPLAIN<br>What does AI need?</small></div>
+    <div class="d d3"><b>Discernment</b><small>CHECK<br>Is the result good?</small></div>
+    <div class="d d4"><b>Diligence</b><small>OWN<br>Is this responsible?</small></div>
+  </div>
+
+  <h3>Three facts you must carry from “What AI Actually Is”</h3>
+  <ol>
+    <li><strong>Sounding correct is not the same as being correct.</strong> AI can confidently produce wrong information.</li>
+    <li><strong>The same prompt may not always give exactly the same answer.</strong> AI output can vary.</li>
+    <li><strong>AI can only use information available to it.</strong> That may include training, your chat, files, memory, web search, or connected tools. Missing information can lead to guessing.</li>
+  </ol>
+  <div class="simple"><strong>Easy picture:</strong> Treat AI like a very capable colleague whose work is useful, fast, and still needs review. Unlike a careful human expert, AI may sound equally confident when it is right and when it is wrong.</div>
+
+  <h3>Why this course matters in Foundations</h3>
+  <table>
+    <tr><th>Course</th><th>Main job</th></tr>
+    <tr><td>What AI Actually Is</td><td>Understand the machine and why it can be wrong.</td></tr>
+    <tr><td><strong>AI Fluency</strong></td><td>Learn how a human should work with that machine.</td></tr>
+    <tr><td>AI Prompting in 2026</td><td>Learn practical techniques for communicating and checking.</td></tr>
+  </table>
+  <p>The tools and prompting tricks will change over time. The 4D competencies are meant to remain useful even when the models change.</p>
+</section>
+
+<section id="modes">
+  <h2>🤝 Three Ways to Work with AI</h2>
+  <p>These modes mainly differ by <span class="term">autonomy</span>, which means <strong>how much freedom the AI has to decide its next step.</strong></p>
+  <div class="grid3">
+    <div class="card accent-cyan">
+      <h3>1. Automation</h3>
+      <p><strong>Meaning:</strong> “Do this defined task.”</p>
+      <p>You provide the task or steps. AI has little freedom.</p>
+      <p><strong>Examples:</strong> summarize a report, translate an email, extract invoice fields.</p>
+      <p><strong>You are like:</strong> a script writer.</p>
+    </div>
+    <div class="card accent-purple">
+      <h3>2. Augmentation</h3>
+      <p><strong>Meaning:</strong> “Help me think.”</p>
+      <p>You and AI work back and forth as thinking partners.</p>
+      <p><strong>Examples:</strong> brainstorm an idea, compare strategies, review an architecture.</p>
+      <p><strong>You are like:</strong> a co-creator.</p>
+    </div>
+    <div class="card accent-pink">
+      <h3>3. Agency</h3>
+      <p><strong>Meaning:</strong> “Pursue this goal for me.”</p>
+      <p>You provide a goal and boundaries. AI chooses many steps.</p>
+      <p><strong>Example:</strong> keep an inbox manageable, reply to routine messages, flag important ones, ask before uncertain actions.</p>
+      <p><strong>You are like:</strong> a director.</p>
+    </div>
+  </div>
+
+  <h3>Automation vs Agency</h3>
+  <table>
+    <tr><th></th><th>Automation</th><th>Agency</th></tr>
+    <tr><td>You provide</td><td>Task / steps</td><td>Goal / boundaries</td></tr>
+    <tr><td>AI decides</td><td>Very little</td><td>Many next steps</td></tr>
+    <tr><td>Main failure</td><td>A step is done badly</td><td>The goal or boundary is misunderstood</td></tr>
+    <tr><td>Your role</td><td>Script writer</td><td>Director</td></tr>
+  </table>
+  <div class="warning"><strong>Important:</strong> Agency is harder because you may not be watching. “Future” means the AI can act later when you are absent. “For others” means it may serve customers, students, or colleagues, not only you. Therefore the judgment and safety rules must be designed beforehand.</div>
+  <p>No mode is always “better.” One project can use all three: automate extraction, use augmentation for difficult exceptions, then give an agent limited authority over routine cases.</p>
+
+  <h3>Agent Factory connection</h3>
+  <p><strong>Mode 1</strong> mainly uses automation and augmentation to solve problems. <strong>Mode 2</strong> makes agency systematic by building Digital FTEs.</p>
+  <div class="simple"><span class="term lime">Digital FTE</span> = an AI worker set up to do a defined job for other people. <strong>FTE</strong> means “full-time equivalent,” a business term for one full-time worker.</div>
+  <p>A Digital FTE is not simply “AI doing things.” It needs a defined job, permissions, rules, governance, and reliable business information.</p>
+  <div class="simple"><span class="term lime">System of Record (SoR)</span> = the trusted place where a business keeps its official data and rules.</div>
+</section>
+
+<section id="delegation">
+  <h2>1️⃣ Delegation · Decide Who Should Do What</h2>
+  <p class="sub"><span class="term">Delegation</span> means deciding how the work should be divided between the human and AI. It is workflow design, not just dumping tasks on AI.</p>
+
+  <div class="grid3">
+    <div class="card accent-cyan"><h3>Problem Awareness</h3><p>Know the goal, work, risks, audience, success criteria, and where human judgment is essential.</p></div>
+    <div class="card accent-purple"><h3>Platform Awareness</h3><p>Know what kind of AI system or tool fits the job.</p></div>
+    <div class="card accent-pink"><h3>Task Delegation</h3><p>Decide which part belongs to AI, which belongs to a human, and which needs both.</p></div>
+  </div>
+
+  <h3>3.1 Problem awareness</h3>
+  <p>Before prompting, ask:</p>
+  <ul>
+    <li>What is the actual goal?</li><li>Who is this for?</li><li>What does success look like?</li>
+    <li>What could go wrong?</li><li>Which decisions need human judgment?</li>
+  </ul>
+  <div class="example"><strong>Example:</strong> “Build an invoice-chasing agent” is not enough. You must first decide which customers it may contact, how late an invoice must be, what tone to use, when human approval is required, what happens during disputes, what systems it may read, and whether it may send messages or only draft them. These are <strong>business-policy questions</strong>, not just prompting questions.</div>
+
+  <h3>3.2 Platform awareness</h3>
+  <p>Different AI systems fit different jobs:</p>
+  <ul>
+    <li><strong>Reasoning model:</strong> useful for difficult multi-step thinking.</li>
+    <li><strong>Search-enabled assistant:</strong> useful when current web information matters.</li>
+    <li><strong>Coding agent:</strong> useful for reading and changing software project files.</li>
+    <li><strong>Agent-capable system:</strong> useful for multi-step work where tools are used and the system continues without a new instruction every step.</li>
+  </ul>
+  <p>You do not need to memorize model brand names. Models change quickly. Build the habit: <strong>“Is this the right tool for this job?”</strong></p>
+
+  <h3>3.3 Task delegation</h3>
+  <table>
+    <tr><th>Course-creation task</th><th>Best owner</th><th>Why</th></tr>
+    <tr><td>Choose audience and learning goals</td><td>Human</td><td>Purpose and judgment</td></tr>
+    <tr><td>Suggest possible structures</td><td>AI + Human</td><td>AI gives options; human chooses</td></tr>
+    <tr><td>Draft from an agreed outline</td><td>AI</td><td>Fast first drafts</td></tr>
+    <tr><td>Verify factual claims</td><td>Human</td><td>Accountability remains human</td></tr>
+    <tr><td>Add lived experience / local examples</td><td>Human</td><td>AI does not have your life experience</td></tr>
+    <tr><td>Improve grammar and consistency</td><td>AI</td><td>Good mechanical task</td></tr>
+    <tr><td>Approve the final work</td><td>Human</td><td>Your name and reputation are attached</td></tr>
+  </table>
+  <div class="exam"><strong>🎯 Better question:</strong> Do not ask only, “Can AI do this?” Ask: <strong>“Which parts should AI do, which parts should I do, and why?”</strong></div>
+
+  <h3>When Delegation becomes engineering</h3>
+  <p>For a Digital FTE, problem awareness becomes a <span class="term purple">specification</span>: the goal, constraints, risks, and definition of done. Task delegation becomes the worker's <strong>boundary</strong>: what AI may do, what humans keep, and what must <span class="term pink">escalate</span>.</p>
+  <div class="simple"><strong>Escalate</strong> = stop and pass the case to a human or higher authority because it is risky, unusual, or outside the AI's permission.</div>
+</section>
+
+<section id="description">
+  <h2>2️⃣ Description · Give AI What It Needs</h2>
+  <p><span class="term purple">Description</span> means giving AI enough information and guidance to do the work well. If important information is missing, AI may make a reasonable-looking guess that is still wrong.</p>
+  <div class="memory-line">Memory aid: <strong>WHAT → HOW → HOW TO WORK WITH ME / USERS</strong></div>
+
+  <div class="grid3">
+    <div class="card accent-cyan"><h3>Product Description</h3><p><strong>WHAT</strong> do you want back?</p></div>
+    <div class="card accent-purple"><h3>Process Description</h3><p><strong>HOW</strong> should the work be approached?</p></div>
+    <div class="card accent-pink"><h3>Performance Description</h3><p><strong>HOW SHOULD AI BEHAVE</strong> with you or future users?</p></div>
+  </div>
+
+  <h3>4.1 Product description: define the result</h3>
+  <p>Specify the output type, audience, format, length, tone, important topics, and exclusions.</p>
+  <div class="example"><strong>Weak:</strong> “Summarize this report.”<br><br><strong>Better:</strong> “Summarize this quarterly report for senior executives. Focus on revenue changes, major risks, and actions. Use short bullets, keep it to one page, highlight big changes from last quarter, and avoid unnecessary accounting jargon.”</div>
+  <p><strong>Main lesson:</strong> the second request is not “smarter.” It is more complete.</p>
+
+  <h3>4.2 Process description: define the approach</h3>
+  <p>You can define steps, order, methods, examples to imitate, and checks before finishing.</p>
+  <div class="example"><strong>Example:</strong> For code review, tell AI to check <strong>correctness first, security second, style last.</strong> This prevents it from wasting attention on naming before confirming that the code even works.</div>
+
+  <h4>Why multi-step work should often be split</h4>
+  <p>If AI extracts facts, compares vendors, scores them, and writes a recommendation in one giant step, a wrong fact at the start can silently infect everything after it.</p>
+  <ol>
+    <li><strong>Extract:</strong> Put the same facts from each proposal into one table. Verify sample cells.</li>
+    <li><strong>Compare:</strong> Compare only from that verified table.</li>
+    <li><strong>Score:</strong> Apply the criteria you actually gave. Check that AI did not invent new criteria.</li>
+    <li><strong>Recommend:</strong> Write the recommendation only from the checked earlier steps.</li>
+  </ol>
+  <div class="exam"><strong>🎯 Key principle:</strong> Put the step where an error could spread the farthest <strong>early</strong>, then check it before continuing.</div>
+
+  <h3>4.3 Performance description: define behavior</h3>
+  <p>This tells AI how to act, not merely what document to produce.</p>
+  <ul>
+    <li>concise or detailed</li><li>supportive or challenging</li><li>exploratory or decisive</li>
+    <li>ask questions first or make reasonable assumptions</li><li>flag uncertainty or simply give a best answer</li>
+  </ul>
+  <div class="example"><strong>Example:</strong> “Challenge weak assumptions. Flag uncertainty. Do not agree just to be polite. Change your recommendation when new evidence supports a change, and explain why you disagree.”</div>
+  <p>At chat scale, this shapes how AI works with <strong>you</strong>. At agent scale, it becomes standing behavior for many users. Example: a tutoring agent may be instructed never to reveal the answer before the student tries.</p>
+  <div class="warning"><strong>Important:</strong> In a chat, bad performance description is annoying. In a deployed agent, its behavior <strong>is part of the product.</strong></div>
+
+  <h3>Prompt Engineering vs Context Engineering</h3>
+  <table>
+    <tr><th>Term</th><th>Super simple meaning</th></tr>
+    <tr><td><strong>Prompt Engineering</strong></td><td>How should I phrase this instruction?</td></tr>
+    <tr><td><strong>Context Engineering</strong></td><td>What information must be available so AI can succeed?</td></tr>
+  </table>
+  <p><span class="term purple">Context engineering</span> can include instructions, documents, examples, memory, conversation history, policies, tools, database records, definitions, and rules.</p>
+  <div class="simple"><strong>Easy analogy:</strong> A prompt is the instruction you give a chef. Context is the entire kitchen: recipe, ingredients, tools, dietary rules, examples, and customer preferences. A beautiful instruction cannot fix missing ingredients.</div>
+
+  <h3>How Description scales in Agent Factory</h3>
+  <ul>
+    <li><span class="term">System prompt</span>: a standing instruction read at the start, useful for permanent behavior rules.</li>
+    <li><code>SKILL.md</code>: can make a process reusable.</li>
+    <li><strong>System of Record:</strong> holds trusted domain knowledge, rules, and governance.</li>
+  </ul>
+</section>
+
+<section id="discernment">
+  <h2>3️⃣ Discernment · Do Not Confuse Confidence with Correctness</h2>
+  <p><span class="term pink">Discernment</span> means judging whether AI's output, support, and behavior are good enough.</p>
+  <div class="warning"><strong>Core danger:</strong> AI can sound polished, detailed, and completely certain while being wrong.</div>
+
+  <h3>Automation bias</h3>
+  <p><span class="term pink">Automation bias</span> = the human tendency to trust automated output too easily, especially when it looks professional.</p>
+  <div class="simple"><strong>Example:</strong> AI gives a precise percentage with a professional citation. Your brain thinks, “It looks researched.” Discernment asks, “Does that source really exist, and does it actually say this?”</div>
+
+  <h3>Four warning signs of a made-up answer</h3>
+  <ol>
+    <li><strong>Suspiciously exact details:</strong> precise figures, dates, names, or citations that appeared from nowhere.</li>
+    <li><strong>Too much certainty:</strong> an expert would say “it depends,” but AI gives a flat yes/no.</li>
+    <li><strong>Internal contradictions:</strong> later parts disagree with earlier parts.</li>
+    <li><strong>Claims that an action happened without evidence:</strong> “I sent it,” “I opened the source,” or “I ran the tests” when no sent message, opened page, or test log exists.</li>
+  </ol>
+  <div class="exam"><strong>🎯 Rule:</strong> When accuracy matters, <strong>verify.</strong></div>
+
+  <div class="grid3">
+    <div class="card accent-cyan"><h3>Product Discernment</h3><p>Is the actual result good?</p></div>
+    <div class="card accent-purple"><h3>Process Discernment</h3><p>Is this way of working with AI actually saving effort?</p></div>
+    <div class="card accent-pink"><h3>Performance Discernment</h3><p>When AI acts independently, does its behavior serve users well?</p></div>
+  </div>
+
+  <h3>5.1 Product discernment</h3>
+  <p>Ask:</p>
+  <ul>
+    <li>Is it factually correct?</li><li>Did it follow important requirements?</li><li>Is anything missing?</li>
+    <li>Is it internally consistent?</li><li>Would an expert find it credible?</li><li><strong>Would I put my name on it?</strong></li>
+  </ul>
+  <p>Check the result against three things: <strong>your request, the source material, and the standards of the field.</strong></p>
+  <p>Your own <span class="term">domain knowledge</span> matters. An accountant catches accounting mistakes. A programmer sees bugs. A teacher sees explanations that will confuse beginners.</p>
+  <div class="simple"><strong>Domain knowledge</strong> = real knowledge and experience in a particular field.</div>
+
+  <h4>Check the justification, not just the conclusion</h4>
+  <p>A recommendation can accidentally be correct even if the assumptions behind it are wrong. Ask AI to show <strong>assumptions, evidence, criteria, calculations, intermediate results, and alternative interpretations</strong>.</p>
+  <div class="warning"><strong>Important technical point:</strong> Treat that as a justification you can review, <strong>not</strong> as a literal transcript of the model's hidden internal reasoning.</div>
+
+  <h4>Ground answers in supplied documents</h4>
+  <p>When the answer must come from documents, tell AI to use only those documents, say when information is missing instead of guessing, and point you to the relevant section or evidence so you can verify quickly.</p>
+
+  <h3>5.2 Process discernment</h3>
+  <p>Judge the whole working session:</p>
+  <ul>
+    <li>Is AI adapting to my corrections?</li><li>Does it repeat the same mistake?</li><li>Has it become so agreeable that it is useless?</li>
+    <li>Am I repeatedly fixing the same formatting problem?</li><li>Am I editing more than I would have written myself?</li>
+  </ul>
+  <div class="example"><strong>Simple math:</strong> 20 minutes of steering that saves 60 minutes is useful. 20 minutes of steering that saves only 15 minutes is not efficient, even if the session felt productive.</div>
+  <p>When the process is bad, escalate through three moves: <strong>change the performance description → change the tool → take the task back.</strong> Taking work back is also AI fluency.</p>
+
+  <h3>5.3 Performance discernment</h3>
+  <p>This matters when you use <strong>agency</strong>. A system can produce correct individual answers and still behave badly across users.</p>
+  <div class="example"><strong>Example:</strong> An AI tutor may answer every math question correctly but still be a bad tutor if it immediately gives answers whenever a student hesitates. Correct output, poor teaching behavior.</div>
+  <p>You cannot judge system behavior from one chat. You look across many cases: complaints, outcomes, repeated failures, and user behavior.</p>
+
+  <h3>The Description ↔ Discernment loop</h3>
+  <div class="flow">
+    <div class="box"><strong>Describe</strong><br><small>Say what you need</small></div><div class="arrow">→</div>
+    <div class="box"><strong>AI produces</strong><br><small>Get a draft</small></div><div class="arrow">→</div>
+    <div class="box"><strong>Discern</strong><br><small>Inspect it</small></div><div class="arrow">→</div>
+    <div class="box"><strong>Refine</strong><br><small>Explain the change</small></div>
+  </div>
+  <p>The first answer is usually a <strong>draft</strong>, not the finish line.</p>
+
+  <h4>Best feedback pattern</h4>
+  <div class="memory-line">Problem → Why it matters → Direction</div>
+  <div class="example"><strong>Weak:</strong> “Wrong. Try again.”<br><br><strong>Better:</strong> “This section assumes large-company customers. Our readers are solo founders, so the advice is too expensive. Rewrite it for a one-person business with a limited budget.”</div>
+
+  <h4>Use named editing passes</h4>
+  <ul>
+    <li><strong>Clarity pass:</strong> Does each sentence clearly say one thing?</li>
+    <li><strong>Tone pass:</strong> Does the writing fit this audience?</li>
+    <li><strong>Formatting pass:</strong> Are headings, bullets, and length correct?</li>
+  </ul>
+  <p>For important work, you can ask for two or three drafts and edit from the strongest.</p>
+
+  <h4>Every review should end in one of three decisions</h4>
+  <div class="grid3">
+    <div class="card"><strong>Ready to use</strong><p>Ship it.</p></div>
+    <div class="card"><strong>Needs revision</strong><p>Send specific feedback.</p></div>
+    <div class="card"><strong>Needs human override</strong><p>Take the task back.</p></div>
+  </div>
+
+  <h3>How Discernment scales into engineering</h3>
+  <p>Manual checking becomes <span class="term pink">evaluation engineering</span>.</p>
+  <ul>
+    <li><strong>Eval:</strong> a repeatable test that scores an AI output.</li>
+    <li><strong>Eval suite:</strong> a collection of such tests.</li>
+    <li><strong>Monitoring:</strong> watching system behavior over time.</li>
+    <li><strong>Sampling:</strong> reviewing selected examples from many outputs.</li>
+    <li><strong>Release / review gates:</strong> checks that must pass before a system or output can move forward.</li>
+  </ul>
+  <div class="exam"><strong>Key idea:</strong> You cannot automate a judgment you never learned to make manually.</div>
+</section>
+
+<section id="diligence">
+  <h2>4️⃣ Diligence · Use AI Responsibly and Own the Result</h2>
+  <p><span class="term lime">Diligence</span> asks a different question from the first three Ds: <strong>“Should I use AI this way at all?”</strong></p>
+  <div class="example"><strong>Example:</strong> A lecturer gets excellent AI-written student feedback, but pasted student names, grades, and disciplinary notes into an unapproved consumer AI tool. The output may be excellent, but the method is still irresponsible.</div>
+
+  <div class="grid3">
+    <div class="card accent-cyan"><h3>Creation Diligence</h3><p>Choose tools, data, and context responsibly before and during the work.</p></div>
+    <div class="card accent-purple"><h3>Transparency Diligence</h3><p>Be honest about AI's role when that role matters to people.</p></div>
+    <div class="card accent-lime"><h3>Deployment Diligence</h3><p>Check and take responsibility before work is sent, used, executed, or published.</p></div>
+  </div>
+
+  <h3>6.1 Creation diligence</h3>
+  <p>Before sharing information with AI, ask:</p>
+  <ul>
+    <li>Does this contain personal data?</li><li>Does it contain confidential company information?</li><li>Am I allowed to put it in this tool?</li>
+    <li>Who can access or retain the data?</li><li>Is this tool approved?</li><li>Are there legal, contractual, or professional restrictions?</li>
+  </ul>
+
+  <h4>Redaction</h4>
+  <p><span class="term lime">Redaction</span> = removing identifying details before giving data to AI, while keeping enough of the useful pattern for the task.</p>
+  <div class="simple"><strong>Example:</strong> AI may need “student scored 62% and repeatedly missed deadlines,” but not the student's name, ID, address, or other details that identify the person.</div>
+  <div class="warning"><strong>Two redaction failures:</strong> Remove too much and AI cannot do the task. Remove too little and a combination of remaining details can still identify the person. Also, redaction does not automatically make an unapproved tool acceptable.</div>
+
+  <h3>6.2 Transparency diligence</h3>
+  <p>Not every tiny AI-assisted task requires an announcement. But disclosure becomes more important when AI materially affects other people.</p>
+  <p>Examples include academic work, hiring, customer communications, medical or financial advice, professional reports, and work represented as purely human-made.</p>
+  <div class="exam"><strong>Rule of thumb:</strong> The more an AI-assisted result affects other people, the stronger the case for transparency.</div>
+  <p>The exact rule can depend on law, organization policy, professional standards, and context.</p>
+
+  <h3>6.3 Deployment diligence</h3>
+  <p>Before work leaves your hands, check it. More impact means more checking. Irreversible actions deserve checks <strong>before</strong> execution.</p>
+  <table>
+    <tr><th>Example</th><th>Level of checking</th></tr>
+    <tr><td>Private note to yourself</td><td>Quick glance</td></tr>
+    <tr><td>Customer-facing email</td><td>Full read</td></tr>
+    <tr><td>Report to regulator / high-stakes body</td><td>Deeper review, possibly a second reviewer</td></tr>
+    <tr><td>Sent payment / deleting files</td><td>Pre-action approval because it may be hard or impossible to undo</td></tr>
+  </table>
+  <p>Checking can include facts, sources, calculations, bias, permissions, rights, policy compliance, and human approval for high-impact actions.</p>
+
+  <h3>🔢 The Numbers Rule</h3>
+  <div class="warning"><strong>Any number that a decision depends on should be computed, not merely generated by a language model.</strong></div>
+  <p>A language model predicts plausible text. It does not automatically behave like a calculator or spreadsheet. Use a calculator, spreadsheet, or executed code, then inspect the inputs used in the calculation.</p>
+  <div class="simple"><strong>Example:</strong> If AI summarizes a financial table and says total revenue is 8.7 million, do not trust the total just because the row values look correct. Make the number come from computation, then verify that the right rows and rates were used.</div>
+
+  <h3>The final Diligence question</h3>
+  <div class="memory-line">“Would I confidently put my name on this?”<br><span style="font-weight:500">If the answer is no, it is not ready.</span></div>
+
+  <h3>When the ethical case is unclear</h3>
+  <ol>
+    <li>Who is affected, including people who never see the result?</li>
+    <li>What could go wrong for them, and would they know?</li>
+    <li>What would a fair outcome look like?</li>
+    <li>What should be disclosed, and to whom?</li>
+  </ol>
+  <p>If you cannot responsibly answer these, escalate to whoever owns the decision rather than guessing.</p>
+
+  <div class="exam"><strong>🎯 Must remember:</strong> AI can automate work. <strong>It cannot automate accountability.</strong> Humans and organizations still own the consequences.</div>
+
+  <h3>How Diligence scales in Agent Factory</h3>
+  <table>
+    <tr><th>Personal skill</th><th>System-scale version</th></tr>
+    <tr><td>Creation diligence</td><td>Data rules, access controls, approved-tool policy</td></tr>
+    <tr><td>Transparency diligence</td><td>Disclosure and user-experience design</td></tr>
+    <tr><td>Deployment diligence</td><td>Evaluation gates, audit logs, monitoring, human review</td></tr>
+  </table>
+  <p><span class="term">Audit log</span> = a record of what the system did, when, and often who or what triggered it. It helps with accountability and investigation.</p>
+</section>
+
+<section id="loop">
+  <h2>🔄 Part 3 · Put the 4Ds Together</h2>
+  <div class="flow">
+    <div class="box d1"><strong>Delegate</strong><br><small>Decide ownership</small></div><div class="arrow">→</div>
+    <div class="box d2"><strong>Describe</strong><br><small>Give context & rules</small></div><div class="arrow">→</div>
+    <div class="box d3"><strong>Discern</strong><br><small>Judge results</small></div><div class="arrow">→</div>
+    <div class="box d4"><strong>Be Diligent</strong><br><small>Use responsibly</small></div><div class="arrow">↻</div>
+  </div>
+  <p>Real work mixes all four. Repeat the loop whenever the result or situation changes.</p>
+
+  <h3>Complete example: Bookkeeping Digital FTE</h3>
+  <p>A Forward Deployed Engineer helps an accounting practice automate monthly <span class="term purple">bank reconciliation</span>, meaning matching the firm's own transaction records against the bank statement.</p>
+
+  <details open><summary>Step 1 · Delegation</summary><div>
+    The team decides that the AI may match bank transactions, flag unmatched items, and draft a reconciliation report. Humans still approve journal adjustments, write-offs, and tax-sensitive decisions. High-value unusual items must escalate.
+    <p><strong>Terms:</strong> <em>ledger entry</em> = the firm's record of a transaction. <em>journal adjustment</em> = a manual correction in the accounts. <em>write-off</em> = recording money the firm no longer expects to collect. <em>tax position</em> = how tax rules apply to the client's situation.</p>
+  </div></details>
+  <details><summary>Step 2 · Description</summary><div>
+    The AI gets the chart of accounts, matching rules, examples of past reconciliations, report format, escalation rules, definitions, and strict rules such as “never post a journal entry itself” and “never contact a client directly.”
+    <p><strong>Terms:</strong> <em>chart of accounts</em> = the categories used to organize transactions. <em>stale cheque</em> = a cheque too old for the bank to pay under applicable rules.</p>
+  </div></details>
+  <details><summary>Step 3 · Discernment</summary><div>
+    The team tests the AI against past reconciliations already trusted by the accountants. They measure correct matches, incorrect matches, correct escalations, over-escalation, and whether quality changes over time. They also sample apparently successful cases, because silent failures may otherwise stay hidden.
+  </div></details>
+  <details><summary>Step 4 · Diligence</summary><div>
+    Client financial data stays inside approved infrastructure. Actions are logged. Clients are informed about AI assistance where required or appropriate. A human partner still signs the work and remains accountable.
+  </div></details>
+</section>
+
+<section id="factory">
+  <h2>🏭 From Chat Skill to Agent Factory System</h2>
+  <table>
+    <tr><th>Competency</th><th>In a normal chat</th><th>At Agent Factory scale</th></tr>
+    <tr><td><strong>Delegation</strong></td><td>Decide what to ask AI to do</td><td>Scope the Digital FTE and define the human/AI boundary</td></tr>
+    <tr><td><strong>Description</strong></td><td>Give instructions and context</td><td>System prompts, reusable skills, context engineering, Systems of Record</td></tr>
+    <tr><td><strong>Discernment</strong></td><td>Review the answer</td><td>Evals, monitoring, sampling, checker reliability, release gates</td></tr>
+    <tr><td><strong>Diligence</strong></td><td>Protect data and own the result</td><td>Governance, permissions, audit, disclosure, human review</td></tr>
+  </table>
+  <div class="simple"><strong>Big idea:</strong> Agent Factory does not replace AI fluency. It takes the same four human skills and builds them into systems that can run at scale.</div>
+</section>
+
+<section id="survival">
+  <h2>🧭 Connection to the Four Survival Skills & 10-80-10</h2>
+  <p>The course connects the 4Ds to the broader survival skills: set direction, orchestrate AI, judge truth, and connect with people.</p>
+  <table>
+    <tr><th>Work stage</th><th>Main activity</th><th>Strongest 4Ds</th></tr>
+    <tr><td>First 10%</td><td>Set direction</td><td>Delegation + Description</td></tr>
+    <tr><td>Middle 80%</td><td>Orchestrate AI and iterate</td><td>Description + Discernment repeatedly</td></tr>
+    <tr><td>Final 10%</td><td>Judge the truth before important work ships</td><td>Discernment</td></tr>
+    <tr><td>All 100%</td><td>Act responsibly</td><td>Diligence surrounds the whole workflow</td></tr>
+  </table>
+  <div class="exam"><strong>Exam trap:</strong> Diligence is <strong>not</strong> only the final step. It applies across the whole workflow.</div>
+</section>
+
+<section id="mistakes">
+  <h2>⚠️ Four Common Beginner Mistakes</h2>
+  <div class="grid">
+    <div class="card accent-cyan"><h3>1. Prompt before defining the problem</h3><p><strong>Missing:</strong> Delegation</p><p><strong>Fix:</strong> define goal, audience, constraints, and human/AI split first.</p></div>
+    <div class="card accent-purple"><h3>2. Treat first answer as final</h3><p><strong>Missing:</strong> Description ↔ Discernment loop</p><p><strong>Fix:</strong> inspect, give specific feedback, iterate.</p></div>
+    <div class="card accent-pink"><h3>3. Trust polished writing</h3><p><strong>Missing:</strong> Discernment</p><p><strong>Fix:</strong> verify facts, assumptions, calculations, and sources.</p></div>
+    <div class="card accent-lime"><h3>4. Think about privacy after trouble</h3><p><strong>Missing:</strong> Diligence</p><p><strong>Fix:</strong> set data, disclosure, approval, and accountability rules beforehand.</p></div>
+  </div>
+</section>
+
+<section id="checklist">
+  <h2>✅ Beginner Checklist for Everyday AI Work</h2>
+  <table>
+    <tr><th>Stage</th><th>Ask yourself</th></tr>
+    <tr><td><strong>Delegate</strong></td><td>What is the goal? What should AI do? What stays with me?</td></tr>
+    <tr><td><strong>Describe</strong></td><td>What output, context, method, and behavior does AI need?</td></tr>
+    <tr><td><strong>Discern</strong></td><td>How will I know the result is correct, complete, and useful?</td></tr>
+    <tr><td><strong>Be diligent</strong></td><td>Is the data safe? Does AI's role need disclosure? Who approves and owns the outcome?</td></tr>
+  </table>
+  <p>You do not need paperwork for every small request. The goal is to make these questions automatic in your mind.</p>
+</section>
+
+<section id="practical">
+  <h2>🛠️ Practical Work · Six Course Exercises</h2>
+  <p class="sub">The official course asks you to practice the ideas in a real AI assistant. The prompts below are rewritten in simple language but preserve the same learning goal.</p>
+
+  <details open><summary>Exercise 1 · Build a 4D plan for a real task</summary><div>
+    <p>Choose one real task you need to do this week.</p>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>I need to do this: [describe your real task].
+
+Before we start, guide me through the four Ds:
+1. Delegation
+2. Description
+3. Discernment
+4. Diligence
+
+Ask me one useful question at a time. Skip anything that clearly does not apply. At the end, summarize our plan in a small table.</pre></div>
+    <p><strong>Notice:</strong> many important answers should come from you. AI can remind you what to consider, but your goals, boundaries, and accountability are human decisions.</p>
+  </div></details>
+
+  <details><summary>Exercise 2 · Practice Discernment on a topic you know well</summary><div>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>Let's discuss [a topic I know well].
+
+Treat me like a knowledgeable colleague. During our discussion I will watch for:
+- places where you improve my thinking,
+- places where I need to correct you,
+- suggestions I reject because my real experience says otherwise.
+
+Start by asking which part of the topic I want to discuss.</pre></div>
+    <p><strong>Notice:</strong> errors are easy to spot when you already have domain expertise.</p>
+  </div></details>
+
+  <details><summary>Exercise 3 · Feel what being a non-expert is like</summary><div>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>Teach me the basics of [a topic I know almost nothing about].
+
+Use beginner-friendly language and concrete examples. At the end, identify the factual claims that I should verify with reliable sources, and explain why each one deserves checking.</pre></div>
+    <p><strong>Notice:</strong> when you know nothing about a field, wrong information may not “feel” wrong. This is why deployed AI systems need evals rather than blind trust.</p>
+  </div></details>
+
+  <details><summary>Exercise 4 · Write a performance description</summary><div>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>For this conversation:
+- challenge weak assumptions,
+- flag uncertainty on factual claims,
+- do not agree with me only to be polite,
+- ask a clarifying question when ambiguity would materially change the answer,
+- update your recommendation when new evidence supports a change,
+- explain your reasons when you disagree.</pre></div>
+    <p><strong>Notice:</strong> the working behavior changes quickly. In a deployed agent, such standing behavior belongs in persistent instructions such as a system prompt.</p>
+  </div></details>
+
+  <details><summary>Exercise 5 · Inspect the support before accepting a recommendation</summary><div>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>Before recommending an option, show me:
+1. the important assumptions,
+2. the evidence supporting them,
+3. the criteria you are using to compare the options,
+4. the major uncertainties.
+
+Then give the recommendation. I want a justification I can review, not only a conclusion.</pre></div>
+    <p><strong>Notice:</strong> look for an assumption you might have accepted without seeing it.</p>
+  </div></details>
+
+  <details><summary>Exercise 6 · Run a small project through the full 4D loop</summary><div>
+    <p>Choose a project that can be completed fairly quickly, such as a study plan, small presentation, proposal, or coding task.</p>
+    <div class="prompt"><button class="copybtn" onclick="copyPrompt(this)">Copy</button><pre>I want to complete this project using the 4D AI Fluency framework:
+[describe the project].
+
+First help me decide the human/AI division of work.
+Before each AI-owned task, ask what product, process, and performance I want.
+After each important output, pause so I can evaluate it.
+At the end, run a diligence check covering facts, sensitive data, disclosure, approvals, and anything that needs verification before I use the result.</pre></div>
+    <p>After finishing, ask yourself: <strong>Which D required the most effort from me?</strong> That is probably the skill you need to practice most.</p>
+  </div></details>
+</section>
+
+<section id="test">
+  <h2>🧠 Test Yourself</h2>
+  <p><strong>Do not scroll for answers because there are none shown here.</strong> Answer from memory first. The MCQ checker will reveal your score only after you answer every question.</p>
+
+  <h3>Official-course-style self-check</h3>
+  <ol>
+    <li>What four qualities define AI fluency?</li>
+    <li>What is the difference between automation, augmentation, and agency?</li>
+    <li>What are the three parts of Delegation?</li>
+    <li>What are the three parts of Description?</li>
+    <li>Why does a confident AI answer still need verification?</li>
+    <li>What are the three parts of Discernment?</li>
+    <li>What are the three parts of Diligence?</li>
+    <li>What single question can you ask before releasing AI-assisted work?</li>
+    <li>Explain the 4D loop in one sentence.</li>
+    <li>How does Discernment become an engineering practice in the Agent Factory?</li>
+  </ol>
+
+  <h3>Exam-style MCQs</h3>
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="b"><p>1. Which best describes AI fluency?</p>
+      <label class="opt"><input type="radio" name="q1" value="a"> Memorizing many prompts</label>
+      <label class="opt"><input type="radio" name="q1" value="b"> Working with AI effectively, efficiently, ethically, and safely</label>
+      <label class="opt"><input type="radio" name="q1" value="c"> Training your own model</label>
+      <label class="opt"><input type="radio" name="q1" value="d"> Always using the newest model</label></div>
+
+    <div class="q" data-answer="c"><p>2. You give AI a goal and boundaries, then let it choose many steps. Which mode is this?</p>
+      <label class="opt"><input type="radio" name="q2" value="a"> Automation</label>
+      <label class="opt"><input type="radio" name="q2" value="b"> Augmentation</label>
+      <label class="opt"><input type="radio" name="q2" value="c"> Agency</label>
+      <label class="opt"><input type="radio" name="q2" value="d"> Redaction</label></div>
+
+    <div class="q" data-answer="a"><p>3. Deciding what stays with the human and what AI should do is:</p>
+      <label class="opt"><input type="radio" name="q3" value="a"> Delegation</label>
+      <label class="opt"><input type="radio" name="q3" value="b"> Description</label>
+      <label class="opt"><input type="radio" name="q3" value="c"> Discernment</label>
+      <label class="opt"><input type="radio" name="q3" value="d"> Diligence</label></div>
+
+    <div class="q" data-answer="d"><p>4. Which is NOT one of the three parts of Delegation?</p>
+      <label class="opt"><input type="radio" name="q4" value="a"> Problem awareness</label>
+      <label class="opt"><input type="radio" name="q4" value="b"> Platform awareness</label>
+      <label class="opt"><input type="radio" name="q4" value="c"> Task delegation</label>
+      <label class="opt"><input type="radio" name="q4" value="d"> Product discernment</label></div>
+
+    <div class="q" data-answer="b"><p>5. “Write this for beginners, under 500 words, as a table” mainly improves which part?</p>
+      <label class="opt"><input type="radio" name="q5" value="a"> Process description</label>
+      <label class="opt"><input type="radio" name="q5" value="b"> Product description</label>
+      <label class="opt"><input type="radio" name="q5" value="c"> Transparency diligence</label>
+      <label class="opt"><input type="radio" name="q5" value="d"> Platform awareness</label></div>
+
+    <div class="q" data-answer="a"><p>6. “Check correctness first, security second, style last” is an example of:</p>
+      <label class="opt"><input type="radio" name="q6" value="a"> Process description</label>
+      <label class="opt"><input type="radio" name="q6" value="b"> Product discernment</label>
+      <label class="opt"><input type="radio" name="q6" value="c"> Task delegation</label>
+      <label class="opt"><input type="radio" name="q6" value="d"> Redaction</label></div>
+
+    <div class="q" data-answer="d"><p>7. “Challenge weak assumptions and flag uncertainty” is mainly:</p>
+      <label class="opt"><input type="radio" name="q7" value="a"> Platform awareness</label>
+      <label class="opt"><input type="radio" name="q7" value="b"> Creation diligence</label>
+      <label class="opt"><input type="radio" name="q7" value="c"> Product description</label>
+      <label class="opt"><input type="radio" name="q7" value="d"> Performance description</label></div>
+
+    <div class="q" data-answer="c"><p>8. Which term means designing all the information AI needs, including documents, memory, tools, policies, and instructions?</p>
+      <label class="opt"><input type="radio" name="q8" value="a"> Automation bias</label>
+      <label class="opt"><input type="radio" name="q8" value="b"> Task delegation</label>
+      <label class="opt"><input type="radio" name="q8" value="c"> Context engineering</label>
+      <label class="opt"><input type="radio" name="q8" value="d"> Deployment diligence</label></div>
+
+    <div class="q" data-answer="b"><p>9. Trusting an AI answer too easily because it looks professional is called:</p>
+      <label class="opt"><input type="radio" name="q9" value="a"> Hallucination</label>
+      <label class="opt"><input type="radio" name="q9" value="b"> Automation bias</label>
+      <label class="opt"><input type="radio" name="q9" value="c"> Agency</label>
+      <label class="opt"><input type="radio" name="q9" value="d"> Evaluation engineering</label></div>
+
+    <div class="q" data-answer="c"><p>10. Removing identifying information while keeping the useful pattern is:</p>
+      <label class="opt"><input type="radio" name="q10" value="a"> Sampling</label>
+      <label class="opt"><input type="radio" name="q10" value="b"> Deployment</label>
+      <label class="opt"><input type="radio" name="q10" value="c"> Redaction</label>
+      <label class="opt"><input type="radio" name="q10" value="d"> Augmentation</label></div>
+
+    <div class="q" data-answer="d"><p>11. Which D asks, “Should I use AI this way at all?”</p>
+      <label class="opt"><input type="radio" name="q11" value="a"> Delegation</label>
+      <label class="opt"><input type="radio" name="q11" value="b"> Description</label>
+      <label class="opt"><input type="radio" name="q11" value="c"> Discernment</label>
+      <label class="opt"><input type="radio" name="q11" value="d"> Diligence</label></div>
+
+    <div class="q" data-answer="a"><p>12. Before an AI-assisted report is sent, you verify facts, permissions, and approvals. This is mainly:</p>
+      <label class="opt"><input type="radio" name="q12" value="a"> Deployment diligence</label>
+      <label class="opt"><input type="radio" name="q12" value="b"> Process discernment</label>
+      <label class="opt"><input type="radio" name="q12" value="c"> Platform awareness</label>
+      <label class="opt"><input type="radio" name="q12" value="d"> Automation</label></div>
+
+    <div class="q" data-answer="b"><p>13. A decision depends on a percentage. According to the numbers rule, you should:</p>
+      <label class="opt"><input type="radio" name="q13" value="a"> Ask the model to guess carefully</label>
+      <label class="opt"><input type="radio" name="q13" value="b"> Compute it with a calculator, spreadsheet, or executed code, then verify inputs</label>
+      <label class="opt"><input type="radio" name="q13" value="c"> Trust it if the answer is precise</label>
+      <label class="opt"><input type="radio" name="q13" value="d"> Use a longer prompt only</label></div>
+
+    <div class="q" data-answer="c"><p>14. In the 10-80-10 mapping, Diligence applies:</p>
+      <label class="opt"><input type="radio" name="q14" value="a"> Only in the first 10%</label>
+      <label class="opt"><input type="radio" name="q14" value="b"> Only in the final 10%</label>
+      <label class="opt"><input type="radio" name="q14" value="c"> Across all 100%</label>
+      <label class="opt"><input type="radio" name="q14" value="d"> Only when data is private</label></div>
+
+    <div class="q" data-answer="d"><p>15. At Agent Factory scale, Discernment becomes:</p>
+      <label class="opt"><input type="radio" name="q15" value="a"> Only better prompts</label>
+      <label class="opt"><input type="radio" name="q15" value="b"> More autonomy</label>
+      <label class="opt"><input type="radio" name="q15" value="c"> Redaction only</label>
+      <label class="opt"><input type="radio" name="q15" value="d"> Evals, monitoring, sampling, and review/release gates</label></div>
+
+    <div class="quiz-actions">
+      <button class="primary" onclick="gradeQuiz()">Check My Answers</button>
+      <button class="secondary" onclick="resetQuiz()">Reset</button>
+      <span id="result"></span>
+    </div>
+    <div id="explanations" style="display:none;margin-top:16px"></div>
+  </div>
+</section>
+
+<section id="glossary">
+  <h2>📚 Technical Terms · Super Simple Glossary</h2>
+  <div class="glossary">
+    <div class="g"><b>AI Fluency</b><br>Using AI effectively, efficiently, ethically, and safely.</div>
+    <div class="g"><b>4Ds</b><br>Delegation, Description, Discernment, Diligence.</div>
+    <div class="g"><b>Automation</b><br>AI performs a clearly defined task you give it.</div>
+    <div class="g"><b>Augmentation</b><br>Human and AI think and work together.</div>
+    <div class="g"><b>Agency</b><br>AI works toward a goal and chooses many steps within boundaries.</div>
+    <div class="g"><b>Autonomy</b><br>How much freedom a system has to decide what to do next.</div>
+    <div class="g"><b>Delegation</b><br>Deciding what AI does and what humans keep.</div>
+    <div class="g"><b>Problem Awareness</b><br>Knowing the goal, work, risks, audience, and what success means.</div>
+    <div class="g"><b>Platform Awareness</b><br>Knowing which kind of AI or tool fits the job.</div>
+    <div class="g"><b>Task Delegation</b><br>Assigning each part to AI, a human, or both.</div>
+    <div class="g"><b>Description</b><br>Giving AI the information and guidance needed for the work.</div>
+    <div class="g"><b>Product Description</b><br>Defining the output you want.</div>
+    <div class="g"><b>Process Description</b><br>Defining the approach or steps AI should use.</div>
+    <div class="g"><b>Performance Description</b><br>Defining how AI should behave with users or on its own.</div>
+    <div class="g"><b>Prompt Engineering</b><br>Designing the wording and structure of an instruction.</div>
+    <div class="g"><b>Context Engineering</b><br>Designing all information AI needs, such as instructions, files, tools, memory, and policies.</div>
+    <div class="g"><b>System Prompt</b><br>A standing instruction that shapes AI behavior at the start of a session.</div>
+    <div class="g"><b>System of Record</b><br>The trusted official store of business data and rules.</div>
+    <div class="g"><b>Discernment</b><br>Judging whether AI output, justification, and behavior are good enough.</div>
+    <div class="g"><b>Product Discernment</b><br>Judging the final result itself.</div>
+    <div class="g"><b>Process Discernment</b><br>Judging whether your way of working with AI is worth the effort.</div>
+    <div class="g"><b>Performance Discernment</b><br>Judging whether an autonomous AI serves users well across many cases.</div>
+    <div class="g"><b>Automation Bias</b><br>Trusting automated output too easily because it looks authoritative.</div>
+    <div class="g"><b>Hallucination</b><br>AI produces invented or incorrect information that may sound convincing.</div>
+    <div class="g"><b>Diligence</b><br>Taking responsibility for how AI is used and what happens because of its output.</div>
+    <div class="g"><b>Creation Diligence</b><br>Choosing tools and data responsibly before and during work.</div>
+    <div class="g"><b>Transparency Diligence</b><br>Being honest about AI's role when it materially affects people.</div>
+    <div class="g"><b>Deployment Diligence</b><br>Checking work before it is sent, used, published, or executed.</div>
+    <div class="g"><b>Redaction</b><br>Removing identifying details while keeping useful task information.</div>
+    <div class="g"><b>Digital FTE</b><br>An AI worker configured to perform a defined job for others.</div>
+    <div class="g"><b>FTE</b><br>Full-time equivalent, a business measure representing one full-time worker.</div>
+    <div class="g"><b>Tokens</b><br>Small pieces of text AI reads and writes, often related to usage cost.</div>
+    <div class="g"><b>Domain Knowledge</b><br>Real expertise in a specific subject or industry.</div>
+    <div class="g"><b>Specification</b><br>A clear definition of goal, requirements, constraints, risks, and completion conditions.</div>
+    <div class="g"><b>Escalation</b><br>Passing a case to a human when it is risky, uncertain, unusual, or outside permission.</div>
+    <div class="g"><b>Eval</b><br>A repeatable test that scores an AI system's output or behavior.</div>
+    <div class="g"><b>Eval Suite</b><br>A group of eval tests used together.</div>
+    <div class="g"><b>Monitoring</b><br>Watching system behavior and quality over time.</div>
+    <div class="g"><b>Sampling</b><br>Reviewing selected examples from a much larger set of outputs.</div>
+    <div class="g"><b>Release Gate</b><br>A required check that must pass before something is released or used.</div>
+    <div class="g"><b>Governance</b><br>Rules, roles, permissions, oversight, and accountability controlling how AI is used.</div>
+    <div class="g"><b>Audit Log</b><br>A record of system actions used for accountability and investigation.</div>
+    <div class="g"><b>Bank Reconciliation</b><br>Comparing internal transaction records with a bank statement to find matches and differences.</div>
+  </div>
+</section>
+
+<section id="remember">
+  <h2>🎯 What You Must Remember for the Exam</h2>
+  <div class="card accent-cyan">
+    <ol>
+      <li><strong>AI Fluency</strong> = effective + efficient + ethical + safe AI use.</li>
+      <li><strong>3 modes:</strong> Automation = do a task; Augmentation = think with me; Agency = pursue a goal.</li>
+      <li><strong>Delegation:</strong> problem awareness + platform awareness + task delegation.</li>
+      <li><strong>Description:</strong> product + process + performance.</li>
+      <li><strong>Discernment:</strong> product + process + performance.</li>
+      <li><strong>Diligence:</strong> creation + transparency + deployment.</li>
+      <li><strong>Prompt engineering</strong> is about the instruction. <strong>Context engineering</strong> is about the whole information environment.</li>
+      <li><strong>Automation bias:</strong> people trust automated answers too easily.</li>
+      <li><strong>Hallucination:</strong> AI can confidently invent or get information wrong.</li>
+      <li><strong>Numbers rule:</strong> decision-critical numbers should be computed, not merely generated.</li>
+      <li><strong>4D loop:</strong> Delegate → Describe → Discern → Be diligent → Repeat.</li>
+      <li><strong>10-80-10:</strong> Delegation/Description early; Description/Discernment during; Discernment at final check; Diligence across all 100%.</li>
+      <li><strong>Scale-up:</strong> Discernment becomes evals/monitoring; Diligence becomes governance/permissions/audit/human review.</li>
+      <li><strong>Final question:</strong> “Would I confidently put my name on this?”</li>
+    </ol>
+  </div>
+  <div class="memory-line" style="margin-top:18px">🔥 Final memory formula: <strong>DECIDE → DESCRIBE → CHECK → OWN</strong></div>
+</section>
+
+<section>
+  <h2>📍 Where This Leads Next</h2>
+  <p><strong>AI Prompting in 2026</strong> turns Description into practical prompting habits. <strong>How to Think in the AI Era</strong> strengthens Discernment and critical thinking.</p>
+  <p>Later Agent Factory topics scale the same skills: Spec-Driven Development develops Delegation and Description; evaluation topics develop Discernment; System of Record and governance topics develop Diligence.</p>
+</section>
+
+<div class="footer">
+  <p><strong>Source of truth:</strong> Agent Factory — “AI Fluency: A Crash Course.” This study guide is an original beginner-friendly explanation and paraphrase created for exam preparation.</p>
+  <p><a href="https://agentfactory.panaversity.org/docs/ai-fluency-crash-course" target="_blank" rel="noopener">Open the official Agent Factory course ↗</a></p>
+  <p>The AI Fluency Framework itself is credited by the course to Professors Rick Dakan and Joseph Feller; the course also notes original educational material produced with Anthropic.</p>
+</div>
+</main>
+</div>
+<a href="#top" class="topbtn" aria-label="Back to top">↑</a>
+
+<script>
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    document.getElementById('progress').style.width=(max? (h.scrollTop/max*100):0)+'%';
+  });
+
+  function copyPrompt(btn){
+    const text=btn.parentElement.querySelector('pre').innerText;
+    navigator.clipboard.writeText(text).then(()=>{
+      const old=btn.textContent;btn.textContent='Copied ✓';setTimeout(()=>btn.textContent=old,1200);
+    });
+  }
+
+  const explanations=[
+    "AI fluency is broader than prompting: it combines effectiveness, efficiency, ethics, and safety.",
+    "Agency gives AI a goal and boundaries, with freedom to decide many steps.",
+    "Delegation decides how work is divided between humans and AI.",
+    "Product discernment belongs to Discernment, not Delegation.",
+    "Audience, format, length, and output requirements are Product Description.",
+    "The order and method of work are Process Description.",
+    "Standing behavior rules such as challenging assumptions are Performance Description.",
+    "Context engineering designs the whole information environment AI needs.",
+    "Automation bias is over-trusting automated output because it looks authoritative.",
+    "Redaction removes identifying details while preserving the useful pattern.",
+    "Diligence asks whether AI is being used responsibly and who owns the outcome.",
+    "Deployment diligence is the final verification before work is used, sent, or executed.",
+    "Decision-critical numbers should come from actual computation, then the inputs should be checked.",
+    "Diligence surrounds the entire 10-80-10 workflow, not only the end.",
+    "At system scale, Discernment becomes evaluation infrastructure: evals, monitoring, sampling, and gates."
+  ];
+
+  function gradeQuiz(){
+    const qs=[...document.querySelectorAll('.q')];
+    let unanswered=0, score=0, wrong=[];
+    qs.forEach((q,i)=>{
+      const pick=q.querySelector('input:checked');
+      q.style.borderColor='rgba(255,255,255,.10)';
+      if(!pick){unanswered++;return;}
+      if(pick.value===q.dataset.answer){score++;q.style.borderColor='rgba(163,255,143,.45)';}
+      else{wrong.push(i);q.style.borderColor='rgba(255,123,139,.55)';}
+    });
+    const result=document.getElementById('result');
+    const exp=document.getElementById('explanations');
+    if(unanswered){
+      result.textContent=`Answer all questions first. ${unanswered} remaining.`;
+      result.style.color='var(--yellow)';
+      exp.style.display='none';
+      return;
+    }
+    const pct=Math.round(score/qs.length*100);
+    result.textContent=`Score: ${score}/${qs.length} (${pct}%)`;
+    result.style.color=pct>=80?'var(--lime)':pct>=60?'var(--yellow)':'var(--red)';
+    if(wrong.length===0){
+      exp.innerHTML='<div class="simple"><strong>Excellent.</strong> All answers are correct. Try explaining the 4Ds aloud without looking.</div>';
+    }else{
+      exp.innerHTML='<div class="warning"><strong>Revise these questions:</strong><ul>'+
+        wrong.map(i=>`<li><strong>Q${i+1}:</strong> ${explanations[i]}</li>`).join('')+
+        '</ul></div>';
+    }
+    exp.style.display='block';
+  }
+  function resetQuiz(){
+    document.querySelectorAll('#quiz input').forEach(i=>i.checked=false);
+    document.querySelectorAll('.q').forEach(q=>q.style.borderColor='rgba(255,255,255,.10)');
+    document.getElementById('result').textContent='';
+    document.getElementById('explanations').style.display='none';
+  }
+</script>
+</body>
+</html>
