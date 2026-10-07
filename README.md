@@ -4,6 +4,8 @@ Complicated AI concepts explained simply. This project turns ten supplied AI cra
 
 The primary website is the Fumadocs application in `website-fumadocs/`. The validated Eleventy implementation in `website/` remains an untouched fallback.
 
+Live site: <https://waterprooffish99.github.io/ai-crash-courses/>
+
 ## Local development
 
 The project requires Node.js 22 or newer; Node.js 24 is used in deployment.
