@@ -19,7 +19,6 @@
     "migrate-content": "node scripts/migrate-content.mjs"
   },
   "dependencies": {
-    "flexsearch": "0.8.212",
     "fumadocs-core": "16.16.2",
     "fumadocs-mdx": "15.4.6",
     "fumadocs-ui": "16.16.2",

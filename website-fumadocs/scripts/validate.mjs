@@ -163,6 +163,8 @@ check(mdxFiles.length === 10, `Expected 10 course MDX files; found ${mdxFiles.le
 const homeFile = path.join(outRoot, 'index.html');
 check(fs.existsSync(homeFile), 'Static homepage is missing.');
 const home = fs.existsSync(homeFile) ? load(read(homeFile)) : null;
+if (home) check(home('link[rel~="icon"]').length >= 1, 'Site icon metadata is missing from the homepage.');
+check(fs.existsSync(path.join(outRoot, 'icon.svg')), 'Static site icon is missing.');
 
 const expectedQuizQuestions = new Map([[2, 15], [3, 15], [4, 12], [8, 8], [10, 12]]);
 const expectedFlashcards = new Map([[2, 6]]);
@@ -252,7 +254,9 @@ if (fs.existsSync(searchFile)) {
   } catch {
     failures.push('Static local-search index is not valid JSON.');
   }
-  check(searchData?.type === 'default' && typeof searchData.raw === 'object', 'Static local-search index has an unexpected structure.');
+  const hasCurrentStaticSearch = ['simple', 'advanced'].includes(searchData?.type) && typeof searchData?.docs === 'object';
+  const hasLegacyFlexSearch = searchData?.type === 'default' && typeof searchData?.raw === 'object';
+  check(hasCurrentStaticSearch || hasLegacyFlexSearch, 'Static local-search index has an unexpected structure.');
   for (const course of courses) {
     check(searchText.includes(`/courses/${course.slug}`), `Static search index does not reference course ${course.number}.`);
   }
